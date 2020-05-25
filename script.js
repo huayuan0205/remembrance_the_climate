@@ -59,7 +59,7 @@ dataPromise.then(function (rows) {
 		.attr('class','g-wheel')
 		.append('image')
 		.attr('id', 'wheel-img')
-		.attr('xlink:href', "../img/wheel-blur.png")
+		.attr('xlink:href', "img/wheel-blur.png")
 		.attr('transform', 'translate(-412,50)')
 		
 	//dots
