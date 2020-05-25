@@ -119,21 +119,59 @@ dataPromise.then(function (rows) {
 			return d.year;
 		})
 	
-	//text
-	var items = canvas.append('g')
-		.attr('id', 'text')
-		//.style('transition', 'all 1s ease 0s');
+	//text items
+	var text_item = canvas.append('g')
+		.selectAll('.text-item')
+		.data(rows)
+		.enter()
+		.append('text')
+		.attr('class','text-item')
+		.attr('id',(d,i)=>{return `label-word-${i}`})
+		.attr('width','400px')
+		.attr('height','400px')
+		.attr('transform','translate(20,400) rotate(90)')
+		.style('transition', 'all 1s ease 0s')
+		.style('transform-origin','left top')
+		.style('opacity',0)
 	
-	var item0 = items.append('g')
-		.attr('class','item')
-		.attr('id','item-0');
+	text_item.append("tspan")
+		.text(d => d.city)
+		.attr('class','text-id')
+		.style('fill','white')
 
-	item0.append('text')
-		.attr('class','')
+	text_item.append("tspan")
+		.text(d => d.title)
+		.attr('class','text-title')	
+		.attr('x', 0)
+		.attr('dy', '1.5em')
+		.style('fill','white')
+	
+		text_item.append("tspan")
+		.text(d => d.date)
+		.attr('class','text-date')	
+		.attr('x', 0)
+		.attr('dy', '2em')
+		.style('fill','black')
+	
+	text_item.append("tspan")
+		.text(d => d.story)
+		.attr('class','text-desc')	
+		.attr('x', 0)
+		.attr('dy', '1.5em')
+		.style('fill','white')
+		.style('white-space','pre-wrap')
+	
+	//first text item 
+	let fisrt_word = d3.select('#label-word-0');
+	fisrt_word.attr('transform', `translate(20,400) rotate(0)`)
+		.style('opacity',1)
 
+	//rotation
 	var currentWheel = d3.select('#wheel-img');
 	var currentDots = timeline.selectAll('.dot');
 	var currentLabels = timeline.selectAll('.label-text')
+	var currentText = canvas.selectAll('.text-item')
+
 	var index = 0;
 	var sumAngle = 0
 	var wheel_sumAngle = 0
@@ -145,10 +183,37 @@ dataPromise.then(function (rows) {
 		if (up_down == 'down') {
 			rotationAngle = 0 - degrees[index];
 			wheelAngle = 0 - 18;
+
+			let current_word_label = d3.select('#label-word-'+(index-1));
+			console.log('now',(index-1))
+			console.log('down',index);
+
+			let last_word_label = d3.select('#label-word-'+index);
+
+			current_word_label
+				.attr('transform', `translate(20,400) rotate(-90)`)
+				.style('opacity',0)
+
+			last_word_label
+				.attr('transform', `translate(20,400) rotate(0)`)
+				.style('opacity',1)
 		}
 		if (up_down == 'up') {
 			rotationAngle = degrees[index + 1];
 			wheelAngle = 18;
+
+			let current_word_label = d3.select('#label-word-'+(index+1))
+			// console.log('now',(index+1))
+			// console.log('up',(index));
+
+			let next_word_label = d3.select('#label-word-'+(index))
+
+			current_word_label
+				.attr('transform', `translate(20,400) rotate(90)`)
+				.style('opacity',0)
+			next_word_label
+				.attr('transform', `translate(20,400) rotate(0)`)
+				.style('opacity',1)
 		}
 
 		//transition to original color and size
@@ -163,7 +228,10 @@ dataPromise.then(function (rows) {
 		d3.select('#label-' + index)
 			.style('opacity',1)
 			.style('font-family','Trade Condensed');
-
+		
+		//currentText.style('opacity',0);
+		//current_word_label.style('opacity',1);
+		
 		wheel_sumAngle += wheelAngle;
 		sumAngle += rotationAngle;
 
@@ -171,11 +239,7 @@ dataPromise.then(function (rows) {
 			.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
 		currentWheel
 			.attr('transform', `translate(-412 50) rotate(${wheel_sumAngle} 412 412)`);
-		
-		// currentDots
-		// 	.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
-		// currentLabels
-		// 	.attr('transform',`translate(0 0) rotate(${sumAngle} 0 462)`);
+
 			
 	}
 

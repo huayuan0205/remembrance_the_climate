@@ -4,23 +4,11 @@ html,body,.container,h1,h2,h3,div,a,p{
 }
 
 h1{
-	font-size: 24px;
+	font-size: 34px;
 	letter-spacing: 2px;
 	font-weight: 400;
 	line-height: 1;
 	color: white;
-}
-
-h2{
-	font-size: 20px;
-	font-weight: 400;
-	color: white;
-}
-
-h3{
-	font-size: 20px;
-	font-weight: 400;
-	color: black;
 }
 
 html,body{
@@ -34,7 +22,6 @@ body{
 	min-width: 320px;
     background: #fff;
     line-height: 1.4285em;
-	color: rgba(0,0,0,.87);
 	/* overscroll-behavior: contain; */
 	overflow: hidden;
 }
@@ -44,11 +31,11 @@ body{
 	height:100%;
 }
 
-.item{
+/* .item{
 	width: 412px; 
 	height: 412px; 
 	margin-top: 50vh;
-	/* transform-origin: 0vw 60vh; */
+	transform-origin: 0vw 60vh;
 	position: absolute;
 	opacity: 1;
 }
@@ -62,27 +49,40 @@ body{
 	margin-top: 15vh;
 	padding-left: 20px;
 	position: absolute;
+} */
+
+.text-item{
+	width:412px;
 }
 
 .text-id{
 	font-family: "Caslon Regular";
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .text-title{
-	margin-top: 5px;
 	font-family: "Caslon Regular";
+	font-size: 22px;
+	font-weight: 400;
 	letter-spacing: 5px;
+	line-height: 1;
+	
 }
 .text-date{
 	font-family: "Trade Regular";
+	font-size: 20px;
+	font-weight: 400;
+	color: black;
 }
 
-.item-body p{
-	margin-top: 10px;
+.text-desc{
+	width:412px;
 	font-family: "Trade Regular";
 	font-size:18px;
-	color:white;
 	line-height: 1.2;
+	display:block;
+	white-space: pre-wrap;
 }
 
 /* p{
