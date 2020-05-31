@@ -47,6 +47,7 @@ dataPromise.then(function (rows) {
 		year_sub.push(rows[i].year - rows[i - 1].year);
 	}
 	console.log('each rotatiion degree=' + degrees)
+	
 	//add svg	
 	var canvas = d3.select('.canvas')
 		.append('svg')
@@ -59,11 +60,13 @@ dataPromise.then(function (rows) {
 		.append('image')
 		.attr('id', 'wheel-img')
 		.attr('xlink:href', "./img/wheel-blur.png")
-		.attr('transform', 'translate(-412,50)')
-		
+		.attr('transform','translate(-412,50) rotate(0 412 412)')
+		.style('transition', 'transform 1s ease 0s')
+
 	//dots
 	var timeline = canvas.append('g')
 		.attr('id', 'timeline')
+		.attr('transform', `translate(0 0) rotate(-90 0 462)`)//start point
 		.style('transition', 'all 1s ease 0s');
 
 	var dots = timeline.selectAll('.dot')
@@ -125,72 +128,125 @@ dataPromise.then(function (rows) {
 		.enter()
 		.append('text')
 		.attr('class','text-item')
-		.attr('id',(d,i)=>{return `label-word-${i}`})
+		.attr('id',(d,i)=>{return `text-item-${i}`})
 		.attr('width','400px')
 		.attr('height','400px')
-		.attr('transform','translate(20,400) rotate(90)')
-		.style('transition', 'all 1s ease 0s')
+		.attr('transform','translate(20,380) rotate(90)')
+		.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
 		.style('transform-origin','left top')
 		.style('opacity',0)
 	
 	text_item.append("tspan")
 		.text(d => d.city)
 		.attr('class','text-id')
-		.style('fill','white')
 
 	text_item.append("tspan")
 		.text(d => d.title)
 		.attr('class','text-title')	
 		.attr('x', 0)
 		.attr('dy', '1.5em')
-		.style('fill','white')
 	
-		text_item.append("tspan")
+	text_item.append("tspan")
 		.text(d => d.date)
 		.attr('class','text-date')	
 		.attr('x', 0)
-		.attr('dy', '2em')
-		.style('fill','black')
+		.attr('dy', '2.2em')
 	
 	text_item.append("tspan")
 		.text(d => d.story)
 		.attr('class','text-desc')	
 		.attr('x', 0)
 		.attr('dy', '1.5em')
-		.style('fill','white')
-		.style('white-space','pre-wrap')
+		.call(wrap,1.5,314)
 	
-	//first text item 
-	let fisrt_word = d3.select('#label-word-0');
-	fisrt_word.attr('transform', `translate(20,400) rotate(0)`)
+	//fix the description part in a given width
+	function wrap(text, dy, width) {
+		text.each(function () {
+			var text = d3.select(this),
+				words = text.text().split(/\s+/).reverse(),
+				word,
+				line = [],
+				lineHeight = 1.2, //ems
+				x = text.attr("x"),
+				y = text.attr("y"),
+				tspan = text.text(null)
+							.append("tspan")
+							.attr("x", x)
+							.attr("y", y)
+							.attr("dy", dy + "em");
+			
+			while (word = words.pop()) {
+				line.push(word);
+				tspan.text(line.join(" "));
+				if (tspan.node().getComputedTextLength() > width) {
+					line.pop();
+					tspan.text(line.join(" "));
+					line = [word];
+					tspan = text.append("tspan")
+								.attr("x", x)
+								.attr("y", y)
+								.attr("dy", lineHeight + "em")
+								.text(word);
+				}
+			}
+		});
+	}		
+	
+	//onboarding animation
+	//wheel
+	wheel.attr('transform','translate(-412,50) rotate(90 412 412)')	
+	//dots and labels
+	timeline
+		.attr('transform', `translate(0 0) rotate(0 0 462)`);
+	//first dot
+	let first_dot = d3.select('#d-0');
+	first_dot
+		.attr('r',4)
+		.style('transition-delay','1s')
+		.style('fill', 'rgb(0,0,0)');
+	//first label 2018
+	let first_label = d3.select('#label-0');
+	first_label
+		.attr('r',4)
+		.style('transition-delay','1s')
 		.style('opacity',1)
+		.style('font-family','Trade Bold');
+	//first text item 
+	let fisrt_word = d3.select('#text-item-0');
+	fisrt_word.attr('transform', 'translate(20,380) rotate(0)')
+		.style('opacity',1)
+
 
 	//rotation
 	var currentWheel = d3.select('#wheel-img');
 	var currentDots = timeline.selectAll('.dot');
 	var currentLabels = timeline.selectAll('.label-text')
-	var currentText = canvas.selectAll('.text-item')
 
 	var index = 0;
 	var sumAngle = 0
-	var wheel_sumAngle = 0
+	var wheel_sumAngle = 90;
 
 	function rotation_def(index, up_down) {
 		let rotationAngle = 0;
 		let wheelAngle = 0;
 
 		if (up_down == 'down') {
-			rotationAngle = 0 - degrees[index];
+			//clear onboarding delay 
+			first_label.style('transition-delay','0s');
+			first_dot.style('transition-delay','0s');
+
+			rotationAngle = 0 - degrees[index];//counter-clockwise
 			wheelAngle = 0 - 18;
 
-			let current_word_label = d3.select('#label-word-'+(index-1));
+			//switch text items
+			let current_word_label = d3.select('#text-item-'+(index-1));
 			console.log('now',(index-1))
 			console.log('down',index);
 
-			let last_word_label = d3.select('#label-word-'+index);
+			let last_word_label = d3.select('#text-item-'+index);
 
 			current_word_label
-				.attr('transform', `translate(20,400) rotate(-90)`)
+				.attr('transform', `translate(20,400) rotate(-180)`)
 				.style('opacity',0)
 
 			last_word_label
@@ -198,17 +254,22 @@ dataPromise.then(function (rows) {
 				.style('opacity',1)
 		}
 		if (up_down == 'up') {
+			//clear onboarding delay 
+			first_label.style('transition-delay','0s');
+			first_dot.style('transition-delay','0s');
+
 			rotationAngle = degrees[index + 1];
 			wheelAngle = 18;
 
-			let current_word_label = d3.select('#label-word-'+(index+1))
-			// console.log('now',(index+1))
-			// console.log('up',(index));
+			//switch text items
+			let current_word_label = d3.select('#text-item-'+(index+1))
+			console.log('now',(index+1))
+			console.log('up',(index));
 
-			let next_word_label = d3.select('#label-word-'+(index))
+			let next_word_label = d3.select('#text-item-'+(index))
 
 			current_word_label
-				.attr('transform', `translate(20,400) rotate(90)`)
+				.attr('transform', `translate(20,400) rotate(180)`)
 				.style('opacity',0)
 			next_word_label
 				.attr('transform', `translate(20,400) rotate(0)`)
@@ -217,16 +278,18 @@ dataPromise.then(function (rows) {
 
 		//transition to original color and size
 		currentDots.style('fill', 'rgb(255,255,255)')
-			.attr('r',dot_radius);
+			.attr('r',dot_radius)
+			.style('transition-delay','none');
 		d3.select('#d-' + index)
 			.attr('r',4)
 			.style('fill', 'rgb(0,0,0)');
 		
 		currentLabels.style('opacity', 0.5)
-			.style('font-family','Trade Regular');
+			.style('font-family','Trade')
+			.style('transition-delay','none');
 		d3.select('#label-' + index)
 			.style('opacity',1)
-			.style('font-family','Trade Condensed');
+			.style('font-family','Trade Bold');
 		
 		//currentText.style('opacity',0);
 		//current_word_label.style('opacity',1);
@@ -238,10 +301,64 @@ dataPromise.then(function (rows) {
 			.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
 		currentWheel
 			.attr('transform', `translate(-412 50) rotate(${wheel_sumAngle} 412 412)`);
-
-			
 	}
 
+	//keydown-scroll
+	document.addEventListener("keydown", function(event) {
+		event.preventDefault();
+		
+		const key = event.key; // "ArrowUp", or "ArrowDown"
+		
+		switch (key) { 
+		  case "ArrowUp":
+			// Up pressed
+			keyUp();
+			break;
+		  case "ArrowDown":
+			// Down pressed
+			keyDown();
+			break;
+		}
+	  });
+
+	function keyUp(){
+		if (index - 1 >= 0) {
+			index--;
+			rotation_def(index, 'up');
+		}
+	}
+
+	function keyDown(){
+		if (index + 1 < degrees.length) {
+			index++;
+			rotation_def(index, 'down');
+		}
+	}
+
+	// d3.select('body')  
+	// 	.on('keydown', function() {
+	// 		keyPressed[d3.event.keyIdentifier] = true;
+	// 		keyDown();
+	// 	})
+	// .on('keyup', function() {
+	// 		keyPressed[d3.event.keyIdentifier] = false;
+	// 		keyUp();
+	// 	});
+
+	// d3.select('body').call(d3.keybinding())
+	// 	.on('↑',keyUp())
+	// 	.on('↓',keyDown())
+	
+	// d3.timer(function(){
+	// 	if(index < 0){
+	// 		event.preventDefault()
+	// 	}
+	// 	if(index > degrees.length){
+	// 		event.preventDefault()
+	// 	}
+	// })
+	
+	//wheel-scroll
 	function move(delta) {
 		if (delta < 0) {
 			if (index - 1 >= 0) {
@@ -294,5 +411,20 @@ dataPromise.then(function (rows) {
 		document.addEventListener('DOMMouseScroll', throttle(scrollFunc,500), false);
 	}
 	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,500);
+
+	// var rotating = false;
+
+	// onMouseScroll {
+	// 	if(!rotating) {
+	// 		rotateWheel()
+	// 	};
+	// }
+
+	// rotateWheel { 
+	// 	rotating = true; 
+	// 	//fires animations
+	// 	//after these animations are done they should automatically call 
+	// 	function(){ rotating = false;}
+	// }
 
 })

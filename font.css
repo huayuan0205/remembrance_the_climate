@@ -7,11 +7,11 @@
     src: url(./fonts/PlayfairDisplaySC-Regular.ttf);   
 }
 @font-face {
-    font-family: "Trade Condensed";
+    font-family: "Trade Bold";
     src: url(./fonts/trade-condensed.ttf);   
 }
 @font-face {
-    font-family: "Trade Regular";
+    font-family: "Trade";
     src: url(./fonts/trade.ttf);   
 }
 

@@ -6,7 +6,6 @@ html,body,.container,h1,h2,h3,div,a,p{
 h1{
 	font-size: 34px;
 	letter-spacing: 2px;
-	font-weight: 400;
 	line-height: 1;
 	color: white;
 }
@@ -22,7 +21,7 @@ body{
 	min-width: 320px;
     background: #fff;
     line-height: 1.4285em;
-	/* overscroll-behavior: contain; */
+	overscroll-behavior: contain;
 	overflow: hidden;
 }
 
@@ -53,44 +52,35 @@ body{
 
 .text-item{
 	width:412px;
+	font-weight: normal;
 }
 
 .text-id{
 	font-family: "Caslon Regular";
 	font-size: 14px;
-	font-weight: 400;
+	fill: #fff;
 }
 
 .text-title{
 	font-family: "Caslon Regular";
 	font-size: 22px;
-	font-weight: 400;
-	letter-spacing: 5px;
+	fill: #fff;
+	letter-spacing: 4px;
 	line-height: 1;
 	
 }
 .text-date{
-	font-family: "Trade Regular";
+	font-family: "Trade";
 	font-size: 20px;
-	font-weight: 400;
-	color: black;
+	fill: black;
 }
 
 .text-desc{
-	width:412px;
-	font-family: "Trade Regular";
-	font-size:18px;
-	line-height: 1.2;
-	display:block;
-	white-space: pre-wrap;
+	font-family: "Trade";
+	font-weight: normal;
+	fill: #fff;
+	font-size:20px;
 }
-
-/* p{
-	position:fixed;
-	font-size:25px;
-	top:5%;
-	right:5%;
-} */
 
 .backgear-img{
 	position: fixed;
@@ -99,7 +89,7 @@ body{
 	z-index: -5999;
 }
 .canvas{
-	width:100%;
+	width:85%;
 	height:100%;
 	float: left;
 	overflow-x: none;
@@ -109,6 +99,38 @@ body{
 	/* overflow:auto; */
 	/* transform-origin: center,center; */
 }
+
+#icon-div{
+	position: fixed;
+    top: 10px;
+	right: 10px;
+}
+
+#icon-div button{
+	font-family: "Trade";
+	font-weight: 700;
+    padding: .5em;
+    padding-top: .6em;
+    border-radius: 2px;
+    border: none;
+    background-color: rgba(0,0,0,.1);
+}
+
+.ui-mini-button{
+	background: transparent none;
+	font-size: 8pt;
+    color: #fff;
+    text-shadow: none!important;
+}
+
+/* .others{
+	width:20%;
+	margin-left: 80%;
+	float: left;
+	position: absolute;
+	top:0;
+} */
+
 .canvas svg{
 	width:100%;
 	height:100%;
@@ -120,40 +142,14 @@ svg .g-wheel
 	filter: brightness(0.75);
 }
 
-
 .label-text{
 	/* text-anchor: end; */
 	font-size: 20px;
-	font-family: "Trade Regular";
+	font-family: "Trade";
 	font-weight: normal;
 	color: #000000;
 	opacity:0.5;
 }
-
-
-/* .others{
-	width:20%;
-	margin-left: 80%;
-	float: left;
-	position: absolute;
-	top:0;
-} */
-
-/* #showScroll{
-	height:100px;
-	background-color: white;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-	font:black;
-} */
-
-/* .main-items{
-	position: absolute;
-	width:416px;
-	left: 30px;
-	top:300px;
-
-} */
 
 .item-head{
 	margin-top: 33px;
@@ -161,13 +157,14 @@ svg .g-wheel
 }
 
 #wheel-img{
-	position:fixed;
+	/* position:fixed; */
 	width: 824px;
 	height: 824px;
 	transition: all 1s ease 0s;
 	/* transform-origin:0,0; */
 	opacity: .8;
 	z-index: -1999;
+	/* filter: brightness(0.75); */
 }
 
 #timeline{
