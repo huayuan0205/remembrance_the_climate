@@ -139,7 +139,9 @@ body{
 
 svg .g-wheel
 {
-	filter: brightness(0.75);
+	-webkit-filter: brightness(10%);
+	filter: brightness(100%);
+	opacity: 0.8;
 }
 
 .label-text{
@@ -183,6 +185,7 @@ svg .g-wheel
 	stroke-width: 2pt;
 	fill:beige;
 }
+
 #info-box {
 	padding: 50px;
 	position: fixed;

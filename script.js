@@ -58,16 +58,19 @@ dataPromise.then(function (rows) {
 	var wheel = canvas.append('g')
 		.attr('class','g-wheel')
 		.append('image')
+		.attr('class', 'wheel-img')
 		.attr('id', 'wheel-img')
 		.attr('xlink:href', "./img/wheel-blur.png")
 		.attr('transform','translate(-412,50) rotate(0 412 412)')
 		.style('transition', 'transform 1s ease 0s')
+		.style('-webkit-transition', '-webkit-transform 1s ease 0s');
 
 	//dots
 	var timeline = canvas.append('g')
 		.attr('id', 'timeline')
 		.attr('transform', `translate(0 0) rotate(-90 0 462)`)//start point
-		.style('transition', 'all 1s ease 0s');
+		.style('transition', 'all 1s ease 0s')
+		.style('-webkit-transition', 'all 1s ease 0s');
 
 	var dots = timeline.selectAll('.dot')
 		.data(rows)
@@ -89,6 +92,7 @@ dataPromise.then(function (rows) {
 		})
 		.attr('r', dot_radius)
 		.style('transition', 'all 1s ease 0s')
+		.style('-webkit-transition', 'all 1s ease 0s')
 		.style('fill', 'rgb(255,255,255)');
 
 	//labels
@@ -117,6 +121,7 @@ dataPromise.then(function (rows) {
 		.style('text-anchor','end')
 		.style('color','rgb(0,0,0)')
 		.style('transition', 'all 1s ease 0s')
+		.style('-webkit-transition', 'all 1s ease 0s')
 		.text((d)=>{
 			return d.year;
 		})
@@ -133,6 +138,7 @@ dataPromise.then(function (rows) {
 		.attr('height','400px')
 		.attr('transform','translate(20,380) rotate(90)')
 		.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
+		.style('-webkit-transition', '-webkit-transform .8s ease 0s, opacity 0.8s ease 0s')
 		.style('transform-origin','left top')
 		.style('opacity',0)
 	
@@ -225,6 +231,7 @@ dataPromise.then(function (rows) {
 	var index = 0;
 	var sumAngle = 0
 	var wheel_sumAngle = 90;
+	let old_url = window.location.href;
 
 	function rotation_def(index, up_down) {
 		let rotationAngle = 0;
@@ -252,6 +259,9 @@ dataPromise.then(function (rows) {
 			last_word_label
 				.attr('transform', `translate(20,400) rotate(0)`)
 				.style('opacity',1)
+			
+			let new_url =old_url + '/#/durham-'+ (index+1);
+			window.history.pushState({},0,new_url);
 		}
 		if (up_down == 'up') {
 			//clear onboarding delay 
@@ -274,6 +284,9 @@ dataPromise.then(function (rows) {
 			next_word_label
 				.attr('transform', `translate(20,400) rotate(0)`)
 				.style('opacity',1)
+
+			let new_url =old_url + '/#/durham-'+ (index+1);
+			window.history.pushState({},0,new_url);
 		}
 
 		//transition to original color and size
@@ -334,29 +347,6 @@ dataPromise.then(function (rows) {
 			rotation_def(index, 'down');
 		}
 	}
-
-	// d3.select('body')  
-	// 	.on('keydown', function() {
-	// 		keyPressed[d3.event.keyIdentifier] = true;
-	// 		keyDown();
-	// 	})
-	// .on('keyup', function() {
-	// 		keyPressed[d3.event.keyIdentifier] = false;
-	// 		keyUp();
-	// 	});
-
-	// d3.select('body').call(d3.keybinding())
-	// 	.on('↑',keyUp())
-	// 	.on('↓',keyDown())
-	
-	// d3.timer(function(){
-	// 	if(index < 0){
-	// 		event.preventDefault()
-	// 	}
-	// 	if(index > degrees.length){
-	// 		event.preventDefault()
-	// 	}
-	// })
 	
 	//wheel-scroll
 	function move(delta) {
