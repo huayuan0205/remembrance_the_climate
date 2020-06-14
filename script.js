@@ -27,12 +27,18 @@ function parseData(d) {
 //d3.json("data-sample.json").then(data=>{})
 dataPromise.then(function (rows) {
 
-	var start_dot_originalX = 425;
-	var start_dot_originalY = 462;
 	var wheel_radius = 412;
 	var dot_radius = 2;
+	var start_dot_originalX = 425;
+	var start_dot_originalY = 462;
+
+	var text_item_width = 400;
+	var text_item_height = 400;
+	var text_wrap_width = 314;
+	
 	var startYear = rows[0].year;
 	var count_year = rows[rows.length - 1].year - startYear;
+
 	var avg_degree = 180 / count_year;
 	var rotating_degrees = [];
 	var degrees = [0];
@@ -61,17 +67,21 @@ dataPromise.then(function (rows) {
 		.attr('class', 'wheel-img')
 		.attr('id', 'wheel-img')
 		.attr('xlink:href', "./img/wheel-dark.png")
-		.attr('transform','translate(-412,50) rotate(0 412 412)')
 		.style('transition', 'transform 1s ease 0s')
-		//.style('-webkit-transition', '1000ms width linear;')
-		//.style('-webkit-transition', '-webkit-transform 1s ease 0s');
+		//.attr('transform','translate(-412,50) rotate(0 412 412)')
+		//safari
+		.style('transform-origin','412px 412px')
+		.style('transform', `translate(-412px, 50px)`)
 
+	//dots & labels
 	//dots
 	var timeline = canvas.append('g')
 		.attr('id', 'timeline')
-		.attr('transform', `translate(0 0) rotate(-90 0 462)`)//start point
 		.style('transition', 'all 1s ease 0s')
-		//.style('-webkit-transition', 'all 1s ease 0s');
+		//.attr('transform', `translate(0 0) rotate(-90 0 ${start_dot_originalY})`)
+		//set start position
+		.style('transform-origin',`0 ${start_dot_originalY}px`)//(0,462)
+		.style('transform',`translate(0,0) rotate(-90deg)`)
 
 	var dots = timeline.selectAll('.dot')
 		.data(rows)
@@ -93,7 +103,6 @@ dataPromise.then(function (rows) {
 		})
 		.attr('r', dot_radius)
 		.style('transition', 'all 1s ease 0s')
-		//.style('-webkit-transition', 'all 1s ease 0s')
 		.style('fill', 'rgb(255,255,255)');
 
 	//labels
@@ -116,13 +125,10 @@ dataPromise.then(function (rows) {
 			} else if (rotate_degree <= 180) {
 				trans_y = (wheel_radius-5) * Math.sin(toRadians(180 - rotate_degree)) + start_dot_originalY;
 			}
-
 			return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
 		})
 		.style('text-anchor','end')
-		.style('color','rgb(0,0,0)')
 		.style('transition', 'all 1s ease 0s')
-		//.style('-webkit-transition', 'all 1s ease 0s')
 		.text((d)=>{
 			return d.year;
 		})
@@ -135,12 +141,14 @@ dataPromise.then(function (rows) {
 		.append('text')
 		.attr('class','text-item')
 		.attr('id',(d,i)=>{return `text-item-${i}`})
-		.attr('width','400px')
-		.attr('height','400px')
-		.attr('transform','translate(20,380) rotate(90)')
-		.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
-		//.style('-webkit-transition', '-webkit-transform .8s ease 0s, opacity 0.8s ease 0s')
-		.style('transform-origin','left top')
+		.attr('width',`${text_item_width}px`)
+		.attr('height',`${text_item_height}px`)
+		//.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
+		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+		//.style('transform-origin','left top')
+		//.attr('transform','translate(20,380) rotate(90)')
+		.style('transform-origin','0px 0px')
+		.style('transform', `translate(20px, 380px) rotate(90deg)`)
 		.style('opacity',0)
 	
 	text_item.append("tspan")
@@ -151,7 +159,7 @@ dataPromise.then(function (rows) {
 		.text(d => d.title)
 		.attr('class','text-title')	
 		.attr('x', 0)
-		.attr('dy', '1.5em')
+		.attr('dy', '1.7em')
 	
 	text_item.append("tspan")
 		.text(d => d.date)
@@ -164,7 +172,7 @@ dataPromise.then(function (rows) {
 		.attr('class','text-desc')	
 		.attr('x', 0)
 		.attr('dy', '1.5em')
-		.call(wrap,1.5,314)
+		.call(wrap,1.5,text_wrap_width)
 	
 	//fix the description part in a given width
 	function wrap(text, dy, width) {
@@ -199,12 +207,16 @@ dataPromise.then(function (rows) {
 		});
 	}		
 	
-	//onboarding animation
+	//onboard animation
 	//wheel
-	wheel.attr('transform','translate(-412,50) rotate(90 412 412)')	
+	//wheel.attr('transform','translate(-412,50) rotate(90 412 412)')	
+	wheel.style('transform-origin','412px 412px')
+		.style('transform', `translate(-412px, 50px) rotate(90deg)`);
 	//dots and labels
 	timeline
-		.attr('transform', `translate(0 0) rotate(0 0 462)`);
+		//.attr('transform', `translate(0 0) rotate(0 0 462)`);
+		.style('transform-origin','0 462px')
+		.style('transform', `translate(0,0)`);
 	//first dot
 	let first_dot = d3.select('#d-0');
 	first_dot
@@ -216,12 +228,17 @@ dataPromise.then(function (rows) {
 	first_label
 		.attr('r',4)
 		.style('transition-delay','1s')
-		.style('opacity',1)
+		.style('opacity',.7)
 		.style('font-family','Trade Bold');
 	//first text item 
-	let fisrt_word = d3.select('#text-item-0');
-	fisrt_word.attr('transform', 'translate(20,380) rotate(0)')
+	let fisrt_content = d3.select('#text-item-0');
+	fisrt_content
+		//.style('transform-origin','0 0')
+		//.style('transform', 'translate(20px,380px) rotate(0)')
 		.style('opacity',1)
+		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+		//.style('transform-origin','0px 0px')
+		.style('transform', `translate(20px, 380px) rotate(0deg)`)
 
 
 	//rotation
@@ -253,14 +270,19 @@ dataPromise.then(function (rows) {
 
 			let last_word_label = d3.select('#text-item-'+index);
 
-			current_word_label
-				.attr('transform', `translate(20,400) rotate(-180)`)
+			current_word_label//rotate out
+				//.attr('transform', `translate(20,380) rotate(0)`)
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 380px) rotate(-180deg)`)
 				.style('opacity',0)
-
-			last_word_label
-				.attr('transform', `translate(20,400) rotate(0)`)
+				
+			last_word_label//rotate in
+				//.attr('transform', `translate(20,400) rotate(0)`)
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 380px) rotate(0deg)`)
 				.style('opacity',1)
 			
+			//change URL path?
 			let new_url =old_url + '#/durham-'+ (index+1);
 			window.history.pushState({},0,new_url);
 		}
@@ -279,13 +301,18 @@ dataPromise.then(function (rows) {
 
 			let next_word_label = d3.select('#text-item-'+(index))
 
-			current_word_label
-				.attr('transform', `translate(20,400) rotate(180)`)
+			current_word_label//rotate out
+				//.attr('transform', `translate(20,380) rotate(0)`)
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 380px) rotate(180deg)`)
 				.style('opacity',0)
-			next_word_label
-				.attr('transform', `translate(20,400) rotate(0)`)
+			next_word_label//rotate in
+				//.attr('transform', `translate(20,380) rotate(0)`)
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 380px) rotate(0deg)`)
 				.style('opacity',1)
 
+			//change URL path?
 			let new_url =old_url + '/#/durham-'+ (index+1);
 			window.history.pushState({},0,new_url);
 		}
@@ -294,27 +321,32 @@ dataPromise.then(function (rows) {
 		currentDots.style('fill', 'rgb(255,255,255)')
 			.attr('r',dot_radius)
 			.style('transition-delay','none');
+		//current dot is black
 		d3.select('#d-' + index)
 			.attr('r',4)
 			.style('fill', 'rgb(0,0,0)');
 		
-		currentLabels.style('opacity', 0.5)
+		currentLabels.style('opacity', 0.3)
 			.style('font-family','Trade')
 			.style('transition-delay','none');
+		//current label is bold
 		d3.select('#label-' + index)
-			.style('opacity',1)
+			.style('opacity',.8)
 			.style('font-family','Trade Bold');
-		
-		//currentText.style('opacity',0);
-		//current_word_label.style('opacity',1);
 		
 		wheel_sumAngle += wheelAngle;
 		sumAngle += rotationAngle;
 
-		timeline
-			.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
+		// timeline
+		// 	.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
+		timeline.style('transform-origin','0px 462px')
+			.style('transform', `translate(0,0) rotate(${sumAngle}deg)`);
+		// currentWheel
+		// 	.attr('transform', `translate(-412 50) rotate(${wheel_sumAngle} 412 412)`);
+		// safari
 		currentWheel
-			.attr('transform', `translate(-412 50) rotate(${wheel_sumAngle} 412 412)`);
+		.style('transform-origin','412px 412px')
+		.style('transform', `translate(-412px, 50px) rotate(${wheel_sumAngle}deg)`);
 	}
 
 	//keydown-scroll
@@ -349,37 +381,19 @@ dataPromise.then(function (rows) {
 	}
 	
 	//touch on mobile device
-	document.addEventListener('touchmove', function(event) {
-		event.preventDefault();
+	// document.addEventListener('touchmove', function(event) {
+	// 	event.preventDefault();
 
-		if (index - 1 >= 0) {
-			index--;
-			rotation_def(index, 'up');
-		}
-		if (index + 1 < degrees.length) {
-			index++;
-			rotation_def(index, 'down');
-		}
+	// 	if (index - 1 >= 0) {
+	// 		index--;
+	// 		rotation_def(index, 'up');
+	// 	}
+	// 	if (index + 1 < degrees.length) {
+	// 		index++;
+	// 		rotation_def(index, 'down');
+	// 	}
 
-	}, true);
-
-	//d3.onscroll doesn't work...
-	// d3.select(window)
-	// 	.on('scroll.scroller',function(){
-	// 		if (delta < 0) {
-	// 			if (index - 1 >= 0) {
-	// 				index--;
-	// 				rotation_def(index, 'up');
-	
-	// 			}
-	// 		} else if (delta > 0) {
-	// 			if (index + 1 < degrees.length) {
-	// 				index++;
-	// 				rotation_def(index, 'down');
-	// 				//console.log(index);
-	// 			}
-	// 		}
-	// 	})
+	// }, true);
 
 	//scroll
 	function move(delta) {
@@ -435,7 +449,7 @@ dataPromise.then(function (rows) {
 	}
 	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,500);
 
-	var rotating = false;
+	// var rotating = false;
 
 	// onMouseScroll {
 	// 	if(!rotating) {
@@ -450,4 +464,12 @@ dataPromise.then(function (rows) {
 	// 	function(){ rotating = false;}
 	// }
 
+	//mobile touch
+	bindTouch('#scroll', _.debounce(function(type) {
+		if(type === 'up' || type === 'left') {
+			keyDown();
+		} else {
+			keyUp();
+		}
+	},500));
 })

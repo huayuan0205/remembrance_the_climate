@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Caslon Regular";
-    src: url(./fonts/caslon.ttf);   
+    src: url(./fonts/caslon.otf);   
 }
 @font-face {
     font-family: "Playfair Regular";
@@ -13,6 +13,10 @@
 @font-face {
     font-family: "Trade";
     src: url(./fonts/trade.ttf);   
+}
+@font-face {
+    font-family: "Trade Gothic LT";
+    src: url(./fonts/TradeGothicLTStd-Cn18.otf);
 }
 
 

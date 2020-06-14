@@ -41,18 +41,18 @@ body{
 
 .text-item{
 	width:412px;
-	font-weight: normal;
 }
 
 .text-id{
 	font-family: "Caslon Regular";
-	font-size: 14px;
+	font-size: 13px;
+	letter-spacing: 1px;
 	fill: #fff;
 }
 
 .text-title{
 	font-family: "Caslon Regular";
-	font-size: 22px;
+	font-size: 20px;
 	fill: #fff;
 	letter-spacing: 4px;
 	line-height: 1;
@@ -62,13 +62,14 @@ body{
 	font-family: "Trade";
 	font-size: 20px;
 	fill: black;
+	font-weight: 100;
 }
 
 .text-desc{
 	font-family: "Trade";
-	font-weight: normal;
 	fill: #fff;
 	font-size:20px;
+	font-weight: 100;
 }
 
 .backgear-img{
@@ -83,8 +84,7 @@ body{
 	float: left;
 	overflow-x: none;
 	/* overflow: scroll; */
-	transition: tranform 1s ease 0s;
-	-webkit-transition: transform 1s ease 0s;
+	/* transition: tranform 1s ease 0s; */
 	/* position: fixed; */
 	/* overflow:auto; */
 	/* transform-origin: center,center; */
@@ -99,7 +99,7 @@ body{
 
 #icon-div button{
 	font-family: "Trade";
-	font-weight: 700;
+	/* font-weight: 700; */
 	vertical-align: middle;
 	border-radius: 2px;
 	/* margin: 0 0 0 0; */
@@ -191,7 +191,7 @@ body{
 }
 .modal-content .about-head{
 	font-family: "Caslon Regular";
-	font-weight: 400;
+	/* font-weight: 400; */
 	font-size: 18px;
 	letter-spacing: 3px;
 }
@@ -240,9 +240,8 @@ svg .g-wheel
 	/* text-anchor: end; */
 	font-size: 20px;
 	font-family: "Trade";
-	font-weight: normal;
 	color: #000000;
-	opacity:0.5;
+	opacity:0.3;
 }
 
 .item-head{

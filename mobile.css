@@ -1,0 +1,57 @@
+.mobile .canvas {
+  width: 820px;
+}
+.mobile .container {
+  overflow-x: hidden !important;
+}
+
+.mobile .canvas {
+  transform: scale(0.9);
+  transform-origin: left bottom;
+}
+
+@media screen and (max-width: 1080px) {
+  body {
+    background-color: red;
+  }
+  .more_desc{
+    column-count: 2;
+  }
+}
+@media screen and (max-width: 960px) {
+  body {
+    background-color: orange;
+  }
+  .more_desc{
+    column-count: 2;
+  }
+}
+@media screen and (max-width: 768px) {
+  body {
+    background-color: yellow;
+  }
+  .more_desc{
+    column-count: 1;
+  }
+}
+@media screen and (max-width: 550px) {
+  body {
+    background-color: green;
+  }
+  /* .canvas {
+    transform: scale(0.8);
+    transform-origin: left top;
+  } */
+  .more_desc{
+    column-count: 1;
+  }
+}
+@media screen and (max-width: 414px) {
+  /* .canvas {
+    transform: scale(0.8);
+    transform-origin: left top;
+  } */
+  .more_desc{
+    column-count: 1;
+  }
+}
