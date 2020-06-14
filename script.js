@@ -60,7 +60,7 @@ dataPromise.then(function (rows) {
 		.append('image')
 		.attr('class', 'wheel-img')
 		.attr('id', 'wheel-img')
-		.attr('xlink:href', "./img/wheel-blur.png")
+		.attr('xlink:href', "./img/wheel-dark.png")
 		.attr('transform','translate(-412,50) rotate(0 412 412)')
 		.style('transition', 'transform 1s ease 0s')
 		.style('-webkit-transition', '-webkit-transform 1s ease 0s');
@@ -103,17 +103,17 @@ dataPromise.then(function (rows) {
 		.append('text')
 		.attr('class','label-text')
 		.attr('id',(d,i)=>{return `label-${i}`})
-		.attr('dx','-5px')
+		//.attr('dx','-5px')
 		.attr('dy','.35em')
 		.attr('transform',(d) =>{
 			var trans_x, trans_y = 0;
 			var rotate_degree = avg_degree * (d.year - startYear);
 
-			trans_x = (wheel_radius-10) * Math.cos(toRadians(rotate_degree));
+			trans_x = (wheel_radius-5) * Math.cos(toRadians(rotate_degree));
 			if (rotate_degree <= 90) {
-				trans_y = (wheel_radius-10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+				trans_y = (wheel_radius-5) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
 			} else if (rotate_degree <= 180) {
-				trans_y = (wheel_radius-10) * Math.sin(toRadians(180 - rotate_degree)) + start_dot_originalY;
+				trans_y = (wheel_radius-5) * Math.sin(toRadians(180 - rotate_degree)) + start_dot_originalY;
 			}
 
 			return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
@@ -418,3 +418,12 @@ dataPromise.then(function (rows) {
 	// }
 
 })
+
+function myFunction() {
+	var x = document.getElementById("myDIV");
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
+  }
