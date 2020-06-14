@@ -63,14 +63,15 @@ dataPromise.then(function (rows) {
 		.attr('xlink:href', "./img/wheel-dark.png")
 		.attr('transform','translate(-412,50) rotate(0 412 412)')
 		.style('transition', 'transform 1s ease 0s')
-		.style('-webkit-transition', '-webkit-transform 1s ease 0s');
+		//.style('-webkit-transition', '1000ms width linear;')
+		//.style('-webkit-transition', '-webkit-transform 1s ease 0s');
 
 	//dots
 	var timeline = canvas.append('g')
 		.attr('id', 'timeline')
 		.attr('transform', `translate(0 0) rotate(-90 0 462)`)//start point
 		.style('transition', 'all 1s ease 0s')
-		.style('-webkit-transition', 'all 1s ease 0s');
+		//.style('-webkit-transition', 'all 1s ease 0s');
 
 	var dots = timeline.selectAll('.dot')
 		.data(rows)
@@ -92,7 +93,7 @@ dataPromise.then(function (rows) {
 		})
 		.attr('r', dot_radius)
 		.style('transition', 'all 1s ease 0s')
-		.style('-webkit-transition', 'all 1s ease 0s')
+		//.style('-webkit-transition', 'all 1s ease 0s')
 		.style('fill', 'rgb(255,255,255)');
 
 	//labels
@@ -121,7 +122,7 @@ dataPromise.then(function (rows) {
 		.style('text-anchor','end')
 		.style('color','rgb(0,0,0)')
 		.style('transition', 'all 1s ease 0s')
-		.style('-webkit-transition', 'all 1s ease 0s')
+		//.style('-webkit-transition', 'all 1s ease 0s')
 		.text((d)=>{
 			return d.year;
 		})
@@ -138,7 +139,7 @@ dataPromise.then(function (rows) {
 		.attr('height','400px')
 		.attr('transform','translate(20,380) rotate(90)')
 		.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
-		.style('-webkit-transition', '-webkit-transform .8s ease 0s, opacity 0.8s ease 0s')
+		//.style('-webkit-transition', '-webkit-transform .8s ease 0s, opacity 0.8s ease 0s')
 		.style('transform-origin','left top')
 		.style('opacity',0)
 	
@@ -260,7 +261,7 @@ dataPromise.then(function (rows) {
 				.attr('transform', `translate(20,400) rotate(0)`)
 				.style('opacity',1)
 			
-			let new_url =old_url + '/#/durham-'+ (index+1);
+			let new_url =old_url + '#/durham-'+ (index+1);
 			window.history.pushState({},0,new_url);
 		}
 		if (up_down == 'up') {
@@ -340,7 +341,6 @@ dataPromise.then(function (rows) {
 			rotation_def(index, 'up');
 		}
 	}
-
 	function keyDown(){
 		if (index + 1 < degrees.length) {
 			index++;
@@ -348,7 +348,40 @@ dataPromise.then(function (rows) {
 		}
 	}
 	
-	//wheel-scroll
+	//touch on mobile device
+	document.addEventListener('touchmove', function(event) {
+		event.preventDefault();
+
+		if (index - 1 >= 0) {
+			index--;
+			rotation_def(index, 'up');
+		}
+		if (index + 1 < degrees.length) {
+			index++;
+			rotation_def(index, 'down');
+		}
+
+	}, true);
+
+	//d3.onscroll doesn't work...
+	// d3.select(window)
+	// 	.on('scroll.scroller',function(){
+	// 		if (delta < 0) {
+	// 			if (index - 1 >= 0) {
+	// 				index--;
+	// 				rotation_def(index, 'up');
+	
+	// 			}
+	// 		} else if (delta > 0) {
+	// 			if (index + 1 < degrees.length) {
+	// 				index++;
+	// 				rotation_def(index, 'down');
+	// 				//console.log(index);
+	// 			}
+	// 		}
+	// 	})
+
+	//scroll
 	function move(delta) {
 		if (delta < 0) {
 			if (index - 1 >= 0) {
@@ -402,7 +435,7 @@ dataPromise.then(function (rows) {
 	}
 	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,500);
 
-	// var rotating = false;
+	var rotating = false;
 
 	// onMouseScroll {
 	// 	if(!rotating) {
@@ -418,12 +451,3 @@ dataPromise.then(function (rows) {
 	// }
 
 })
-
-function myFunction() {
-	var x = document.getElementById("myDIV");
-	if (x.style.display === "none") {
-	  x.style.display = "block";
-	} else {
-	  x.style.display = "none";
-	}
-  }

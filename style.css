@@ -261,6 +261,7 @@ svg .g-wheel
 	/* filter: brightness(0.75); */
 }
 
+
 #timeline{
 	transform-origin: 0px 0px;
 	filter: brightness(1);
@@ -286,17 +287,17 @@ svg .g-wheel
 	top: 20px;
 	right: 20px;
 }
-
-/* @media (max-width: 414px) { 
+/* 
+@media (max-width: 414px) { 
 	#wheel-img{
-		/* position:fixed; */
+		
 		width: 400px;
 		height: 400px;
 		transition: all 1s ease 0s;
-		/* transform-origin:0,0; */
+
 		opacity: .8;
 		z-index: -1999;
-		/* filter: brightness(0.75); */
+		
 	}
-} */
+}  */
 
