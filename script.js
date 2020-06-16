@@ -34,7 +34,8 @@ dataPromise.then(function (rows) {
 
 	var text_item_width = 400;
 	var text_item_height = 400;
-	var text_wrap_width = 314;
+	var text_wrap_width_title = 250;
+	var text_wrap_width_desc = 314;
 	
 	var startYear = rows[0].year;
 	var count_year = rows[rows.length - 1].year - startYear;
@@ -57,8 +58,8 @@ dataPromise.then(function (rows) {
 	//add svg	
 	var canvas = d3.select('.canvas')
 		.append('svg')
-		.attr('width', W)
-		.attr('height', H)
+		.attr('width', w)
+		.attr('height', h)
 		
 	//add wheel image
 	var wheel = canvas.append('g')
@@ -138,6 +139,13 @@ dataPromise.then(function (rows) {
 		.selectAll('.text-item')
 		.data(rows)
 		.enter()
+		.append('g')
+		.attr('class','text-item-g')
+		.attr('id',(d,i)=>{return `text-item-g-${i}`})
+		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+		.style('transform-origin','0px 0px')
+		.style('transform', `translate(20px, 350px) rotate(90deg)`)
+		.style('opacity',0)
 		.append('text')
 		.attr('class','text-item')
 		.attr('id',(d,i)=>{return `text-item-${i}`})
@@ -147,9 +155,7 @@ dataPromise.then(function (rows) {
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 		//.style('transform-origin','left top')
 		//.attr('transform','translate(20,380) rotate(90)')
-		.style('transform-origin','0px 0px')
-		.style('transform', `translate(20px, 380px) rotate(90deg)`)
-		.style('opacity',0)
+		//.style('opacity',0)
 	
 	text_item.append("tspan")
 		.text(d => d.city)
@@ -159,20 +165,21 @@ dataPromise.then(function (rows) {
 		.text(d => d.title)
 		.attr('class','text-title')	
 		.attr('x', 0)
-		.attr('dy', '1.7em')
+		.attr('dy', '1em')
+		.call(wrap,1,text_wrap_width_title)
 	
 	text_item.append("tspan")
 		.text(d => d.date)
 		.attr('class','text-date')	
 		.attr('x', 0)
-		.attr('dy', '2.2em')
+		.attr('dy', '2.5em')
 	
 	text_item.append("tspan")
 		.text(d => d.story)
 		.attr('class','text-desc')	
 		.attr('x', 0)
 		.attr('dy', '1.5em')
-		.call(wrap,1.5,text_wrap_width)
+		.call(wrap,1.4,text_wrap_width_desc)
 	
 	//fix the description part in a given width
 	function wrap(text, dy, width) {
@@ -181,7 +188,7 @@ dataPromise.then(function (rows) {
 				words = text.text().split(/\s+/).reverse(),
 				word,
 				line = [],
-				lineHeight = 1.2, //ems
+				lineHeight = dy, //ems
 				x = text.attr("x"),
 				y = text.attr("y"),
 				tspan = text.text(null)
@@ -231,20 +238,17 @@ dataPromise.then(function (rows) {
 		.style('opacity',.7)
 		.style('font-family','Trade Bold');
 	//first text item 
-	let fisrt_content = d3.select('#text-item-0');
+	let fisrt_content = d3.select('#text-item-g-0');
 	fisrt_content
-		//.style('transform-origin','0 0')
-		//.style('transform', 'translate(20px,380px) rotate(0)')
+		.style('transform-origin','0 0')
+		.style('transform', `translate(20px,350px) rotate(0deg)`)
 		.style('opacity',1)
-		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
-		//.style('transform-origin','0px 0px')
-		.style('transform', `translate(20px, 380px) rotate(0deg)`)
-
 
 	//rotation
 	var currentWheel = d3.select('#wheel-img');
 	var currentDots = timeline.selectAll('.dot');
 	var currentLabels = timeline.selectAll('.label-text')
+	var currentText = canvas.select('.text-item-g')
 
 	var index = 0;
 	var sumAngle = 0
@@ -264,22 +268,22 @@ dataPromise.then(function (rows) {
 			wheelAngle = 0 - 18;
 
 			//switch text items
-			let current_word_label = d3.select('#text-item-'+(index-1));
+			let current_word_label = d3.select('#text-item-g-'+(index-1));
 			console.log('now',(index-1))
 			console.log('down',index);
 
-			let last_word_label = d3.select('#text-item-'+index);
+			let last_word_label = d3.select('#text-item-g-'+index);
 
 			current_word_label//rotate out
 				//.attr('transform', `translate(20,380) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 380px) rotate(-180deg)`)
+				.style('transform', `translate(20px, 350px) rotate(-180deg)`)
 				.style('opacity',0)
 				
 			last_word_label//rotate in
 				//.attr('transform', `translate(20,400) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 380px) rotate(0deg)`)
+				.style('transform', `translate(20px, 350px) rotate(0deg)`)
 				.style('opacity',1)
 			
 			//change URL path?
@@ -295,21 +299,21 @@ dataPromise.then(function (rows) {
 			wheelAngle = 18;
 
 			//switch text items
-			let current_word_label = d3.select('#text-item-'+(index+1))
+			let current_word_label = d3.select('#text-item-g-'+(index+1))
 			console.log('now',(index+1))
 			console.log('up',(index));
 
-			let next_word_label = d3.select('#text-item-'+(index))
+			let next_word_label = d3.select('#text-item-g-'+(index))
 
 			current_word_label//rotate out
 				//.attr('transform', `translate(20,380) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 380px) rotate(180deg)`)
+				.style('transform', `translate(20px, 350px) rotate(180deg)`)
 				.style('opacity',0)
 			next_word_label//rotate in
 				//.attr('transform', `translate(20,380) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 380px) rotate(0deg)`)
+				.style('transform', `translate(20px, 350px) rotate(0deg)`)
 				.style('opacity',1)
 
 			//change URL path?
@@ -379,21 +383,6 @@ dataPromise.then(function (rows) {
 			rotation_def(index, 'down');
 		}
 	}
-	
-	//touch on mobile device
-	// document.addEventListener('touchmove', function(event) {
-	// 	event.preventDefault();
-
-	// 	if (index - 1 >= 0) {
-	// 		index--;
-	// 		rotation_def(index, 'up');
-	// 	}
-	// 	if (index + 1 < degrees.length) {
-	// 		index++;
-	// 		rotation_def(index, 'down');
-	// 	}
-
-	// }, true);
 
 	//scroll
 	function move(delta) {
@@ -448,6 +437,12 @@ dataPromise.then(function (rows) {
 		document.addEventListener('DOMMouseScroll', throttle(scrollFunc,500), false);
 	}
 	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,500);
+
+	//disable scroll after clicking the button
+	document.getElementById('btn_more').onclick = function(e){
+		//document.body.style.overflow = "hidden";
+		document.addEventListener('DOMMouseScroll', e.preventDefault(), false); 
+	}
 
 	// var rotating = false;
 

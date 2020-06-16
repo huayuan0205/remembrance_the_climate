@@ -45,18 +45,20 @@ body{
 
 .text-id{
 	font-family: "Caslon Regular";
-	font-size: 13px;
-	letter-spacing: 1px;
+	text-transform: lowercase;
+	font-size: 20px;
+	margin-bottom: 0;
 	fill: #fff;
 }
 
 .text-title{
 	font-family: "Caslon Regular";
-	font-size: 20px;
+	text-transform: lowercase;
+	font-size: 34px;
 	fill: #fff;
-	letter-spacing: 4px;
+	letter-spacing: 2px;
 	line-height: 1;
-	
+	margin-top: 0;
 }
 .text-date{
 	font-family: "Trade";
