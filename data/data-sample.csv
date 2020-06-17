@@ -1,12 +1,13 @@
-﻿Year,City,Title,Date,Story
-2018,DURHAM–1,SPECIES RELOCATION,AUG 15,"Populations now thriving, Mississippi kites first observed in Durham near here by local bird watchers."
-2020,DURHAM–6,BRIDGE ELEVATED,OCT 30,"Route 60 bridge elevated, enabling migration of salt marsh along Bunker Creek due to sea level rise." 
-2026,DURHAM–3,It's a very longlonglong title,AUG 17,STORY 3
-2032,DURHAM–4,TITLE 4,AUG 18,STORY 4
-2034,DURHAM–5,TITLE 5,AUG 19,STORY 5
-2040,DURHAM–6,TITLE 6,AUG 20,STORY 6
-2044,DURHAM–7,TITLE 7,AUG 21,STORY 7
-2052,DURHAM–8,TITLE 8,AUG 22,STORY 8
-2057,DURHAM–9,TITLE 9,AUG 23,STORY 9
-2058,DURHAM–10,TITLE 10,AUG 24,STORY 10 
-2060,DURHAM–11,TITLE 11,AUG 25,STORY 11
+﻿id,spot,spot_id,event,description,date
+1,Rindge Avenue Climate Resilience Trail,RIN-2,Relief from Heat Wave,The DCR McCrehan Pool was kept open 24 hours a day during a 10 day heat wave.,7/10/28
+2,Rindge Avenue Climate Resilience Trail,RIN-3,Flooding,Two feet of flooding came to Clifton Street.,5/1/30
+3,Rindge Avenue Climate Resilience Trail,RIN-5,Homes Elevated,Homes on Clifton Street were raised to protect them from growing flood risk.,5/21/33
+4,Rindge Avenue Climate Resilience Trail,RIN-4,Reliable Electricity,Fresh Pond Apartments and Rindge Tower were connected to a microgrid to provide reliable electricity.,4/12/33
+5,Rindge Avenue Climate Resilience Trail,RIN-1,Renewable Energy,Solar power canopies were installed in the parking lots at Fresh Pond Apartments and Rindge Tower to reduce the urban heat island and charge electric vehicles.,5/8/23
+6,Rindge Avenue Climate Resilience Trail,RIN-6,Subway Flood Risks,The MBTA floodproofed Alewife Station anticipating the growing threat of sea level rise and storm surge flooding.,10/1/35
+7,Vassal Lane Climate Resilience Trail,VAS-2,School Elevated,The reconstructed Tobin School was elevated 3 feet anticipating higher flood water.,8/23/24
+8,Vassal Lane Climate Resilience Trail,VAS-6,Flooding Reaches Vassal,Salt water flooding from a coastal storm first reached Vassal Lane.,6/2/70
+9,Vassal Lane Climate Resilience Trail,VAS-3,Flood Water Storage,A massive underground stormwater storage tank was installed when the Tobin School was reconstructed.,9/10/24
+10,Vassal Lane Climate Resilience Trail,VAS-4,Heat Wave,A 12-day heat wave hung over the city with humidity levels making the heat feel like 102 degrees Fahrenheit.,8/5/30
+11,Vassal Lane Climate Resilience Trail,VAS-1,Trees Provide Relief,Vassal Lane was turned into a cool corridor when trees planted grew to shade the street.,5/7/20
+12,Vassal Lane Climate Resilience Trail,VAS-5,Road Reduction,Car ownership decreased enough to allow the residential streets to be slimmed down to reduce pavement and create more green space.,10/9/40

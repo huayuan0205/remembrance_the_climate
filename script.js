@@ -15,17 +15,40 @@ function toRadians(angle) {
 
 //parse csv
 function parseData(d) {
+	// set format for time data
+	var formatMonDay = d3.timeFormat("%B %d");
+	var formatYear = d3.timeFormat("%Y");
+
 	return {
-		year: +d.Year,
-		city: d.City,
-		title: d.Title,
-		date: d.Date,
-		story: d.Story
+		year: formatYear(new Date(d.date)),
+		monday: formatMonDay(new Date(d.date)),
+		//year: +d.Year,
+		city: d.spot_id,
+		title: d.event,
+		desc: d.description,
 	}
 }
 
+// disable scrolling after clicing the button
+$('#exampleModal1').on('shown.bs.modal', function (e) {
+	document.getElementsById("scroll").disabled = true;
+	// document.getElementById("g-wheel").disabled = true;
+	});
+
+$('#exampleModal2').on('shown.bs.modal', function (e) {
+	document.getElementsById("scroll").disabled = true;
+	// document.getElementById("g-wheel").disabled = true;
+	})
+
 //d3.json("data-sample.json").then(data=>{})
 dataPromise.then(function (rows) {
+
+	//console.log(rows);
+
+	//data manipulation
+	//get sorted data by year
+	var data_by_year = rows.slice().sort((a,b)=>d3.ascending(a.year,b.year));
+	console.log(data_by_year);
 
 	var wheel_radius = 412;
 	var dot_radius = 2;
@@ -37,8 +60,8 @@ dataPromise.then(function (rows) {
 	var text_wrap_width_title = 250;
 	var text_wrap_width_desc = 314;
 	
-	var startYear = rows[0].year;
-	var count_year = rows[rows.length - 1].year - startYear;
+	var startYear = data_by_year[0].year;
+	var count_year = data_by_year[data_by_year.length - 1].year - startYear;
 
 	var avg_degree = 180 / count_year;
 	var rotating_degrees = [];
@@ -46,12 +69,12 @@ dataPromise.then(function (rows) {
 	var year_sub = [0]
 
 	//calculate rotating degrees
-	for (i = 1; i < rows.length; i++) {
-		var interval_year = rows[i].year - startYear;
+	for (i = 1; i < data_by_year.length; i++) {
+		var interval_year = data_by_year[i].year - startYear;
 		var new_element = d3.format(".1f")(avg_degree * interval_year);
 		rotating_degrees.push(new_element);
-		degrees.push(avg_degree * (rows[i].year - rows[i - 1].year));
-		year_sub.push(rows[i].year - rows[i - 1].year);
+		degrees.push(avg_degree * (data_by_year[i].year - data_by_year[i - 1].year));
+		year_sub.push(data_by_year[i].year - data_by_year[i - 1].year);
 	}
 	console.log('each rotatiion degree=' + degrees)
 	
@@ -79,13 +102,12 @@ dataPromise.then(function (rows) {
 	var timeline = canvas.append('g')
 		.attr('id', 'timeline')
 		.style('transition', 'all 1s ease 0s')
-		//.attr('transform', `translate(0 0) rotate(-90 0 ${start_dot_originalY})`)
 		//set start position
 		.style('transform-origin',`0 ${start_dot_originalY}px`)//(0,462)
 		.style('transform',`translate(0,0) rotate(-90deg)`)
 
 	var dots = timeline.selectAll('.dot')
-		.data(rows)
+		.data(data_by_year)
 		.enter()
 		.append('circle')
 		.attr('class', 'dot')
@@ -109,7 +131,7 @@ dataPromise.then(function (rows) {
 	//labels
 	var labels = timeline.append('g')
 		.selectAll('.label-text')
-		.data(rows)
+		.data(data_by_year)
 		.enter()
 		.append('text')
 		.attr('class','label-text')
@@ -136,26 +158,22 @@ dataPromise.then(function (rows) {
 	
 	//text items
 	var text_item = canvas.append('g')
-		.selectAll('.text-item')
-		.data(rows)
+		.selectAll('.text-item-g')
+		.data(data_by_year)
 		.enter()
 		.append('g')
 		.attr('class','text-item-g')
 		.attr('id',(d,i)=>{return `text-item-g-${i}`})
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 		.style('transform-origin','0px 0px')
-		.style('transform', `translate(20px, 350px) rotate(90deg)`)
+		.style('transform', `translate(20px, 360px) rotate(90deg)`)
 		.style('opacity',0)
 		.append('text')
 		.attr('class','text-item')
 		.attr('id',(d,i)=>{return `text-item-${i}`})
 		.attr('width',`${text_item_width}px`)
 		.attr('height',`${text_item_height}px`)
-		//.style('transition', 'transform .8s ease 0s, opacity 0.8s ease 0s')
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
-		//.style('transform-origin','left top')
-		//.attr('transform','translate(20,380) rotate(90)')
-		//.style('opacity',0)
 	
 	text_item.append("tspan")
 		.text(d => d.city)
@@ -169,13 +187,14 @@ dataPromise.then(function (rows) {
 		.call(wrap,1,text_wrap_width_title)
 	
 	text_item.append("tspan")
-		.text(d => d.date)
+		.text(d => d.monday)
 		.attr('class','text-date')	
 		.attr('x', 0)
-		.attr('dy', '2.5em')
+		.attr('y','108px')
+		//.attr('dy', '2.5em')
 	
 	text_item.append("tspan")
-		.text(d => d.story)
+		.text(d => d.desc)
 		.attr('class','text-desc')	
 		.attr('x', 0)
 		.attr('dy', '1.5em')
@@ -241,21 +260,20 @@ dataPromise.then(function (rows) {
 	let fisrt_content = d3.select('#text-item-g-0');
 	fisrt_content
 		.style('transform-origin','0 0')
-		.style('transform', `translate(20px,350px) rotate(0deg)`)
+		.style('transform', `translate(20px,360px) rotate(0deg)`)
 		.style('opacity',1)
 
 	//rotation
 	var currentWheel = d3.select('#wheel-img');
 	var currentDots = timeline.selectAll('.dot');
 	var currentLabels = timeline.selectAll('.label-text')
-	var currentText = canvas.select('.text-item-g')
 
 	var index = 0;
 	var sumAngle = 0
 	var wheel_sumAngle = 90;
 	let old_url = window.location.href;
 
-	function rotation_def(index, up_down) {
+	function rotation_def(index, up_down, data) {
 		let rotationAngle = 0;
 		let wheelAngle = 0;
 
@@ -267,29 +285,53 @@ dataPromise.then(function (rows) {
 			rotationAngle = 0 - degrees[index];//counter-clockwise
 			wheelAngle = 0 - 18;
 
-			//switch text items
+			// switch text items
 			let current_word_label = d3.select('#text-item-g-'+(index-1));
+			let last_word_label = d3.select('#text-item-g-'+index);
 			console.log('now',(index-1))
 			console.log('down',index);
-
-			let last_word_label = d3.select('#text-item-g-'+index);
-
-			current_word_label//rotate out
-				//.attr('transform', `translate(20,380) rotate(0)`)
+			// part 1
+			current_word_label//rotate out	
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 350px) rotate(-180deg)`)
+				.style('transform', `translate(20px, 360px) rotate(-180deg)`)
 				.style('opacity',0)
-				
 			last_word_label//rotate in
-				//.attr('transform', `translate(20,400) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 350px) rotate(0deg)`)
+				.style('transform', `translate(20px, 360px) rotate(0deg)`)
 				.style('opacity',1)
-			
+			// two consecutive dots have the same year
+			if(data[index].year === data[index+1].year){
+				//other dots keep original color and size
+				for(i=0;i<degrees.length && i!== index && i!== (index+1);i++){
+					d3.select('#d-' + i)
+						.attr('r',dot_radius)
+						.style('transition-delay','none')
+						.style('fill', 'rgb(255,255,255)');
+				}
+				// current dot is black
+				d3.select('#d-' + (index+1))
+					.attr('r',4)
+					.style('fill', 'rgb(0,0,0)');
+				d3.select('#d-' + index)
+					.attr('r',4)
+					.style('fill', 'rgb(0,0,0)');
+			}else{
+				//other dots keep original color and size
+				currentDots.style('fill', 'rgb(255,255,255)')
+					.attr('r',dot_radius)
+					.style('transition-delay','none');
+				//current dot is black
+				d3.select('#d-' + index)
+					.attr('r',4)
+					.style('fill', 'rgb(0,0,0)');
+			}
+
 			//change URL path?
-			let new_url =old_url + '#/durham-'+ (index+1);
+			let new_url = old_url + '#/'+ data[index].city;
 			window.history.pushState({},0,new_url);
+			//console.log(data[index].city);
 		}
+
 		if (up_down == 'up') {
 			//clear onboarding delay 
 			first_label.style('transition-delay','0s');
@@ -298,38 +340,51 @@ dataPromise.then(function (rows) {
 			rotationAngle = degrees[index + 1];
 			wheelAngle = 18;
 
-			//switch text items
+			//switch text items 
 			let current_word_label = d3.select('#text-item-g-'+(index+1))
+			let next_word_label = d3.select('#text-item-g-'+(index))
 			console.log('now',(index+1))
 			console.log('up',(index));
-
-			let next_word_label = d3.select('#text-item-g-'+(index))
-
+		
 			current_word_label//rotate out
-				//.attr('transform', `translate(20,380) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 350px) rotate(180deg)`)
+				.style('transform', `translate(20px, 360px) rotate(180deg)`)
 				.style('opacity',0)
 			next_word_label//rotate in
-				//.attr('transform', `translate(20,380) rotate(0)`)
 				.style('transform-origin','0px 0px')
-				.style('transform', `translate(20px, 350px) rotate(0deg)`)
+				.style('transform', `translate(20px, 360px) rotate(0deg)`)
 				.style('opacity',1)
+			// two consecutive dots have the same year
+			if(data[index].year === data[index+1].year){
+				//other dots keep original color and size
+				for(i=0;i<degrees.length && i!== index && i!== (index+1);i++){
+					d3.select('#d-' + i)
+						.attr('r',dot_radius)
+						.style('transition-delay','none')
+						.style('fill', 'rgb(255,255,255)');
+				}
+				//current dot is black
+				d3.select('#d-' + (index+1))
+					.attr('r',4)
+					.style('fill', 'rgb(0,0,0)');
+				
+			}else{
+				//other dots keep original color and size
+				currentDots.style('fill', 'rgb(255,255,255)')
+					.attr('r',dot_radius)
+					.style('transition-delay','none');
+				//current dot is black
+				d3.select('#d-' + index)
+					.attr('r',4)
+					.style('fill', 'rgb(0,0,0)');
+			}
 
 			//change URL path?
-			let new_url =old_url + '/#/durham-'+ (index+1);
+			let new_url = old_url + `#/${data[index].city}`;
 			window.history.pushState({},0,new_url);
+			//console.log(data[index].city);
 		}
 
-		//transition to original color and size
-		currentDots.style('fill', 'rgb(255,255,255)')
-			.attr('r',dot_radius)
-			.style('transition-delay','none');
-		//current dot is black
-		d3.select('#d-' + index)
-			.attr('r',4)
-			.style('fill', 'rgb(0,0,0)');
-		
 		currentLabels.style('opacity', 0.3)
 			.style('font-family','Trade')
 			.style('transition-delay','none');
@@ -341,16 +396,11 @@ dataPromise.then(function (rows) {
 		wheel_sumAngle += wheelAngle;
 		sumAngle += rotationAngle;
 
-		// timeline
-		// 	.attr('transform', `translate(0 0) rotate(${sumAngle} 0 462)`);
 		timeline.style('transform-origin','0px 462px')
 			.style('transform', `translate(0,0) rotate(${sumAngle}deg)`);
-		// currentWheel
-		// 	.attr('transform', `translate(-412 50) rotate(${wheel_sumAngle} 412 412)`);
-		// safari
 		currentWheel
-		.style('transform-origin','412px 412px')
-		.style('transform', `translate(-412px, 50px) rotate(${wheel_sumAngle}deg)`);
+			.style('transform-origin','412px 412px')
+			.style('transform', `translate(-412px, 50px) rotate(${wheel_sumAngle}deg)`);
 	}
 
 	//keydown-scroll
@@ -374,28 +424,28 @@ dataPromise.then(function (rows) {
 	function keyUp(){
 		if (index - 1 >= 0) {
 			index--;
-			rotation_def(index, 'up');
+			rotation_def(index, 'up', data_by_year);
 		}
 	}
 	function keyDown(){
 		if (index + 1 < degrees.length) {
 			index++;
-			rotation_def(index, 'down');
+			rotation_def(index, 'down', data_by_year);
 		}
 	}
 
-	//scroll
+	//fire scrolling
 	function move(delta) {
 		if (delta < 0) {
 			if (index - 1 >= 0) {
 				index--;
-				rotation_def(index, 'up');
+				rotation_def(index, 'up', data_by_year);
 
 			}
 		} else if (delta > 0) {
 			if (index + 1 < degrees.length) {
 				index++;
-				rotation_def(index, 'down');
+				rotation_def(index, 'down', data_by_year);
 				//console.log(index);
 			}
 		}
@@ -441,7 +491,9 @@ dataPromise.then(function (rows) {
 	//disable scroll after clicking the button
 	document.getElementById('btn_more').onclick = function(e){
 		//document.body.style.overflow = "hidden";
-		document.addEventListener('DOMMouseScroll', e.preventDefault(), false); 
+		e.preventDefault();
+		return false;
+		//document.addEventListener('DOMMouseScroll', e.preventDefault(), false); 
 	}
 
 	// var rotating = false;
@@ -467,4 +519,12 @@ dataPromise.then(function (rows) {
 			keyUp();
 		}
 	},500));
+
 })
+
+
+
+
+
+
+
