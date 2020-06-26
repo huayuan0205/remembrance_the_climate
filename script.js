@@ -92,7 +92,6 @@ dataPromise.then(function (rows) {
 		.attr('id', 'wheel-img')
 		.attr('xlink:href', "./img/wheel-dark.png")
 		.style('transition', 'transform 1s ease 0s')
-		//.attr('transform','translate(-412,50) rotate(0 412 412)')
 		//safari
 		.style('transform-origin','412px 412px')
 		.style('transform', `translate(-412px, 50px)`)

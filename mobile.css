@@ -42,7 +42,7 @@
     width: 120vw;
     height:150vh;
     transform: scale(0.8);
-    transform-origin: left;
+    transform-origin: left top;
     position:fixed;
   }
   .mobile .container {
@@ -60,7 +60,7 @@
     width: 150vw;
     height:180vh;
     transform: scale(0.7);
-    transform-origin: left;
+    transform-origin: left top;
     position:fixed;
   }
   .mobile .container {
