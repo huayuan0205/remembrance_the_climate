@@ -49,6 +49,7 @@ body{
 	font-size: 20px;
 	margin-bottom: 0;
 	fill: #fff;
+	-webkit-font-smoothing: antialiased;
 }
 
 .text-title{
@@ -59,12 +60,14 @@ body{
 	letter-spacing: 2px;
 	line-height: 1;
 	margin-top: 0;
+	-webkit-font-smoothing: antialiased;
 }
 .text-date{
 	font-family: "Trade";
 	font-size: 20px;
 	fill: black;
 	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
 }
 
 .text-desc{
@@ -72,6 +75,7 @@ body{
 	fill: #fff;
 	font-size:20px;
 	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
 }
 
 .backgear-img{
@@ -148,10 +152,11 @@ body{
 	position:fixed;
 	margin: 2% 1.75rem 2% 1.75rem; 
 	max-width: 100%;
-	min-height: 50vh;
+	min-height: 90%;
 	height: 100%;
 	vertical-align: middle;
 	overscroll-behavior: scroll;
+	background-color: rgba(116, 116, 116, .1);
 }
 #dialog1 {
 	position:fixed;
@@ -159,7 +164,24 @@ body{
 	margin:0;
 	padding:0;
 }
-
+#dialog2 {
+	position:fixed;
+	top:1%;
+	bottom:0.5%;
+	margin:1%;
+}
+.modal-img{
+	position: fixed;
+	filter: blur(4px);
+    width: 650px;
+    height: 650px;
+    opacity: .85;
+    top: .18vh;
+    left: -50vw;
+    z-index: 0;
+    -webkit-filter: blur(4px) brightness(60%);
+    filter: blur(4px) brightness(60%);
+}
 .modal-header{
 	border-bottom: none;
 	height: 10%;
@@ -175,14 +197,18 @@ body{
 }
 .modal-content{
 	height:100%;
-	margin: 1% 1% 1% 1%;
+	/* margin: 1% 1% 1% 1%; */
 	background-color: rgba(0,0,0);
 	color:white;
 }
 #content1{
 	margin:0;
 	margin-bottom: 1%;
-	background-color: rgba(0,0,0,.3);
+	background-color: rgba(0,0,0,.1);
+}
+#content2{
+	background-color: rgba(0,0,0);
+	z-index: 1;
 }
 .more_desc{
 	column-count: 3;
@@ -193,19 +219,22 @@ body{
 }
 .modal-content .about-head{
 	font-family: "Caslon Regular";
-	/* font-weight: 400; */
-	font-size: 18px;
-	letter-spacing: 3px;
+	font-weight: 600;
+	font-size: 16px;
+	letter-spacing: 1px;
+	-webkit-font-smoothing: antialiased;
 }
 .modal-content .about-body{
 	font-family: "Trade";
 	font-size: 16px;
-	color:white !important
+	color:white !important;
+	-webkit-font-smoothing: antialiased;
 }
 .modal-content #notes{
 	font-family: "Trade";
 	font-size: 12px;
-	color:white !important
+	color:white !important;
+	-webkit-font-smoothing: antialiased;
 }
 a {
 	color:white;
