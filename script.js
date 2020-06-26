@@ -1,5 +1,6 @@
 //import csv
 const dataPromise = d3.csv('./data/data-sample.csv', parseData);
+//const dataPromise = d3.csv('./data/essex.csv', parseData);
 
 //
 const W = d3.select('.canvas').node().clientWidth;
@@ -57,7 +58,7 @@ dataPromise.then(function (rows) {
 
 	var text_item_width = 400;
 	var text_item_height = 400;
-	var text_wrap_width_title = 250;
+	var text_wrap_width_title = 230;
 	var text_wrap_width_desc = 314;
 	
 	var startYear = data_by_year[0].year;
@@ -183,24 +184,23 @@ dataPromise.then(function (rows) {
 		.attr('class','text-title')	
 		.attr('x', 0)
 		.attr('dy', '1em')
-		.call(wrap,1,text_wrap_width_title)
+		.call(wrap,1,1,text_wrap_width_title)
 	
 	text_item.append("tspan")
 		.text(d => d.monday)
 		.attr('class','text-date')	
 		.attr('x', 0)
 		.attr('y','108px')
-		//.attr('dy', '2.5em')
+		//.attr('dy', '0.5em')
 	
 	text_item.append("tspan")
 		.text(d => d.desc)
 		.attr('class','text-desc')	
 		.attr('x', 0)
-		.attr('dy', '1.5em')
-		.call(wrap,1.4,text_wrap_width_desc)
+		.call(wrap,1.7,1.2,text_wrap_width_desc)
 	
 	//fix the description part in a given width
-	function wrap(text, dy, width) {
+	function wrap(text, dy1, dy, width) {
 		text.each(function () {
 			var text = d3.select(this),
 				words = text.text().split(/\s+/).reverse(),
@@ -213,7 +213,8 @@ dataPromise.then(function (rows) {
 							.append("tspan")
 							.attr("x", x)
 							.attr("y", y)
-							.attr("dy", dy + "em");
+							//.attr("dy", "2em");
+							.attr("dy", dy1 + "em");
 			
 			while (word = words.pop()) {
 				line.push(word);
