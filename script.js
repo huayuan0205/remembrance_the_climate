@@ -2,7 +2,6 @@
 const dataPromise = d3.csv('./data/data-sample.csv', parseData);
 //const dataPromise = d3.csv('./data/essex.csv', parseData);
 
-//
 const W = d3.select('.canvas').node().clientWidth;
 const H = d3.select('.canvas').node().clientHeight;
 const m = { t: 50, r: 50, b: 50, l: 50 };
@@ -21,7 +20,7 @@ function parseData(d) {
 	var formatYear = d3.timeFormat("%Y");
 
 	return {
-		year: formatYear(new Date(d.date)),
+		year: +formatYear(new Date(d.date)),
 		monday: formatMonDay(new Date(d.date)),
 		//year: +d.Year,
 		city: d.spot_id,
@@ -40,6 +39,8 @@ function parseData(d) {
 // 	document.getElementsById("scroll").disabled = true;
 // 	// document.getElementById("g-wheel").disabled = true;
 // 	})
+
+var topRight = false;
 
 //d3.json("data-sample.json").then(data=>{})
 dataPromise.then(function (rows) {
@@ -112,21 +113,49 @@ dataPromise.then(function (rows) {
 		.append('circle')
 		.attr('class', 'dot')
 		.attr('id', (d, i) => { return `d-${i}` })
-		.attr('cx', (d) => {
+	dots
+		.attr('cx',(d,i)=>{
+			var prevData = dots.data()[i-1];
 			var rotate_degree = avg_degree * (d.year - startYear);
-			return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+			if(i>0){
+				if(d.year == prevData['year']){
+					return ((start_dot_originalX+10) * Math.cos(toRadians(rotate_degree)));
+				}
+				else{
+					return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+				}	
+			}else{
+				return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+			}	
 		})
-		.attr('cy', (d) => {
+		.attr('cy',(d,i)=>{
+			var prevData = dots.data()[i-1];
 			var rotate_degree = avg_degree * (d.year - startYear);
 			if (rotate_degree <= 90) {
-				return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
-			} else if (rotate_degree <= 180) {
-				return start_dot_originalX * Math.sin(toRadians(180 - rotate_degree)) + start_dot_originalY;
+				if(i>0){
+					if(d.year == prevData['year']) {
+						return (start_dot_originalX+10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}else{
+						return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}
+				}else{
+					return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+				}
+			}else if (rotate_degree <= 180){
+				if(i>0){
+					if(d.year == prevData['year']) {
+						return (start_dot_originalX+10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}else{
+						return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}
+				}else{
+					return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+				}
 			}
-		})
+		})	
 		.attr('r', dot_radius)
 		.style('transition', 'all 1s ease 0s')
-		.style('fill', 'rgb(255,255,255)');
+		.style('fill', 'rgb(255,255,255)');		
 
 	//labels
 	var labels = timeline.append('g')
@@ -173,29 +202,34 @@ dataPromise.then(function (rows) {
 		.attr('id',(d,i)=>{return `text-item-${i}`})
 		.attr('width',`${text_item_width}px`)
 		.attr('height',`${text_item_height}px`)
+		.style('vertical-align','text-bottom')
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 	
-	text_item.append("tspan")
+	text_item
+		.append("tspan")
 		.text(d => d.city)
-		.attr('class','text-id')
+		.attr('class','tspan-top')
+		.attr('id','text-id')
 
 	text_item.append("tspan")
 		.text(d => d.title)
-		.attr('class','text-title')	
+		.attr('class','tspan-top')
+		.attr('id','text-title')	
 		.attr('x', 0)
 		.attr('dy', '1em')
 		.call(wrap,1,1,text_wrap_width_title)
 	
 	text_item.append("tspan")
+		.attr('class','tspan-bottom')
 		.text(d => d.monday)
-		.attr('class','text-date')	
+		.attr('id','text-date')	
 		.attr('x', 0)
 		.attr('y','108px')
-		//.attr('dy', '0.5em')
 	
 	text_item.append("tspan")
+		.attr('class','tspan-bottom')
 		.text(d => d.desc)
-		.attr('class','text-desc')	
+		.attr('id','text-desc')	
 		.attr('x', 0)
 		.call(wrap,1.7,1.2,text_wrap_width_desc)
 	
@@ -274,6 +308,8 @@ dataPromise.then(function (rows) {
 	let old_url = window.location.href;
 
 	function rotation_def(index, up_down, data) {
+		if(topRight) return;
+
 		let rotationAngle = 0;
 		let wheelAngle = 0;
 
@@ -306,16 +342,13 @@ dataPromise.then(function (rows) {
 				// index: 0—(length-2)
 				if(data[index].year === data[index+1].year){
 					//other dots keep original color and size
-					for(i=0;i<degrees.length && i!== index && i!== (index+1);i++){
+					for(i=0;i<degrees.length && i!== index;i++){
 						d3.select('#d-' + i)
 							.attr('r',dot_radius)
 							.style('transition-delay','none')
 							.style('fill', 'rgb(255,255,255)');
 					}
 					// current dot is black
-					d3.select('#d-' + (index+1))
-						.attr('r',4)
-						.style('fill', 'rgb(0,0,0)');
 					d3.select('#d-' + index)
 						.attr('r',4)
 						.style('fill', 'rgb(0,0,0)');
@@ -374,16 +407,19 @@ dataPromise.then(function (rows) {
 			// two consecutive dots have the same year
 			if(data[index].year === data[index+1].year){
 				//other dots keep original color and size
-				for(i=0;i<degrees.length && i!== index && i!== (index+1);i++){
+				for(i=0;i<degrees.length && i!== index;i++){
 					d3.select('#d-' + i)
 						.attr('r',dot_radius)
 						.style('transition-delay','none')
 						.style('fill', 'rgb(255,255,255)');
 				}
 				//current dot is black
-				d3.select('#d-' + (index+1))
+				d3.select('#d-' + index)
 					.attr('r',4)
 					.style('fill', 'rgb(0,0,0)');
+				d3.select('#d-' + (index+1))
+					.attr('r',4)
+					.style('fill', 'rgb(255,255,255)');
 			}else{
 				//other dots keep original color and size
 				currentDots.style('fill', 'rgb(255,255,255)')
@@ -452,13 +488,13 @@ dataPromise.then(function (rows) {
 
 	//fire scrolling
 	function move(delta) {
-		if (delta > 0) {
+		if (delta < 0) {
 			if (index - 1 >= 0) {
 				index--;
 				rotation_def(index, 'up', data_by_year);
 
 			}
-		} else if (delta < 0) {
+		} else if (delta > 0) {
 			if (index + 1 < degrees.length) {
 				index++;
 				rotation_def(index, 'down', data_by_year);
@@ -500,16 +536,16 @@ dataPromise.then(function (rows) {
 	}
 
 	if (document.addEventListener) {
-		document.addEventListener('DOMMouseScroll', throttle(scrollFunc,500), false);
+		document.addEventListener('DOMMouseScroll', throttle(scrollFunc,800), false);
 	}
-	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,500);
+	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,800);
 
 	//disable scroll after clicking the button
 	document.getElementById('btn_more').onclick = function(e){
-		//document.body.style.overflow = "hidden";
-		e.preventDefault();
-		return false;
-		//document.addEventListener('DOMMouseScroll', e.preventDefault(), false); 
+		topRight = true;
+	}
+	document.getElementById('btn_about').onclick = function(e){
+		topRight = true;
 	}
 
 	// var rotating = false;

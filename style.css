@@ -43,16 +43,22 @@ body{
 	width:412px;
 }
 
-.text-id{
+.tspan-top{
+	vertical-align:text-bottom;
+	justify-content: flex-end;
+}
+
+#text-id{
 	font-family: "Caslon Regular";
 	text-transform: lowercase;
 	font-size: 20px;
 	margin-bottom: 0;
 	fill: #fff;
 	-webkit-font-smoothing: antialiased;
+	
 }
 
-.text-title{
+#text-title{
 	font-family: "Caslon Regular";
 	text-transform: lowercase;
 	font-size: 34px;
@@ -62,7 +68,12 @@ body{
 	margin-top: 0;
 	-webkit-font-smoothing: antialiased;
 }
-.text-date{
+
+.tspan-bottom{
+
+}
+
+#text-date{
 	font-family: "Trade";
 	font-size: 20px;
 	fill: black;
@@ -70,7 +81,7 @@ body{
 	-webkit-font-smoothing: antialiased;
 }
 
-.text-desc{
+#text-desc{
 	font-family: "Trade";
 	fill: #fff;
 	font-size:20px;
