@@ -1,9 +1,6 @@
 //import csv
-const dataPromise = d3.csv('./data/seacoast.csv', parseData);
-// console.log("Json")
-// d3.json('./data/data.json').then(function(data){
-// 	console.log(data)
-// })
+const dataPromise = d3.csv('./data/data-sample.csv', parseData);
+//const dataPromise = d3.csv('./data/essex.csv', parseData);
 
 const W = d3.select('.canvas').node().clientWidth;
 const H = d3.select('.canvas').node().clientHeight;
@@ -25,6 +22,7 @@ function parseData(d) {
 	return {
 		year: +formatYear(new Date(d.date)),
 		monday: formatMonDay(new Date(d.date)),
+		//year: +d.Year,
 		city: d.spot_id,
 		title: d.event,
 		desc: d.description,
@@ -63,7 +61,7 @@ dataPromise.then(function (rows) {
 	var text_item_height = 400;
 	var text_wrap_width_title = 230;
 	var text_wrap_width_desc = 314;
-
+	
 	var startYear = data_by_year[0].year;
 	var count_year = data_by_year[data_by_year.length - 1].year - startYear;
 
@@ -81,13 +79,13 @@ dataPromise.then(function (rows) {
 		year_sub.push(data_by_year[i].year - data_by_year[i - 1].year);
 	}
 	console.log('each rotatiion degree=' + degrees)
-
-	//add svg
+	
+	//add svg	
 	var canvas = d3.select('.canvas')
 		.append('svg')
 		.attr('width', w)
 		.attr('height', h)
-
+		
 	//add wheel image
 	var wheel = canvas.append('g')
 		.attr('class','g-wheel')
@@ -116,26 +114,107 @@ dataPromise.then(function (rows) {
 		.attr('class', 'dot')
 		.attr('id', (d, i) => { return `d-${i}` })
 	dots
+		// .attr('cx',(d,i)=>{
+		// 	var prevData = dots.data()[i-1];
+		// 	var rotate_degree = avg_degree * (d.year - startYear);
+			
+		// 	if (rotate_degree <= 90) {
+		// 		if(i>0){
+		// 			var last_circle = document.getElementById(`d-${i-1}`);
+		// 			cx_last = last_circle.getAttribute('cx');
+		// 			console.log("Last dot:" + cx_last)
+	
+		// 			if(d.year == prevData['year']){
+		// 				return (cx_last + 10* Math.cos(toRadians(rotate_degree)))
+		// 			}else{
+		// 				return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+		// 			}
+		// 		// i=0 
+		// 		}else{ 
+		// 			return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+		// 		}	
+		// 	}else if (rotate_degree <= 180) {
+		// 		if(i>0){
+		// 			var last_circle = document.getElementById(`d-${i-1}`);
+		// 			cx_last = last_circle.getAttribute('cx');
+		// 			console.log("Last dot:" + cx_last)
+	
+		// 			if(d.year == prevData['year']){
+		// 				return (cx_last-10* Math.cos(toRadians(rotate_degree)))
+		// 			}else{
+		// 				return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+		// 			}
+		// 		// i=0 
+		// 		}else{ 
+		// 			return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+		// 		}	
+		// 	}
+			
+		// })
+		// .attr('cy',(d,i)=>{
+		// 	var prevData = dots.data()[i-1];
+		// 	var rotate_degree = avg_degree * (d.year - startYear);
+			
+		// 	if (rotate_degree <= 90) {
+		// 		if(i>0){
+		// 			var last_circle = document.getElementById(`d-${i-1}`);
+		// 			cy_last = last_circle.getAttribute('cy')-start_dot_originalY;
+		// 			console.log("Last dot:" + cy_last)
+
+		// 			if(d.year == prevData['year']) {
+		// 				return (cy_last + 10 * Math.sin(toRadians(rotate_degree)))
+		// 			}else{
+		// 				return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+		// 			}
+		// 		// i=0
+		// 		}else{
+		// 			return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+		// 		}
+		// 	}else if (rotate_degree <= 180){
+		// 		if(i>0){
+		// 			var last_circle = document.getElementById(`d-${i-1}`);
+		// 			cy_last = last_circle.getAttribute('cy')-start_dot_originalY;
+		// 			console.log("Last dot:" + cy_last)
+
+		// 			if(d.year == prevData['year']) {
+		// 				return (cy_last + 10 * Math.sin(toRadians(180-rotate_degree)))
+		// 			}else{
+		// 				return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+		// 			}
+		// 		// i=0
+		// 		}else{
+		// 			return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+		// 		}
+		// 	}
+		// })
 		.attr('cx',(d,i)=>{
+			
 			var prevData = dots.data()[i-1];
+			var prevData2 = dots.data()[i-2];
 			var rotate_degree = avg_degree * (d.year - startYear);
 			if(i>0){
-				if(d.year == prevData['year']){
+				if((i>2) && (d.year == prevData2['year'])){
+					return ((start_dot_originalX+10*2) * Math.cos(toRadians(rotate_degree)));
+				}else if(d.year == prevData['year']){
 					return ((start_dot_originalX+10) * Math.cos(toRadians(rotate_degree)));
-				}
-				else{
+				}else{
 					return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
 				}
-			}else{
+			// i=0 
+			}else{ 
 				return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
 			}
+				
 		})
 		.attr('cy',(d,i)=>{
 			var prevData = dots.data()[i-1];
+			var prevData2 = dots.data()[i-2];
 			var rotate_degree = avg_degree * (d.year - startYear);
 			if (rotate_degree <= 90) {
 				if(i>0){
-					if(d.year == prevData['year']) {
+					if((i>2) && (d.year == prevData2['year'])){
+						return (start_dot_originalX+10*2) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}else if(d.year == prevData['year']) {
 						return (start_dot_originalX+10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
 					}else{
 						return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
@@ -145,7 +224,9 @@ dataPromise.then(function (rows) {
 				}
 			}else if (rotate_degree <= 180){
 				if(i>0){
-					if(d.year == prevData['year']) {
+					if((i>2) && (d.year == prevData2['year'])){
+						return (start_dot_originalX+10*2) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+					}else if(d.year == prevData['year']) {
 						return (start_dot_originalX+10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
 					}else{
 						return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
@@ -154,10 +235,10 @@ dataPromise.then(function (rows) {
 					return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
 				}
 			}
-		})
+		})	
 		.attr('r', dot_radius)
 		.style('transition', 'all 1s ease 0s')
-		.style('fill', 'rgb(255,255,255)');
+		.style('fill', 'rgb(255,255,255)');		
 
 	//labels
 	var labels = timeline.append('g')
@@ -186,73 +267,80 @@ dataPromise.then(function (rows) {
 		.text((d)=>{
 			return d.year;
 		})
-
+	
 	//text items
 	var text_item = canvas.append('g')
-		.selectAll('.text-item-g')
+		.attr('class','text-items')
+		.selectAll('.text-item-g-top')
 		.data(data_by_year)
 		.enter()
 		.append('g')
-		.attr('class','text-item-g')
-		.attr('id',(d,i)=>{
-			return `text-item-g-${i}`
-		})
+		.attr('class','text-item-g-top')
+		.attr('id',(d,i)=>{return `text-item-g-${i}`})
+		//.style('vertical-align','text-bottom')
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 		.style('transform-origin','0px 0px')
 		.style('transform', `translate(20px, 360px) rotate(90deg)`)
 		.style('opacity',0)
 		.append('text')
 		.attr('class','text-item')
-		.attr('id',(d,i)=>{
-			return `text-item-${i}`
-		})
+		.attr('id',(d,i)=>{return `text-item-${i}`})
 		.attr('width',`${text_item_width}px`)
 		.attr('height',`${text_item_height}px`)
+		.style('vertical-align','text-bottom')
 		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+	
+	var text_item2 = canvas.append('g')
+		.attr('class','text-items-btm')
+		.selectAll('.text-item-g-btm')
+		.data(data_by_year)
+		.enter()
+		.append('g')
+		.attr('class','text-item-g-btm')
+		.attr('id',(d,i)=>{return `text-item-g-btm-${i}`})
+		//.style('vertical-align','text-bottom')
+		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+		.style('transform-origin','0px 0px')
+		.style('transform', `translate(20px, 470px) rotate(90deg)`)
+		.style('opacity',0)
+		.append('text')
+		.attr('class','text-item-btm')
+		.attr('id',(d,i)=>{return `text-item-btm-${i}`})
+		.attr('width',`${text_item_width}px`)
+		.attr('height',`${text_item_height}px`)
+		//.style('vertical-align','text-bottom')
+		.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+
+	text_item.append("tspan")
+		.text(d => d.city)
+		.attr('class','tspan-top')
+		.attr('id','text-id')
 
 	text_item.append("tspan")
 		.text(d => d.title)
 		.attr('class','tspan-top')
-		.attr('id','text-title')
+		.attr('id','text-title')	
 		.attr('x', 0)
-		.attr('dy', '2em')
-		.call(wrapUp,1.7,1,text_wrap_width_title)
+		.attr('dy', '1em')
+		.call(wrap,1,1,text_wrap_width_title)
+	 	
 	
-	text_item
-		.append("tspan")
-		.text(d => d.city)
-		.attr('class','tspan-top')
-		.attr('id','text-id')
-		.attr('x',0)
-		.attr('dy','-2em')
-		.call(reposition)
-
-	text_item.append("tspan")
+	text_item2.append("tspan")
 		.attr('class','tspan-bottom')
 		.text(d => d.monday)
-		.attr('id','text-date')
+		.attr('id','text-date')	
 		.attr('x', 0)
-		.attr('y','108px')
-
-	text_item.append("tspan")
+		//.attr('y','108px')
+	
+	text_item2.append("tspan")
 		.attr('class','tspan-bottom')
 		.text(d => d.desc)
-		.attr('id','text-desc')
+		.attr('id','text-desc')	
 		.attr('x', 0)
-		.call(wrapDown,1.7,1.2,text_wrap_width_desc)
-
-	//If there are multiple lines in title, push text id 
-	function reposition(text){
-		text.each(function(){
-			if ($(this).prev("tspan").find("#wrap").length != 0 ){
-				console.log('hello');
-					$(this).attr("dy", "-3.5em");
-					}
-		})
-	}
-
-	//fix the title in a given width
-	function wrapUp(text, dy1, dy, width) {
+		.call(wrap,1.7,1.2,text_wrap_width_desc)
+	
+	//fix the description part in a given width
+	function wrap(text, dy1, dy, width) {
 		text.each(function () {
 			var text = d3.select(this),
 				words = text.text().split(/\s+/).reverse(),
@@ -267,50 +355,7 @@ dataPromise.then(function (rows) {
 							.attr("y", y)
 							//.attr("dy", "2em");
 							.attr("dy", dy1 + "em");
-
-			while (word = words.pop()) {
-				line.push(word);
-				tspan.text(line.join(" "));
-				if (tspan.node().getComputedTextLength() > width) {
-					tspan = text.text(null)
-							.append("tspan")
-							.attr("x", x)
-							.attr("y", y)
-							//.attr("dy", "2em");
-							.attr("dy", dy1-1 + "em");
-
-					line.pop();
-					tspan.text(line.join(" "));
-					line = [word];
-					tspan = text.append("tspan")
-						.attr("x", x)
-						.attr("y", y)
-						.attr("dy", lineHeight + "em")
-						.text(word)
-						.attr('id','wrap');
-					$('tspan').css('dominant-baseline','baseline')
-				}
-			}
-		});
-	}
-
-	//fix the description in a given width
-	function wrapDown(text, dy1, dy, width) {
-		text.each(function () {
-			var text = d3.select(this),
-				words = text.text().split(/\s+/).reverse(),
-				word,
-				line = [],
-				lineHeight = dy, //ems
-				x = text.attr("x"),
-				y = text.attr("y"),
-				tspan = text.text(null)
-							.append("tspan")
-							.attr("x", x)
-							.attr("y", y)
-							//.attr("dy", "2em");
-							.attr("dy", dy1 + "em");
-
+			
 			while (word = words.pop()) {
 				line.push(word);
 				tspan.text(line.join(" "));
@@ -326,10 +371,11 @@ dataPromise.then(function (rows) {
 				}
 			}
 		});
-	}
-
+	}		
+	
 	//onboard animation
 	//wheel
+	//wheel.attr('transform','translate(-412,50) rotate(90 412 412)')	
 	wheel.style('transform-origin','412px 412px')
 		.style('transform', `translate(-412px, 50px) rotate(90deg)`);
 	//dots and labels
@@ -350,13 +396,17 @@ dataPromise.then(function (rows) {
 		.style('transition-delay','1s')
 		.style('opacity',.7)
 		.style('font-family','Trade Bold');
-	//first text item
-	let fisrt_content = d3.select('#text-item-g-0');
-	fisrt_content
+	//first text item 
+	let fisrt_content1 = d3.select('#text-item-g-0');
+	let fisrt_content2 = d3.select('#text-item-g-btm-0');
+	fisrt_content1
 		.style('transform-origin','0 0')
 		.style('transform', `translate(20px,360px) rotate(0deg)`)
 		.style('opacity',1)
-
+	fisrt_content2
+		.style('transform-origin','0 0')
+		.style('transform', `translate(20px,470px) rotate(0deg)`)
+		.style('opacity',1)
 
 	//rotation
 	var currentWheel = d3.select('#wheel-img');
@@ -369,7 +419,6 @@ dataPromise.then(function (rows) {
 	let old_url = window.location.href;
 
 	function rotation_def(index, up_down, data) {
-
 		if(topRight) return;
 
 		let rotationAngle = 0;
@@ -377,7 +426,7 @@ dataPromise.then(function (rows) {
 
 		// rotate to next dot
 		if (up_down == 'down') {
-			//clear onboarding delay
+			//clear onboarding delay 
 			first_label.style('transition-delay','0s');
 			first_dot.style('transition-delay','0s');
 
@@ -387,18 +436,33 @@ dataPromise.then(function (rows) {
 			// switch text items
 			let last_word_label = d3.select('#text-item-g-'+(index-1));
 			let current_word_label = d3.select('#text-item-g-'+index);
+			let last_word_label2 = d3.select('#text-item-g-btm-'+(index-1));
+			let current_word_label2 = d3.select('#text-item-g-btm-'+index);
 			console.log('now',(index-1))
 			console.log('down',index);
-
-			last_word_label//rotate out
+			
+			last_word_label//rotate out	
 				.style('transform-origin','0px 0px')
 				.style('transform', `translate(20px, 360px) rotate(-180deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(-180deg)`)
 				.style('opacity',0)
 			current_word_label//rotate in
 				.style('transform-origin','0px 0px')
 				.style('transform', `translate(20px, 360px) rotate(0deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(0deg)`)
+				.style('opacity',1)
+			last_word_label2//rotate out	
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 470px) rotate(-180deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(-180deg)`)
+				.style('opacity',0)
+			current_word_label2//rotate in
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 470px) rotate(0deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(0deg)`)
 				.style('opacity',1)
 
+			//dots
 			// two consecutive dots have the same year
 			if((index+1)<degrees.length){
 				// index: 0—(length-2)
@@ -444,28 +508,43 @@ dataPromise.then(function (rows) {
 
 		// rotate to previous dot
 		if (up_down == 'up') {
-			//clear onboarding delay
+			//clear onboarding delay 
 			first_label.style('transition-delay','0s');
 			first_dot.style('transition-delay','0s');
 
 			rotationAngle = degrees[index + 1];
 			wheelAngle = 18;
 
-			//switch text items
+			//switch text items 
 			let last_word_label = d3.select('#text-item-g-'+(index+1))
 			let current_word_label = d3.select('#text-item-g-'+(index))
+			let last_word_label2 = d3.select('#text-item-g-btm-'+(index+1))
+			let current_word_label2 = d3.select('#text-item-g-btm-'+(index))
 			console.log('now',(index+1))
 			console.log('up',(index));
-
+		
 			last_word_label//rotate out
 				.style('transform-origin','0px 0px')
 				.style('transform', `translate(20px, 360px) rotate(180deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(180deg)`)
 				.style('opacity',0)
 			current_word_label//rotate in
 				.style('transform-origin','0px 0px')
 				.style('transform', `translate(20px, 360px) rotate(0deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(0deg)`)
+				.style('opacity',1)
+			last_word_label2//rotate out
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 470px) rotate(180deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(180deg)`)
+				.style('opacity',0)
+			current_word_label2//rotate in
+				.style('transform-origin','0px 0px')
+				.style('transform', `translate(20px, 470px) rotate(0deg)`)
+				//.style('transform', `translate(20px, 0px) rotate(0deg)`)
 				.style('opacity',1)
 
+			//dots
 			// two consecutive dots have the same year
 			if(data[index].year === data[index+1].year){
 				//other dots keep original color and size
@@ -480,7 +559,7 @@ dataPromise.then(function (rows) {
 					.attr('r',4)
 					.style('fill', 'rgb(0,0,0)');
 				d3.select('#d-' + (index+1))
-					.attr('r',dot_radius)
+					.attr('r',4)
 					.style('fill', 'rgb(255,255,255)');
 			}else{
 				//other dots keep original color and size
@@ -506,7 +585,7 @@ dataPromise.then(function (rows) {
 		d3.select('#label-' + index)
 			.style('opacity',.8)
 			.style('font-family','Trade Bold');
-
+		
 		wheel_sumAngle += wheelAngle;
 		sumAngle += rotationAngle;
 
@@ -515,50 +594,15 @@ dataPromise.then(function (rows) {
 		currentWheel
 			.style('transform-origin','412px 412px')
 			.style('transform', `translate(-412px, 50px) rotate(${wheel_sumAngle}deg)`);
-
-
-		// connect to JSON file to update the contents in the button "More"
-		// var new_year = data[index].year
-		var new_title = data[index].title
-		
-		$(document).ready(function () {
-			$('#btn_more').on('click', function () {
-				// $('#exampleModal1').modal({show:true});
-				$.ajax({
-					type: "GET",
-					url: "data/data.json",
-					dataType: 'json',
-					success: function (response) {
-						$.each(response.result, function (i, event) {
-								if (event.title == new_title) {
-									console.log(new_title);
-									// var url = "<a target='_blank' href='" + event.url + "' >" + event.url + "</a>";
-									$("#exampleModal1").find('#more-main').text(event.main);
-									$("#exampleModal1").find('#notes').html(event.note);
-									$('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
-									if (event.note == ""){
-										$("hr").css("visibility","hidden")
-									}
-									else{
-										$("hr").css("visibility","visible")
-									}
-								}
-						})
-					}
-				})
-			})
-		})
-
 	}
-
 
 	//keydown-scroll
 	document.addEventListener("keydown", function(event) {
 		event.preventDefault();
-
+		
 		const key = event.key; // "ArrowUp", or "ArrowDown"
-
-		switch (key) {
+		
+		switch (key) { 
 		  case "ArrowUp":
 			// Up pressed
 			keyUp();
@@ -638,18 +682,27 @@ dataPromise.then(function (rows) {
 	window.onmousewheel = document.onmousewheel = throttle(scrollFunc,800);
 
 	//disable scroll after clicking the button
-	$('#exampleModal1').on('shown.bs.modal', function (e){
+	document.getElementById('btn_more').onclick = function(e){
 		topRight = true;
-	})
-	$('#exampleModal2').on('shown.bs.modal', function (e){
+	}
+	document.getElementById('btn_about').onclick = function(e){
 		topRight = true;
-	})
-	$('#exampleModal1').on('hidden.bs.modal', function (e){
-		topRight = false;
-	})
-	$('#exampleModal2').on('hidden.bs.modal', function (e){
-		topRight = false;
-	})
+	}
+
+	// var rotating = false;
+
+	// onMouseScroll {
+	// 	if(!rotating) {
+	// 		rotateWheel()
+	// 	};
+	// }
+
+	// rotateWheel { 
+	// 	rotating = true; 
+	// 	//fires animations
+	// 	//after these animations are done they should automatically call 
+	// 	function(){ rotating = false;}
+	// }
 
 	//mobile touch
 	bindTouch('#scroll', _.debounce(function(type) {
@@ -658,6 +711,13 @@ dataPromise.then(function (rows) {
 		} else {
 			keyUp();
 		}
-	},500))
+	},500));
 
 })
+
+
+
+
+
+
+
