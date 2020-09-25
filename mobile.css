@@ -1,6 +1,7 @@
 .mobile .canvas {
   width: 820px;
 }
+
 .mobile .container {
   overflow-x: hidden !important;
 }
@@ -14,59 +15,97 @@
   body {
     /* background-color: red; */
   }
-  .more_desc{
+
+  .more_desc {
     column-count: 2;
   }
 }
+
 @media screen and (max-width: 960px) {
   body {
     /* background-color: orange; */
   }
-  .more_desc{
+
+  .more_desc {
     column-count: 2;
   }
 }
+
 @media screen and (max-width: 768px) {
   body {
     /* background-color: yellow; */
   }
-  .more_desc{
+
+  .more_desc {
     column-count: 1;
   }
 }
+
 @media screen and (max-width: 550px) {
   body {
     /* background-color: green; */
   }
+
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+
   .mobile .canvas {
     width: 120vw;
-    height:150vh;
+    height: 150vh;
     transform: scale(0.8);
     transform-origin: left top;
-    position:fixed;
+    position: fixed;
   }
+
   .mobile .container {
     overflow-x: hidden !important;
   }
-  .more_desc{
+
+  .more_desc {
     column-count: 1;
   }
+
+  .mobile #text-id {
+    font-size: 1.75em;
+  }
+
+  .mobile #text-title {
+    font-size: 3em;
+  }
+
+  .mobile #text-date {
+    font-size: 1.65em;
+  }
+
+  .mobile #text-desc {
+    font-size: 1.5em;
+  }
+
+  .mobile .label-text {
+    font-size: 1.5em;
+  }
 }
+
 @media screen and (max-width: 325px) {
   body {
     /* background-color: purple; */
   }
+
   .mobile .canvas {
     width: 150vw;
-    height:180vh;
+    height: 180vh;
     transform: scale(0.7);
     transform-origin: left top;
-    position:fixed;
+    position: fixed;
   }
+
   .mobile .container {
     overflow-x: hidden !important;
   }
-  .more_desc{
+
+  .more_desc {
     column-count: 1;
   }
 }

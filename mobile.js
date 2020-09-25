@@ -2,12 +2,12 @@ function bindTouch(el, callBack) {
 
   var slider = $(el);
 
-  $('body').on('touchstart', el, function (e) {
+  $('body').on('touchstart', el, function(e) {
     var touch = e.originalEvent,
-    startX = touch.changedTouches[0].pageX;
+      startX = touch.changedTouches[0].pageX;
     startY = touch.changedTouches[0].pageY;
 
-    slider.on('touchmove', function (e) {
+    slider.on('touchmove', function(e) {
       e.preventDefault();
       touch = e.originalEvent.touches[0] ||
         e.originalEvent.changedTouches[0];
@@ -31,7 +31,7 @@ function bindTouch(el, callBack) {
     });
     return false;
 
-  }).on('touchend', function () {
+  }).on('touchend', function() {
     slider.off('touchmove');
   });
 }
