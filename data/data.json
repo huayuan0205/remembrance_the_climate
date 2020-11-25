@@ -7,33 +7,33 @@
             "title": "SPECIES RELOCATION",
             "spot": "DURHAM-1",
             "spot_id": "durham-1",
-            "description": "Populations now thriving&#44 Mississippi kites first observed in Durham near here by local bird watchers.",
+            "description": "Populations now thriving, Mississippi kites first observed in Durham near here by local bird watchers.",
             "link": "observed",
             "main": "As temperatures rise due to climate change, we expect to see increasing numbers of wildlife species that are typically located in more southern regions. Sightings of rare birds, which include the sandhill crane and wood stork, have become more and more common. We are also seeing dwindling numbers of some of our historically common native birds, as well as changes in the timing of migration and breeding patterns in some species. The Mississippi kite, a relative newcomer, was first observed nesting in Durham in 2018.",
             "note": ""
         },
         {
-            "id": "1",
+            "id": "2",
             "date": "10/30/20",
             "year": "2020",
             "subdomain": "seacoast",
             "title": "BRIDGE ELEVATED",
             "spot": "DURHAM-6",
             "spot_id": "durham-6",
-            "description": "Route 4 bridge elevated&#44 enabling migration of salt marsh along Bunker Creek due to sea level rise.",
+            "description": "Route 4 bridge elevated, enabling migration of salt marsh along Bunker Creek due to sea level rise.",
             "link": "migration",
             "main": "Salt marshes provide important habitat for wildlife and offer numerous benefits for people, too, such as storing flood water and absorbing wave energy during storms. In Durham, there are roughly 150 acres of existing salt marsh. Unfortunately, these important ecosystems are threatened by rising seas. In coastal NH, sea-level is likely to rise between 0.5 – 1.3  feet by 2050 and between 1.0 – 2.9 feet by 2100 if global greenhouse gas concentrations stabilize; however, there is a risk of much greater sea-level rise if global greenhouse gas concentrations continue to grow and the rate of ice mass loss from Antarctica accelerates rapidly.1 As sea levels rise, salt marshes will migrate upland if they can, or they’ll be lost if they don’t have room to move. In some cases, the topography is too steep to allow gradual salt marsh migration. In other cases, there is a barrier to migration, such as a road, undersized culvert, or retaining wall that causes the marsh to get ‘squeezed out.’ According to marsh migration models, opportunities for salt marsh migration in Durham include areas adjacent to the Oyster River and Little Bay. Durham, in conjunction with the NH Department of Transportation, is incorporating these projections into the design of the Route 4 bridge replacement to allow salt marsh habitat to persist in the face of rising seas, maintaining the many benefits these ecosystems provide and helping to prevent future flooding issues.",
             "note": "(1) Wake, C., Knott, J., Lippmann, T., Stampone, M., Ballestero, T., Bjerklie, D., Burakowski, E., Glidden, S., Hosseini-Shakib, I., Jacobs, J. (2019). New Hampshire Coastal Flood Risk Science Summary. Prepared for the New Hampshire Coastal Flood Risk Science and Technical Advisory Panel. Report published by the University of New Hampshire, Durham, NH. <br> (2) test line 2"
         },
         {
-            "id": "1",
+            "id": "3",
             "date": "5/30/26",
             "year": "2026",
             "subdomain": "seacoast",
             "title": "TREES PROVIDE RELIEF",
             "spot": "DURHAM-9",
             "spot_id": "durham-9",
-            "description": "Now reducing urban heat effect&#44 elm trees planted along Main Street and Madbury Road.",
+            "description": "Now reducing urban heat effect, elm trees planted along Main Street and Madbury Road.",
             "link": "urban heat effect",
             "main": "Scientists expect both average and extreme temperatures to rise, not just in degrees, but also in frequency and duration. By 2050, the number of days reaching temperatures of 90ºF or above in Strafford County is projected to increase from 8 to 35 days a year, and over 60 by 2100 if we do nothing to reduce emissions.1 Rising temperatures pose numerous health and safety risks, including exhaustion, dehydration, heat stroke, and dangers associated with ozone. Youth and elderly populations and those with pre-existing health issues are especially vulnerable. In addition, extreme heat raises electricity usage (and associated expenses and greenhouse gas emissions) as more people use air conditioners for longer periods. This is especially pronounced in more developed areas due to the urban heat island effect, where the abundance of pavement and general lack of shade-providing vegetation cause locally higher temperatures than more rural surroundings. One of the best ways to mitigate the urban heat effect is to plant trees, such as elms.",
             "note": "(1) Union of Concerned Scientists. 2019. Killer Heat in the United States: Climate Choices and the Future of Dangerously Hot Days. https://www.ucsusa.org/global-warming/global-warming-impacts/killer-heat-in-united-states"
@@ -87,8 +87,8 @@
             "spot_id": "durham-2",
             "description": "All downtown buildings powered by 100% renewable energy.",
             "link": "renewable",
-            "main": "Since 2007, the Durham Energy Committee has been working to reduce the town’s greenhouse gas emissions as well as the cost of energy use. In 2011, Durham became the first jurisdiction in the country to adopt the International Energy Conservation Code (IECC) 2012 building energy codes.  Moving forward, the town has committed to basing its energy code on the current printed edition of the IECC, which is now the 2018 version. In 2012 the town completed an energy audit of town-owned facilities. So far, there are solar installations at the police station, the public library, and the Churchill Rink. The new town hall is designed to LEED (Leadership in Energy and Environmental Design) standards, adding to two LEED certified buildings on the UNH campus. Durham adopted an energy chapter of the master plan in 2015 (see footnotes (1)), which sets a series of goals and recommendations for achieving a more resilient, efficient, and environmentally responsible community. In 2018, the town hosted a fellow from the UNH Sustainability Institute to develop a joint climate resiliency plan. Learn more about Durham's energy initiatives visiting the links in the footenotes (2).",
-            "note": "(1) https://www.ci.durham.nh.us/sites/default/files/fileattachments/energy_committee/page/54216/energy_12312015.pdf <br> (2) https://www.ci.durham.nh.us/boc_energy"
+            "main": "Since 2007, the Durham Energy Committee has been working to reduce the town’s greenhouse gas emissions as well as the cost of energy use. In 2011, Durham became the first jurisdiction in the country to adopt the International Energy Conservation Code (IECC) 2012 building energy codes. Moving forward, the town has committed to basing its energy code on the current printed edition of the IECC, which is now the 2018 version. In 2012 the town completed an energy audit of town-owned facilities. So far, there are solar installations at the police station, the public library, and the Churchill Rink. The new town hall is designed to LEED (Leadership in Energy and Environmental Design) standards, adding to two LEED certified buildings on the UNH campus. Durham adopted an energy chapter of the master plan in 2015, which sets a series of goals and recommendations for achieving a more resilient, efficient, and environmentally responsible community. In 2018, the town hosted a fellow from the UNH Sustainability Institute to develop a joint climate resiliency plan. Learn more about Durham's energy initiatives visiting the links in the footenotes (1).",
+            "note": "(2) https://www.ci.durham.nh.us/boc_energy"
         },
         {
             "id": "8",
@@ -100,7 +100,7 @@
             "spot_id": "durham-8",
             "description": "Wagon Hill closed for summer due to health concerns related to outbreak of ticks.",
             "link": "health",
-            "main": "In the northeast, winters have warmed three times faster than summers.1 Ticks and other pests that are typically limited by our cold weather will be able to expand their range, abundance, and season of activity. This may lead to increases in vector-borne diseases including babesiosis, ehrlichiosis, Rocky Mountain spotted fever, anaplasmosis, southern tick-associated rash illness, tularemia, and Lyme. One study project that by mid- to late-century (under a high emissions scenario), the period of higher Lyme transmission risk will begin about 1.5 weeks earlier in the northeast compared to the 1990s-2000s.2 We are already experiencing major changes. The number of New Hampshire residents diagnosed with Lyme disease has increased significantly since 2005. From 2009 to 2013, reported cases of Lyme disease in New Hampshire increased by approximately 20 percent, from 1,416 to 1,691 cases per year. 3 This is a major concern from a public health standpoint, and also for our wildlife species like the moose, which are already being significantly impacted by ticks. ",
+            "main": "In the northeast, winters have warmed three times faster than summers (1). Ticks and other pests that are typically limited by our cold weather will be able to expand their range, abundance, and season of activity. This may lead to increases in vector-borne diseases including babesiosis, ehrlichiosis, Rocky Mountain spotted fever, anaplasmosis, southern tick-associated rash illness, tularemia, and Lyme. One study project that by mid- to late-century (under a high emissions scenario), the period of higher Lyme transmission risk will begin about 1.5 weeks earlier in the northeast compared to the 1990s-2000s (2). We are already experiencing major changes. The number of New Hampshire residents diagnosed with Lyme disease has increased significantly since 2005. From 2009 to 2013, reported cases of Lyme disease in New Hampshire increased by approximately 20 percent, from 1,416 to 1,691 cases per year (3). This is a major concern from a public health standpoint, and also for our wildlife species like the moose, which are already being significantly impacted by ticks.",
             "note": "(1) “Chapter 18: Northeast,” in USGCRP, 2018: Impacts, Risks, and Adaptation in the United States: Fourth National Climate Assessment, Volume II [Reidmiller, D.R., C.W. Avery, D.R. Easterling, K.E. Kunkel, K.L.M. Lewis, T.K. Maycock, and B.C. Stewart (eds.)]. U.S. Global Change Research Program, Washington, DC, USA, 1515 pp. doi: 10.7930/NCA4.2018. Retrieved from https://nca2018.globalchange.gov/chapter/18/. <br> (2) Monaghan, A. J., S. M. Moore, K. M. Sampson, C. B. Beard, and R. J. Eisen, 2015: Climate change influences on the annual onset of Lyme disease in the United States. Ticks and Tick-Borne Diseases, 6 (5), 615–622. doi:10.1016/j.ttbdis.2015.05.005. Retrieved from https://www.sciencedirect.com/science/article/pii/S1877959X15000874?via%3Dihub <br> (3) NHDHHS. State of New Hampshire Tickborne Disease Prevention Plan. March 31, 2015. http://www.dhhs.state.nh.us/dphs/cdcs/lyme/documents/tbdpreventionplan.pdf"
         },
         {
@@ -137,9 +137,9 @@
             "title": "RELIEF FROM HEAT WAVE",
             "spot": "DURHAM-11",
             "spot_id": "durham-11",
-            "description": "Summer season for UNH pool extended through Indigenous Peoples&#39 Day to provide relief from fall heat.",
+            "description": "Summer season for UNH pool extended through Indigenous Peoples' Day to provide relief from fall heat.",
             "link": "relief",
-            "main": "Scientists expect average and extreme temperatures to rise, not just in degrees, but also in frequency and duration. By 2050, the number of days reaching temperatures of 90ºF or above in Strafford County is projected to increase from 8 to 35 days a year, and over 60 by 2100 if we do nothing to reduce emissions.1 In the future, Durham may need to consider strategies for keeping people cool during these hot days, such as working with UNH to extend the pool season so community members can cool down.",
+            "main": "Scientists expect average and extreme temperatures to rise, not just in degrees, but also in frequency and duration. By 2050, the number of days reaching temperatures of 90ºF or above in Strafford County is projected to increase from 8 to 35 days a year, and over 60 by 2100 if we do nothing to reduce emissions (1). In the future, Durham may need to consider strategies for keeping people cool during these hot days, such as working with UNH to extend the pool season so community members can cool down.",
             "note": "(1) Union of Concerned Scientists. 2019. Killer Heat in the United States: Climate Choices and the Future of Dangerously Hot Days. https://www.ucsusa.org/global-warming/global-warming-impacts/killer-heat-in-united-states"
         },
         {
