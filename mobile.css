@@ -40,10 +40,14 @@
     overflow-x: hidden !important;
   }
 
+  .canvas {
+    width: 90%;
+    height: 100%;
+  }
+
   .more_desc {
     column-count: 1;
   }
-
 
 }
 
@@ -53,13 +57,12 @@
   }
 
   .canvas {
-    width: 100%;
+    width: 80%;
     height: 100%;
   }
 
   .mobile .canvas {
-    width: 120vw;
-    height: 150vh;
+    height: 180vh;
     transform: scale(0.8);
     transform-origin: left top;
     position: fixed;
@@ -73,7 +76,7 @@
     column-count: 1;
   }
 
-  .mobile #text-id {
+  /* .mobile #text-id {
     font-size: 1.75em;
     line-height: 0em;
   }
@@ -85,7 +88,6 @@
 
   .mobile #text-date {
     font-size: 1.5em;
-    line-break: 3em;
   }
 
   .mobile .tspan-bottom {
@@ -99,18 +101,62 @@
 
   .mobile .label-text {
     font-size: 1.5em;
-  }
+  } */
 }
 
-@media screen and (max-width: 325px) {
+@media screen and (max-width: 490px) {
   body {
     /* background-color: purple; */
   }
 
   .mobile .canvas {
-    width: 150vw;
+    /* width: 150vw;*/
     height: 180vh;
     transform: scale(0.7);
+    transform-origin: left top;
+    position: fixed;
+  }
+
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+
+  .more_desc {
+    column-count: 1;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  body {
+    /* background-color: purple; */
+  }
+
+  .mobile .canvas {
+    /* width: 150vw; */
+    height: 180vh;
+    transform: scale(0.6);
+    transform-origin: left top;
+    position: fixed;
+  }
+
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+
+  .more_desc {
+    column-count: 1;
+  }
+}
+
+@media screen and (max-width: 352px) {
+  body {
+    /* background-color: purple; */
+  }
+
+  .mobile .canvas {
+    /* width: 150vw; */
+    height: 180vh; 
+    transform: scale(0.5);
     transform-origin: left top;
     position: fixed;
   }
