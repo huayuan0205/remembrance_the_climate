@@ -53,7 +53,7 @@ var topRight = false;
 //d3.json("data-sample.json").then(data=>{})
 dataPromise.then(function(rows) {
 
-  //console.log(rows);
+  console.log(rows);
 
 
   //data manipulation
@@ -61,15 +61,15 @@ dataPromise.then(function(rows) {
   var data_by_year = rows.slice().sort((a, b) => d3.ascending(a.year, b.year));
   console.log(data_by_year);
 
-  var wheel_radius = 412;
+  var wheel_radius = 562;
   var dot_radius = 2;
-  var start_dot_originalX = 425;
-  var start_dot_originalY = 462;
+  var start_dot_originalX = wheel_radius + 13;//425
+  var start_dot_originalY = wheel_radius + 50;//462
 
-  var text_item_width = 400;
-  var text_item_height = 400;
-  var text_wrap_width_title = 200;
-  var text_wrap_width_desc = 314;
+  var text_item_width = 500;
+  var text_item_height = 535;
+  var text_wrap_width_title = 500;
+  var text_wrap_width_desc = 500;
 
   var startYear = data_by_year[0].year;
   var count_year = data_by_year[data_by_year.length - 1].year - startYear;
@@ -104,8 +104,8 @@ dataPromise.then(function(rows) {
     .attr('xlink:href', "./img/wheel-dark.png")
     .style('transition', 'transform 1s ease 0s')
     //safari
-    .style('transform-origin', '412px 412px')
-    .style('transform', `translate(-412px, 50px)`)
+    .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
+    .style('transform', `translate(-${wheel_radius}px, 50px)`)
 
   //dots & labels
   //dots
@@ -209,7 +209,7 @@ dataPromise.then(function(rows) {
     })
     .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
     .style('transform-origin', '0px 0px')
-    .style('transform', `translate(20px, 360px) rotate(90deg)`)
+    .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
     .style('opacity', 0)
     .append('text')
     .attr('class', 'text-item')
@@ -221,27 +221,27 @@ dataPromise.then(function(rows) {
     .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 
   text_item.append("tspan")
-    .text(d => d.title)
-    .attr('class', 'tspan-top')
-    .attr('id', 'text-title')
-    .attr('x', 0)
-    .attr('dy', '2em')
-    .call(wrapUpper, 2, 0.85, text_wrap_width_title)
-
-  text_item.append("tspan")
     .text(d => d.city)
     .attr('class', 'tspan-top')
     .attr('id', 'text-id')
     .attr('x', 0)
-    .attr('dy', '-2em')
+    .attr('dy', '0em')
     .call(reposition)
+
+  text_item.append("tspan")
+    .text(d => d.title)
+    .attr('class', 'tspan-top')
+    .attr('id', 'text-title')
+    .attr('x', 0)
+    .attr('dy', '0em')
+    .call(wrapUpper, 1, 1.2, text_wrap_width_title)
 
   text_item.append("tspan")
     .attr('class', 'tspan-bottom')
     .text(d => d.monday)
     .attr('id', 'text-date')
     .attr('x', 0)
-    .attr('y', '5em')
+    .attr('y', '4em')
 
   text_item.append("tspan")
     .attr('class', 'tspan-bottom')
@@ -342,12 +342,12 @@ dataPromise.then(function(rows) {
   //onboard animation
   //wheel
   //wheel.attr('transform','translate(-412,50) rotate(90 412 412)')
-  wheel.style('transform-origin', '412px 412px')
-    .style('transform', `translate(-412px, 50px) rotate(90deg)`);
+  wheel.style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
+    .style('transform', `translate(-${wheel_radius}px, 50px) rotate(90deg)`);
   //dots and labels
   timeline
     //.attr('transform', `translate(0 0) rotate(0 0 462)`);
-    .style('transform-origin', '0 462px')
+    .style('transform-origin', `0 ${start_dot_originalY}px`)
     .style('transform', `translate(0,0)`);
   //first dot
   let first_dot = d3.select('#d-0');
@@ -366,7 +366,7 @@ dataPromise.then(function(rows) {
   let fisrt_content = d3.select('#text-item-g-0');
   fisrt_content
     .style('transform-origin', '0 0')
-    .style('transform', `translate(20px,360px) rotate(0deg)`)
+    .style('transform', `translate(20px,${text_item_height}px) rotate(0deg)`)
     .style('opacity', 1)
 
   //rotation
@@ -401,11 +401,11 @@ dataPromise.then(function(rows) {
 
       last_word_label //rotate out
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, 360px) rotate(-180deg)`)
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(-180deg)`)
         .style('opacity', 0)
       current_word_label //rotate in
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, 360px) rotate(0deg)`)
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
         .style('opacity', 1)
 
       // two consecutive dots have the same year
@@ -468,11 +468,11 @@ dataPromise.then(function(rows) {
 
       last_word_label //rotate out
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, 360px) rotate(180deg)`)
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(180deg)`)
         .style('opacity', 0)
       current_word_label //rotate in
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, 360px) rotate(0deg)`)
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
         .style('opacity', 1)
 
       // two consecutive dots have the same year
@@ -519,11 +519,11 @@ dataPromise.then(function(rows) {
     wheel_sumAngle += wheelAngle;
     sumAngle += rotationAngle;
 
-    timeline.style('transform-origin', '0px 462px')
+    timeline.style('transform-origin', `0px ${start_dot_originalY}px`)
       .style('transform', `translate(0,0) rotate(${sumAngle}deg)`);
     currentWheel
-      .style('transform-origin', '412px 412px')
-      .style('transform', `translate(-412px, 50px) rotate(${wheel_sumAngle}deg)`);
+      .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
+      .style('transform', `translate(-${wheel_radius}px, 50px) rotate(${wheel_sumAngle}deg)`);
 
     var new_title = data[index].title
     $(document).ready(function() {
