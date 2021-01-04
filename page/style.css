@@ -39,7 +39,7 @@ body {
 }
 
 .text-item {
-  width: 500px;
+  width: 450px;
 }
 
 .tspan-top {
@@ -318,9 +318,8 @@ svg .g-wheel {
 
 #wheel-img {
   /* position:fixed; */
-  /* 824 */
-  width: 1124px;
-  height: 1124px;
+  width: 960px;
+  height: 960px;
   transition: all 1s ease 0s;
   /* transform-origin:0,0; */
   opacity: .8;

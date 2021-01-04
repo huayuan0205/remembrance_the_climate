@@ -1,0 +1,218 @@
+.mobile .canvas {
+  width: 820px;
+}
+
+.mobile .container {
+  overflow-x: hidden !important;
+}
+
+.mobile .canvas {
+  transform: scale(0.9);
+  transform-origin: left bottom;
+}
+
+@media screen and (max-width: 1080px) {
+  body {
+    background-color: red;
+  }
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .more_desc {
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  body {
+    background-color: orange;
+  }
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .more_desc {
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    background-color: yellow;
+  }
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .more_desc {
+    column-count: 1;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  body {
+    background-color: green;
+  }
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+  .canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .mobile .canvas {
+    height: 180vh;
+    transform: scale(0.8);
+    transform-origin: left top;
+    position: fixed;
+  }
+  /* text */
+  .more_desc {
+    column-count: 1;
+  }
+  /* .mobile .text-item-g {
+    transform: translate(100px,-20px);
+  } */
+  .mobile #text-id {
+    font-size: 1.8em;
+    line-height: 0em;
+  }
+  .mobile #text-title {
+    width: 400px;
+    font-size: 2.5em;
+    line-height: 0em;
+  }
+  .mobile #text-date {
+    font-size: 1.6em;
+  }
+  .mobile #text-desc tspan {
+    width: 300px;
+    font-size: 1.3em;
+  }   
+  .mobile .label-text {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  body {
+    background-color:blue;
+  }
+  .mobile .canvas {
+    /* width: 150vw; */
+    height: 180vh;
+    transform: scale(0.7);
+    transform-origin: left top;
+    position: fixed;
+  }
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+  .more_desc {
+    column-count: 1;
+  }
+  .mobile #text-id {
+    font-size: 1.8em;
+    line-height: 0em;
+  }
+  .mobile #text-title {
+    font-size: 2.75em;
+    line-height: 0em;
+  }
+  .mobile #text-date {
+    font-size: 1.6em;
+  }
+  .mobile .tspan-bottom {
+    width: 200px;
+  }
+  .mobile #text-desc {
+  font-size: 1.6em;
+  }   
+  .mobile .label-text {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  body {
+    background-color: purple;
+  }
+
+  .mobile .canvas {
+    /* width: 150vw; */
+    height: 180vh;
+    transform: scale(0.6);
+    transform-origin: left top;
+    position: fixed;
+  }
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+  .more_desc {
+    column-count: 1;
+  }
+  .mobile #text-id {
+    font-size: 1.8em;
+    line-height: 0em;
+  }
+  .mobile #text-title {
+    font-size: 2.6em;
+    line-height: 0em;
+  }
+  .mobile #text-date {
+    font-size: 1.8em;
+  }
+  .mobile .tspan-bottom {
+    width: 200px;
+  }
+  .mobile #text-desc {
+  font-size: 1.4em;
+  }   
+  .mobile .label-text {
+    font-size: 1.8em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  body {
+    background-color:yellow;
+  }
+
+  .mobile .canvas {
+    /* width: 150vw; */
+    height: 180vh;
+    transform: scale(0.6);
+    transform-origin: left top;
+    position: fixed;
+  }
+  .mobile .container {
+    overflow-x: hidden !important;
+  }
+  .more_desc {
+    column-count: 1;
+  }
+  .mobile #text-id {
+    font-size: 1.8em;
+    line-height: 0em;
+  }
+  .mobile #text-title {
+    font-size: 2.6em;
+    line-height: 0em;
+  }
+  .mobile #text-date {
+    font-size: 1.8em;
+  }
+  .mobile .tspan-bottom {
+    width: 200px;
+  }
+  .mobile #text-desc {
+  font-size: 1.3em;
+  }   
+  .mobile .label-text {
+    font-size: 1.8em;
+  }
+}

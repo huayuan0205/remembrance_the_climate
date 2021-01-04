@@ -1,25 +1,28 @@
 //import csv
-const dataPromise = d3.csv('./data/seacoast.csv', parseData);
-// console.log("Json")
-// d3.json('./data/data.json').then(function(data){
-// 	console.log(data)
-// })
+var neu_url = "https://web.northeastern.edu/climatefutures/page/"
 
-const W = d3.select('.canvas').node().clientWidth;
-const H = d3.select('.canvas').node().clientHeight;
-const m = {
-  t: 50,
-  r: 50,
-  b: 50,
-  l: 50
-};
-const w = W - m.r - m.l;
-const h = H - m.t - m.b;
-console.log(`W,H:${W},${H}`);
+// get city name from URL
+var switch_to_city = getQueryVariable("city");
 
-function toRadians(angle) {
-  return angle * (Math.PI / 180);
-}
+function getQueryVariable(variable)
+{
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == variable){return pair[1];}
+  }
+  return(false);
+}//(/?id=1&image=awesome.jpg ——> getQueryVariable("id")——>return 1)
+
+var data_src = "./data/seacoast.csv";
+// var data_src = neu_url + "data/"+ city+ "/data.csv";
+const dataPromise = d3.csv(data_src, parseData);
+
+// use the two lines when selecting a new place
+// if the user is clicking one place ID - switch_to_city
+// var switch_to_url = "https://web.northeastern.edu/climatefutures/page/"+"?city=" + switch_to_city;
+// location.href = switch_to_url;
 
 //parse csv
 function parseData(d) {
@@ -36,8 +39,25 @@ function parseData(d) {
     desc: d.description,
   }
 }
+// console.log("Json")
+// d3.json('./data/data.json').then(function(data){
+// 	console.log(data)
+// })
 
-// disable scrolling after clicing the button
+// set width and height
+const W = d3.select('.canvas').node().clientWidth;
+const H = d3.select('.canvas').node().clientHeight;
+const m = {
+  t: 50,
+  r: 50,
+  b: 50,
+  l: 50
+};
+const w = W - m.r - m.l;
+const h = H - m.t - m.b;
+console.log(`.canvas-W,H:${W},${H}`);
+
+// disable scrolling after clicking the button
 // $('#exampleModal1').on('shown.bs.modal', function (e) {
 // 	document.getElementsById("scroll").disabled = true;
 // 	// document.getElementById("g-wheel").disabled = true;
@@ -50,36 +70,42 @@ function parseData(d) {
 
 var topRight = false;
 
+function toRadians(angle) {
+  return angle * (Math.PI / 180);
+}
+
+
 //d3.json("data-sample.json").then(data=>{})
 dataPromise.then(function(rows) {
 
   console.log(rows);
 
-
-  //data manipulation
   //get sorted data by year
-  var data_by_year = rows.slice().sort((a, b) => d3.ascending(a.year, b.year));
+  var data_by_year = rows.slice().sort((a, b) => d3.ascending(a.year, b.year));//orignal date format: mm/dd/yyyy
   console.log(data_by_year);
 
-  var wheel_radius = 562;
+  var wheel_radius = 480;//test1:562
   var dot_radius = 2;
-  var start_dot_originalX = wheel_radius + 13;//425
-  var start_dot_originalY = wheel_radius + 50;//462
+  var start_dot_originalX = wheel_radius + 13;//493
+  var start_dot_originalY = wheel_radius + 50;//530
 
-  var text_item_width = 500;
-  var text_item_height = 535;
-  var text_wrap_width_title = 500;
-  var text_wrap_width_desc = 500;
+  //textbox on wheel
+  var text_item_width = 400;
+  var text_item_height = 460;
+  var text_wrap_width_title = 400;
+  var text_wrap_width_desc = 390;
 
+  //calculate rotating degrees
   var startYear = data_by_year[0].year;
   var count_year = data_by_year[data_by_year.length - 1].year - startYear;
 
-  var avg_degree = 180 / count_year;
+  console.log(count_year);
+
+  var avg_degree = 270 / count_year; //test1:180
   var rotating_degrees = [];
   var degrees = [0];
   var year_sub = [0]
 
-  //calculate rotating degrees
   for (i = 1; i < data_by_year.length; i++) {
     var interval_year = data_by_year[i].year - startYear;
     var new_element = d3.format(".1f")(avg_degree * interval_year);
@@ -90,13 +116,13 @@ dataPromise.then(function(rows) {
   console.log('each rotatiion degree=' + degrees)
 
   //add svg
-  var canvas = d3.select('.canvas')
+  var svg = d3.select('.canvas')
     .append('svg')
     .attr('width', w)
     .attr('height', h)
-
+  console.log(`.svg-w,h:${W},${H}`);
   //add wheel image
-  var wheel = canvas.append('g')
+  var wheel = svg.append('g')
     .attr('class', 'g-wheel')
     .append('image')
     .attr('class', 'wheel-img')
@@ -107,15 +133,15 @@ dataPromise.then(function(rows) {
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate(-${wheel_radius}px, 50px)`)
 
-  //dots & labels
-  //dots
-  var timeline = canvas.append('g')
+  // add dots and labels
+  var timeline = svg.append('g')
     .attr('id', 'timeline')
     .style('transition', 'all 1s ease 0s')
     //set start position
-    .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,462)
+    .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
     .style('transform', `translate(0,0) rotate(-90deg)`)
-
+  
+  // add dots
   var dots = timeline.selectAll('.dot')
     .data(data_by_year)
     .enter()
@@ -128,20 +154,32 @@ dataPromise.then(function(rows) {
     .attr('cx', (d, i) => {
       var prevData = dots.data()[i - 1];
       var rotate_degree = avg_degree * (d.year - startYear);
-      if (i > 0) {
-        if (d.year == prevData['year']) {
-          return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
+      if (rotate_degree <=180){
+        if (i > 0) {
+          if (d.year == prevData['year']) {//two dots with the same year
+            return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
+          } else {
+            return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+          }
         } else {
           return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
         }
-      } else {
-        return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
-      }
+      } else if (rotate_degree <= 270) {
+        if (i > 0) {
+          if (d.year == prevData['year']) {//two dots with the same year
+            return (-1) * (start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree-180));
+          } else {
+            return (-1) * start_dot_originalX * Math.cos(toRadians(rotate_degree-180));
+          }
+        } else {
+          return (-1) * start_dot_originalX * Math.cos(toRadians(rotate_degree-180));
+        }
+      } 
     })
     .attr('cy', (d, i) => {
       var prevData = dots.data()[i - 1];
       var rotate_degree = avg_degree * (d.year - startYear);
-      if (rotate_degree <= 90) {
+      if (rotate_degree <= 180) {
         if (i > 0) {
           if (d.year == prevData['year']) {
             return (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
@@ -151,15 +189,15 @@ dataPromise.then(function(rows) {
         } else {
           return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
         }
-      } else if (rotate_degree <= 180) {
+      } else if (rotate_degree <= 270){
         if (i > 0) {
           if (d.year == prevData['year']) {
-            return (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+            return start_dot_originalY - (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree-180));
           } else {
-            return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+            return start_dot_originalY - start_dot_originalX * Math.sin(toRadians(rotate_degree-180));
           }
         } else {
-          return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+          return start_dot_originalY - start_dot_originalX * Math.sin(toRadians(rotate_degree-180));
         }
       }
     })
@@ -167,7 +205,7 @@ dataPromise.then(function(rows) {
     .style('transition', 'all 1s ease 0s')
     .style('fill', 'rgb(255,255,255)');
 
-  //labels
+  //add labels
   var labels = timeline.append('g')
     .selectAll('.label-text')
     .data(data_by_year)
@@ -183,11 +221,17 @@ dataPromise.then(function(rows) {
       var trans_x, trans_y = 0;
       var rotate_degree = avg_degree * (d.year - startYear);
 
-      trans_x = (wheel_radius - 5) * Math.cos(toRadians(rotate_degree));
-      if (rotate_degree <= 90) {
+      //trans_x
+      if (rotate_degree <= 180) {
+        trans_x = (wheel_radius - 5) * Math.cos(toRadians(rotate_degree));
+      } else if (rotate_degree <= 270) {
+        trans_x = (-1) * (wheel_radius - 5) * Math.cos(toRadians(rotate_degree-180));
+      }
+      //trans_y
+      if (rotate_degree <= 180) {
         trans_y = (wheel_radius - 5) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
-      } else if (rotate_degree <= 180) {
-        trans_y = (wheel_radius - 5) * Math.sin(toRadians(180 - rotate_degree)) + start_dot_originalY;
+      } else if (rotate_degree <= 270) {
+        trans_y = start_dot_originalY - (wheel_radius - 5) * Math.sin(toRadians(rotate_degree-180));
       }
       return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
     })
@@ -197,8 +241,8 @@ dataPromise.then(function(rows) {
       return d.year;
     })
 
-  //text items
-  var text_item = canvas.append('g')
+  //add text items on the wheel
+  var text_item = svg.append('g')
     .selectAll('.text-item-g')
     .data(data_by_year)
     .enter()
@@ -220,36 +264,54 @@ dataPromise.then(function(rows) {
     .attr('height', `${text_item_height}px`)
     .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
 
-  text_item.append("tspan")
+
+  d3.select(window).on('resize', resize);
+ 
+  function resize(){
+    if (screen.width <= 465){
+      text_wrap_width_desc = 200;
+    }else if(screen.width <= 505){
+      text_wrap_width_desc = 300;
+      desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
+    } else if(screen.width > 505){
+      text_wrap_width_desc = 390;
+      desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
+    }  
+  }  
+
+  var city = text_item.append("tspan")
     .text(d => d.city)
     .attr('class', 'tspan-top')
     .attr('id', 'text-id')
     .attr('x', 0)
     .attr('dy', '0em')
     .call(reposition)
-
-  text_item.append("tspan")
+  
+  var title = text_item.append("tspan")
     .text(d => d.title)
     .attr('class', 'tspan-top')
     .attr('id', 'text-title')
     .attr('x', 0)
     .attr('dy', '0em')
-    .call(wrapUpper, 1, 1.2, text_wrap_width_title)
+    .call(wrapUpper, 1, 1.2, text_wrap_width_title) 
 
-  text_item.append("tspan")
+  var monday = text_item.append("tspan")
     .attr('class', 'tspan-bottom')
-    .text(d => d.monday)
+    .text(d => d.monday)//monday = month + day
     .attr('id', 'text-date')
     .attr('x', 0)
     .attr('y', '4em')
 
-  text_item.append("tspan")
+  // var windowWidth = d3.select('body').node().clientWidth;
+  // console.log("windowsize= " + screen.width);
+  var desc = text_item.append("tspan")
     .attr('class', 'tspan-bottom')
     .text(d => d.desc)
     .attr('id', 'text-desc')
     .attr('x', 0)
     .call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
-
+    // .call(wrapAdjust)
+      
   // realign text id with text description
   function reposition(text) {
     text.each(function() {
@@ -260,7 +322,7 @@ dataPromise.then(function(rows) {
     })
   }
 
-  //fix the description part above the middle line in a given width
+  //fix the up description part above the middle line in a given width
   function wrapUpper(text, dy1, dy, width) {
     text.each(function() {
       var text = d3.select(this),
@@ -305,7 +367,7 @@ dataPromise.then(function(rows) {
     });
   }
 
-  //fix the description part in a given width
+  //fix the bottom description part in a given width
   function wrapBelow(text, dy1, dy, width) {
     text.each(function() {
       var text = d3.select(this),
@@ -341,7 +403,6 @@ dataPromise.then(function(rows) {
 
   //onboard animation
   //wheel
-  //wheel.attr('transform','translate(-412,50) rotate(90 412 412)')
   wheel.style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate(-${wheel_radius}px, 50px) rotate(90deg)`);
   //dots and labels
@@ -525,6 +586,7 @@ dataPromise.then(function(rows) {
       .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
       .style('transform', `translate(-${wheel_radius}px, 50px) rotate(${wheel_sumAngle}deg)`);
 
+    ////NEED UPDATE!
     var new_title = data[index].title
     $(document).ready(function() {
       $('#btn_more').on('click', function() {
@@ -556,7 +618,7 @@ dataPromise.then(function(rows) {
   }
 
 
-  //keydown-scroll
+  // enable keydown-scroll
   document.addEventListener("keydown", function(event) {
     event.preventDefault();
 
@@ -573,14 +635,12 @@ dataPromise.then(function(rows) {
         break;
     }
   });
-
   function keyUp() {
     if (index - 1 >= 0) {
       index--;
       rotation_def(index, 'down', data_by_year);
     }
   }
-
   function keyDown() {
     if (index + 1 < degrees.length) {
       index++;
@@ -633,6 +693,7 @@ dataPromise.then(function(rows) {
     }
   }
 
+  // control scrolling/tracking speed
   function throttle(fn, wait) {
     var time = Date.now();
     return function() {
@@ -652,19 +713,15 @@ dataPromise.then(function(rows) {
   $('#exampleModal1').on('shown.bs.modal', function() {
     topRight = true;
   })
-
   $('#exampleModal2').on('shown.bs.modal', function() {
     topRight = true;
   })
-
   $('#exampleModal1').on('hidden.bs.modal', function() {
     topRight = false;
   })
-
   $('#exampleModal2').on('hidden.bs.modal', function() {
     topRight = false;
   })
-
 
   // var rotating = false;
 
