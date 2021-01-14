@@ -97,17 +97,23 @@ d3.json("data/Durham/data.json").then(function(json){
 
   //textbox on wheel
   var text_item_width = 400;
-  var text_item_height = 460;
   var text_wrap_width_title = 400;
   var text_wrap_width_desc = 390;
-
+  if (screen.width <= 505){
+    var text_item_height = 430;
+    text_wrap_width_title = 350;
+    text_wrap_width_desc = 340;
+  } else {
+    text_item_height = 460;
+  }
+  
   //calculate rotating degrees
   var startYear = dataArray[0].year;
   var count_year = dataArray[dataArray.length - 1].year - startYear;
 
   //console.log(count_year);
 
-  var avg_degree = 270 / count_year; //test1:180
+  var avg_degree = 250 / count_year; //test1:180
   var rotating_degrees = [];
   var degrees = [0];
   var year_sub = [0]
@@ -249,7 +255,7 @@ d3.json("data/Durham/data.json").then(function(json){
     })
 
   //add text items on the wheel
-  var text_item = svg.append('g')
+  var text_item = svg
     .selectAll('.text-item-g')
     .data(dataArray)
     .enter()
@@ -262,21 +268,51 @@ d3.json("data/Durham/data.json").then(function(json){
     .style('transform-origin', '0px 0px')
     .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
     .style('opacity', 0)
-    .append('text')
-    .attr('class', 'text-item')
+
+  var text_item2 = svg
+    .selectAll('.text-item-g2')
+    .data(dataArray)
+    .enter()
+    .append('g')
+    .attr('class', 'text-item-g2')
     .attr('id', (d, i) => {
-      return `text-item-${i}`
+      return `text-item-g2-${i}`
+    })
+    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+    .style('transform-origin', '0px 0px')
+    .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
+    .style('opacity', 0)
+ 
+  var text_top = text_item
+    .append('text')
+    .attr('class', 'text-item-top')
+    .attr('id', (d, i) => {
+      return `text-item-top-${i}`
     })
     .attr('width', `${text_item_width}px`)
     .attr('height', `${text_item_height}px`)
     .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+  
+  var text_bottom = text_item2
+    .append('text')
+    //.style('transform-origin', '20px 0px')
+    //.style('transform',`translate(100,${start_dot_originalY})`)
+    .attr('class', 'text-item-bottom')
+    
+    .attr('id', (d, i) => {
+      return `text-item-bottom-${i}`
+    })
+    .attr('width', `${text_item_width}px`)
+    .attr('height', `${text_item_height}px`)
+    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s') 
 
 
   // d3.select(window).on('resize', resize);
  
   // function resize(){
   //   if (screen.width <= 465){
-  //     text_wrap_width_desc = 200;
+  //     text_item_height = 420;
+  //     text_wrap_width_desc = 180;
   //   }else if(screen.width <= 505){
   //     text_wrap_width_desc = 300;
   //     desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
@@ -284,25 +320,29 @@ d3.json("data/Durham/data.json").then(function(json){
   //     text_wrap_width_desc = 390;
   //     desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
   //   }  
-  // }  
-
-  var spot = text_item.append("tspan")
-    .text(d => d.spot)
-    .attr('class', 'tspan-top')
-    .attr('id', 'text-id')
-    .attr('x', 0)
-    .attr('dy', '0em')
-    .call(reposition)
+  // } 
   
-  var title = text_item.append("tspan")
+ 
+
+  
+  
+  var title = text_top.append("tspan")
     .text(d => d.event)
     .attr('class', 'tspan-top')
     .attr('id', 'text-title')
     .attr('x', 0)
-    .attr('dy', '0em')
-    .call(wrapUpper, 1, 1.2, text_wrap_width_title);
+    .attr('dy', '1em')
+    .call(wrapUpper, 1, 1, text_wrap_width_title);
 
-  var monday = text_item.append("tspan")
+  var spot = text_top.append("tspan")
+    .text(d => d.spot)
+    .attr('class', 'tspan-top')
+    .attr('id', 'text-id')
+    .attr('x', 0)
+    .attr('dy', '-1.55em')
+    .call(reposition)
+
+  var monday = text_bottom.append("tspan")
     .attr('class', 'tspan-bottom')
     .text(d => d.mon_day)//monday = month + day
     .attr('id', 'text-date')
@@ -311,7 +351,7 @@ d3.json("data/Durham/data.json").then(function(json){
 
   // var windowWidth = d3.select('body').node().clientWidth;
   // console.log("windowsize= " + screen.width);
-  var desc = text_item.append("tspan")
+  var desc = text_bottom.append("tspan")
     .attr('class', 'tspan-bottom')
     .text(d => d.desc)
     .attr('id', 'text-desc')
@@ -324,7 +364,7 @@ d3.json("data/Durham/data.json").then(function(json){
     text.each(function() {
       if ($(this).prev("tspan").find("#wrap").length != 0) {
         console.log('hello');
-        $(this).attr("dy", "-3.5em");
+        $(this).attr("dy", "-3em");
       }
     })
   }
@@ -431,8 +471,16 @@ d3.json("data/Durham/data.json").then(function(json){
     .style('opacity', .7)
     .style('font-family', 'Trade Bold');
   //first text item
-  let fisrt_content = d3.select('#text-item-g-0');
-  fisrt_content
+  let fisrt_content_top = d3.select('#text-item-g-0');
+  fisrt_content_top
+    .attr('class','first_content1')
+    .style('transform-origin', '0 0')
+    .style('transform', `translate(20px,${text_item_height}px) rotate(0deg)`)
+    .style('opacity', 1)
+
+  let fisrt_content_bottom = d3.select('#text-item-g2-0');
+  fisrt_content_bottom
+    .attr('class','first_content2')
     .style('transform-origin', '0 0')
     .style('transform', `translate(20px,${text_item_height}px) rotate(0deg)`)
     .style('opacity', 1)
@@ -462,16 +510,28 @@ d3.json("data/Durham/data.json").then(function(json){
       wheelAngle = 0 - 18; //counter-clockwise
 
       // switch text items
-      let last_word_label = d3.select('#text-item-g-' + (index - 1));
-      let current_word_label = d3.select('#text-item-g-' + index);
+      let last_word_text_top = d3.select('#text-item-g-' + (index - 1));
+      let last_word_text_bottom = d3.select('#text-item-g2-' + (index - 1));
+      let current_word_text_top = d3.select('#text-item-g-' + index);
+      let current_word_text_bottom = d3.select('#text-item-g2-' + index);
       console.log('now', (index - 1))
       console.log('down', index);
 
-      last_word_label //rotate out
+      //rotate out
+      last_word_text_top 
         .style('transform-origin', '0px 0px')
         .style('transform', `translate(20px, ${text_item_height}px) rotate(-180deg)`)
         .style('opacity', 0)
-      current_word_label //rotate in
+      last_word_text_bottom
+        .style('transform-origin', '0px 0px')
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(-180deg)`)
+        .style('opacity', 0)
+      //rotate in
+      current_word_text_top 
+        .style('transform-origin', '0px 0px')
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('opacity', 1)
+      current_word_text_bottom
         .style('transform-origin', '0px 0px')
         .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
         .style('opacity', 1)
@@ -529,16 +589,28 @@ d3.json("data/Durham/data.json").then(function(json){
       wheelAngle = 18;
 
       //switch text items
-      let last_word_label = d3.select('#text-item-g-' + (index + 1))
-      let current_word_label = d3.select('#text-item-g-' + (index))
+      let last_word_text_top = d3.select('#text-item-g-' + (index + 1))
+      let last_word_text_bottom = d3.select('#text-item-g2-' + (index + 1))
+      let current_word_text_top = d3.select('#text-item-g-' + (index))
+      let current_word_text_bottom = d3.select('#text-item-g2-' + (index))
       console.log('now', (index + 1))
       console.log('up', (index));
 
-      last_word_label //rotate out
+      //rotate out
+      last_word_text_top 
         .style('transform-origin', '0px 0px')
         .style('transform', `translate(20px, ${text_item_height}px) rotate(180deg)`)
         .style('opacity', 0)
-      current_word_label //rotate in
+      last_word_text_bottom
+        .style('transform-origin', '0px 0px')
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(180deg)`)
+        .style('opacity', 0)
+      //rotate in
+      current_word_text_top 
+        .style('transform-origin', '0px 0px')
+        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('opacity', 1)
+      current_word_text_bottom
         .style('transform-origin', '0px 0px')
         .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
         .style('opacity', 1)

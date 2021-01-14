@@ -38,8 +38,34 @@ body {
   height: 100%;
 }
 
-.text-item {
-  width: 450px;
+.text-item-g {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.text-item-g2 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+.first_content1 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.first_content2 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+
+.text-item-top {
+  justify-content: flex-start;
+}
+
+.text-item-g2 {
+  justify-content: flex-end;
+  position: fixed;
 }
 
 .tspan-top {
@@ -91,10 +117,13 @@ body {
 }
 
 .canvas {
-  width: 85%;
+  width: 100%;
   height: 100%;
   float: left;
+  overflow: visible;
   overflow-x: none;
+  margin: 0;
+  padding: 0;
   /* overflow: scroll; */
   /* transition: tranform 1s ease 0s; */
   /* position: fixed; */
