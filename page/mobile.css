@@ -87,7 +87,7 @@
     line-height: 0em;
   }
   .mobile #text-date {
-    font-size: 1.65em;
+    font-size: 1.6em;
   }
   .mobile #text-desc tspan {
     width: 300px;
@@ -140,13 +140,13 @@
 
 @media screen and (max-width: 375px) {
   body {
-    /* background-color:yellow; */
+    /* background-color:blue; */
   }
 
   .mobile .canvas {
     /* width: 150vw; */
     height: 180vh;
-    transform: scale(0.6);
+    transform: scale(0.7);
     transform-origin: left top;
     position: fixed;
   }
@@ -171,7 +171,7 @@
     width: 200px;
   }
   .mobile #text-desc {
-  font-size: 1.3em;
+    font-size: 1.3em;
   }   
   .mobile .label-text {
     font-size: 1.8em;

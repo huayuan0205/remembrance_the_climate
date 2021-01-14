@@ -63,11 +63,6 @@ body {
   justify-content: flex-start;
 }
 
-.text-item-g2 {
-  justify-content: flex-end;
-  position: fixed;
-}
-
 .tspan-top {
   display: inline-block
 }

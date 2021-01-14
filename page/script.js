@@ -99,12 +99,16 @@ d3.json("data/Durham/data.json").then(function(json){
   var text_item_width = 400;
   var text_wrap_width_title = 400;
   var text_wrap_width_desc = 390;
+  var text_item_height = 460;
+
   if (screen.width <= 505){
-    var text_item_height = 430;
+    text_item_height = 442;
     text_wrap_width_title = 350;
     text_wrap_width_desc = 340;
-  } else {
-    text_item_height = 460;
+  } else if(screen.width <= 412){
+    text_item_height = 300;
+    text_wrap_width_title = 350;
+    text_wrap_width_desc = 340;
   }
   
   //calculate rotating degrees
@@ -113,7 +117,7 @@ d3.json("data/Durham/data.json").then(function(json){
 
   //console.log(count_year);
 
-  var avg_degree = 250 / count_year; //test1:180
+  var avg_degree = 250 / count_year; 
   var rotating_degrees = [];
   var degrees = [0];
   var year_sub = [0]
@@ -322,10 +326,6 @@ d3.json("data/Durham/data.json").then(function(json){
   //   }  
   // } 
   
- 
-
-  
-  
   var title = text_top.append("tspan")
     .text(d => d.event)
     .attr('class', 'tspan-top')
@@ -348,6 +348,15 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('id', 'text-date')
     .attr('x', 0)
     .attr('y', '4em')
+    .attr('y',d=>{
+      if(screen.width <= 412){
+        return '3.5em';
+      }else if(screen.width <= 375){
+        return '3.475em';
+      }else{
+        return '4em';
+      }
+    })
 
   // var windowWidth = d3.select('body').node().clientWidth;
   // console.log("windowsize= " + screen.width);
@@ -756,7 +765,7 @@ d3.json("data/Durham/data.json").then(function(json){
       event = window.event;
     }
     if (event.wheelDelta) {
-      delta = event.wheelDelta / 10000;
+      delta = event.wheelDelta / 8000;
       if (window.opera) {
         delta = -delta;
       }
@@ -784,9 +793,9 @@ d3.json("data/Durham/data.json").then(function(json){
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 500), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 550), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 500);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 550);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function() {
