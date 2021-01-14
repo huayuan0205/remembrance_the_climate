@@ -286,6 +286,7 @@ body {
 .modal-content #notes {
   font-family: "Trade";
   font-size: 12px;
+  line-height: 1.5em;
   color: white !important;
   -webkit-font-smoothing: antialiased;
   /* Careful, this breaks the word wherever it is without a hyphen */

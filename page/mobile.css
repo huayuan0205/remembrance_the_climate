@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 1080px) {
   body {
-    background-color: red;
+    /* background-color: red; */
   }
   .canvas {
     width: 100%;
@@ -26,7 +26,7 @@
 
 @media screen and (max-width: 960px) {
   body {
-    background-color: orange;
+    /* background-color: orange; */
   }
   .canvas {
     width: 100%;
@@ -39,7 +39,7 @@
 
 @media screen and (max-width: 650px) {
   body {
-    background-color: yellow;
+    /* background-color: yellow; */
   }
   .mobile .container {
     overflow-x: hidden !important;
@@ -55,7 +55,7 @@
 
 @media screen and (max-width: 505px) {
   body {
-    background-color: green;
+    /* background-color: green; */
   }
   .mobile .container {
     overflow-x: hidden !important;
@@ -100,7 +100,7 @@
 
 @media screen and (max-width: 412px) {
   body {
-    background-color: purple;
+    /* background-color: purple; */
   }
 
   .mobile .canvas {
@@ -140,7 +140,7 @@
 
 @media screen and (max-width: 375px) {
   body {
-    background-color:yellow;
+    /* background-color:yellow; */
   }
 
   .mobile .canvas {
