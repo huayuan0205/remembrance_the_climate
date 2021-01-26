@@ -99,18 +99,18 @@ d3.json("data/Durham/data.json").then(function(json){
   var text_item_width = 400;
   var text_wrap_width_title = 400;
   var text_wrap_width_desc = 390;
-  var text_item_height = 458;
+  var text_item_height = 459;
 
-  if (screen.width <= 505){
-    text_item_height = 441;
+  if(screen.width <= 375){
+    text_item_height = 444.5;
     text_wrap_width_title = 350;
     text_wrap_width_desc = 340;
-  } else if(screen.width <= 412){
-    text_item_height = 305;
+  } else if (screen.width <= 505){
+    text_item_height = 438.5;
     text_wrap_width_title = 350;
     text_wrap_width_desc = 340;
-  }
-  
+  } 
+
   //calculate rotating degrees
   var startYear = dataArray[0].year;
   var count_year = dataArray[dataArray.length - 1].year - startYear;
@@ -145,7 +145,7 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('class', 'wheel-img')
     .attr('id', 'wheel-img')
     .attr('xlink:href', "./img/wheel-dark.png")
-    .style('transition', 'transform 1.1s ease 0.2s')
+    .style('transition', 'transform 1s ease 0.2s')
     //safari
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate(-${wheel_radius}px, 50px)`)
@@ -154,6 +154,7 @@ d3.json("data/Durham/data.json").then(function(json){
   var timeline = svg.append('g')
     .attr('id', 'timeline')
     .style('transition', 'all 1s ease 0.2s')
+
     //set start position
     .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
     .style('transform', `translate(0,0) rotate(-90deg)`)
@@ -219,7 +220,8 @@ d3.json("data/Durham/data.json").then(function(json){
       }
     })
     .attr('r', dot_radius)
-    .style('transition', 'all .8s ease 0.1s')
+    .style('transition', 'all 1s ease 0.2s')
+    .style('transition-delay', '0.7s')
     .style('fill', 'rgb(255,255,255)');
 
   //add labels
@@ -253,7 +255,8 @@ d3.json("data/Durham/data.json").then(function(json){
       return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
     })
     .style('text-anchor', 'end')
-    .style('transition', 'all 1s ease 0s')
+    .style('transition', 'all 1s ease 0.2s')
+    .style('transition-delay', '0.7s')
     .text((d) => {
       return d.year;
     })
@@ -537,7 +540,7 @@ d3.json("data/Durham/data.json").then(function(json){
           for (i = 0; i < degrees.length && i !== index; i++) {
             d3.select('#d-' + i)
               .attr('r', dot_radius)
-              .style('transition-delay', 'none')
+              .style('transition-delay', '1s')
               .style('fill', 'rgb(255,255,255)');
           }
           // current dot is black
@@ -749,7 +752,7 @@ d3.json("data/Durham/data.json").then(function(json){
       event = window.event;
     }
     if (event.wheelDelta) {
-      delta = event.wheelDelta / 8000;
+      delta = event.wheelDelta / 10000;
       if (window.opera) {
         delta = -delta;
       }
@@ -777,9 +780,9 @@ d3.json("data/Durham/data.json").then(function(json){
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 500), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 525), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 500);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 525);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function() {
