@@ -99,14 +99,14 @@ d3.json("data/Durham/data.json").then(function(json){
   var text_item_width = 400;
   var text_wrap_width_title = 400;
   var text_wrap_width_desc = 390;
-  var text_item_height = 460;
+  var text_item_height = 458;
 
   if (screen.width <= 505){
-    text_item_height = 442;
+    text_item_height = 441;
     text_wrap_width_title = 350;
     text_wrap_width_desc = 340;
   } else if(screen.width <= 412){
-    text_item_height = 300;
+    text_item_height = 305;
     text_wrap_width_title = 350;
     text_wrap_width_desc = 340;
   }
@@ -145,7 +145,7 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('class', 'wheel-img')
     .attr('id', 'wheel-img')
     .attr('xlink:href', "./img/wheel-dark.png")
-    .style('transition', 'transform 1s ease 0s')
+    .style('transition', 'transform .8s ease 0.1s')
     //safari
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate(-${wheel_radius}px, 50px)`)
@@ -153,7 +153,7 @@ d3.json("data/Durham/data.json").then(function(json){
   // add dots and labels
   var timeline = svg.append('g')
     .attr('id', 'timeline')
-    .style('transition', 'all 1s ease 0s')
+    .style('transition', 'all 0.8s ease 0.1s')
     //set start position
     .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
     .style('transform', `translate(0,0) rotate(-90deg)`)
@@ -219,7 +219,7 @@ d3.json("data/Durham/data.json").then(function(json){
       }
     })
     .attr('r', dot_radius)
-    .style('transition', 'all 1s ease 0s')
+    .style('transition', 'all .8s ease 0.1s')
     .style('fill', 'rgb(255,255,255)');
 
   //add labels
@@ -268,7 +268,7 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('id', (d, i) => {
       return `text-item-g-${i}`
     })
-    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+    .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
     .style('transform-origin', '0px 0px')
     .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
     .style('opacity', 0)
@@ -282,7 +282,7 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('id', (d, i) => {
       return `text-item-g2-${i}`
     })
-    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+    .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
     .style('transform-origin', '0px 0px')
     .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
     .style('opacity', 0)
