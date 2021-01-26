@@ -793,9 +793,9 @@ d3.json("data/Durham/data.json").then(function(json){
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 550), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 500), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 550);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 500);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function() {

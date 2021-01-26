@@ -21,10 +21,10 @@ function bindTouch(el, callBack) {
       //   slider.off('touchmove');
       //   return callBack('left')
       // };
-      if (touch.pageY - startY > 10) {
+      if (touch.pageY - startY > 5) {
         console.log("scroll down");
         return callBack('dowm')
-      } else if (touch.pageY - startY < -10) {
+      } else if (touch.pageY - startY < -5) {
         console.log("scroll up");
         return callBack('up')
       };
