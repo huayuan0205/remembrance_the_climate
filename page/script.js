@@ -145,7 +145,7 @@ d3.json("data/Durham/data.json").then(function(json){
     .attr('class', 'wheel-img')
     .attr('id', 'wheel-img')
     .attr('xlink:href', "./img/wheel-dark.png")
-    .style('transition', 'transform .8s ease 0.1s')
+    .style('transition', 'transform 1.1s ease 0.2s')
     //safari
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate(-${wheel_radius}px, 50px)`)
@@ -153,7 +153,7 @@ d3.json("data/Durham/data.json").then(function(json){
   // add dots and labels
   var timeline = svg.append('g')
     .attr('id', 'timeline')
-    .style('transition', 'all 0.8s ease 0.1s')
+    .style('transition', 'all 1s ease 0.2s')
     //set start position
     .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
     .style('transform', `translate(0,0) rotate(-90deg)`)
@@ -295,7 +295,7 @@ d3.json("data/Durham/data.json").then(function(json){
     })
     .attr('width', `${text_item_width}px`)
     .attr('height', `${text_item_height}px`)
-    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
+    //.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s')
   
   var text_bottom = text_item2
     .append('text')
@@ -308,23 +308,7 @@ d3.json("data/Durham/data.json").then(function(json){
     })
     .attr('width', `${text_item_width}px`)
     .attr('height', `${text_item_height}px`)
-    .style('transition', 'transform .8s ease 0s, opacity .5s ease 0s') 
-
-
-  // d3.select(window).on('resize', resize);
- 
-  // function resize(){
-  //   if (screen.width <= 465){
-  //     text_item_height = 420;
-  //     text_wrap_width_desc = 180;
-  //   }else if(screen.width <= 505){
-  //     text_wrap_width_desc = 300;
-  //     desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
-  //   } else if(screen.width > 505){
-  //     text_wrap_width_desc = 390;
-  //     desc.call(wrapBelow, 1.7, 1.2, text_wrap_width_desc)
-  //   }  
-  // } 
+    //.style('transition', 'transform .8s ease 0s, opacity .5s ease 0s') 
   
   var title = text_top.append("tspan")
     .text(d => d.event)
