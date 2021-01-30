@@ -1,8 +1,18 @@
-//import csv
-var neu_url = "https://web.northeastern.edu/climatefutures/page/"
-
 // get city name from URL
 var switch_to_city = getQueryVariable("city");
+
+//update url in About page
+if(switch_to_city === "Essex"){
+  document.getElementById("btn_more").disabled = true;
+  document.getElementById("btn_more").style.visibility = 'hidden';
+  $('#about_link')
+      .attr('href','https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
+}
+
+// use the two lines below when selecting a new place
+// if the user is clicking one place ID - switch_to_city
+var switch_to_url = "https://web.northeastern.edu/climatefutures/page/"+"?city=" + switch_to_city +"/";
+//location.href = switch_to_url;
 
 function getQueryVariable(variable)
 {
@@ -15,29 +25,26 @@ function getQueryVariable(variable)
   return(false);
 }//(/?id=1&image=awesome.jpg ——> getQueryVariable("id")——>return 1)
 
-var data_src = "./data/Durham/data.csv";
-const dataPromise = d3.csv(data_src, parseData);
-
-// use the two lines when selecting a new place
-// if the user is clicking one place ID - switch_to_city
-// var switch_to_url = "https://web.northeastern.edu/climatefutures/page/"+"?city=" + switch_to_city;
-// location.href = switch_to_url;
+//----------- csv ---------------
+// var data_src = "./data/Essex/data.csv";
+// const dataPromise = d3.csv(data_src, parseData);
 
 //parse csv
-function parseData(d) {
-  // set format for time data
-  var formatMonDay = d3.timeFormat("%B %d");
-  var formatYear = d3.timeFormat("%Y");
+// function parseData(d) {
+//   // set format for time data
+//   var formatMonDay = d3.timeFormat("%B %d");
+//   var formatYear = d3.timeFormat("%Y");
 
-  return {
-    year: +formatYear(new Date(d.date)),
-    monday: formatMonDay(new Date(d.date)),
-    //year: +d.Year,
-    city: d.spot_id,
-    title: d.event,
-    desc: d.description,
-  }
-}
+//   return {
+//     year: +formatYear(new Date(d.date)),
+//     monday: formatMonDay(new Date(d.date)),
+//     //year: +d.Year,
+//     city: d.spot_id,
+//     title: d.event,
+//     desc: d.description,
+//   }
+// }
+//----------- csv ---------------
 
 // set width and height
 const W = d3.select('.canvas').node().clientWidth;
@@ -69,12 +76,9 @@ function toRadians(angle) {
   return angle * (Math.PI / 180);
 }
 
-d3.json("data/Durham/data.json").then(function(json){
-  //`${neu_url}data/${city}/data.json`
-  //(neu_url = "https://web.northeastern.edu/climatefutures/page/")
-  //neu_url + "data/"+ Durham+ "/data.csv";
-  
-  
+d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}/data.json`).then(function(json){
+  // testing - use file url 'data/Essex/data.json'
+
   var dataArray = []; // This will be the resulting array
   for(var key in json) {
     var entry = json[key]
@@ -97,7 +101,7 @@ d3.json("data/Durham/data.json").then(function(json){
 
   //textbox on wheel
   var text_item_width = 400;
-  var text_wrap_width_title = 400;
+  var text_wrap_width_title = 375;
   var text_wrap_width_desc = 390;
   var text_item_height = 459;
 
