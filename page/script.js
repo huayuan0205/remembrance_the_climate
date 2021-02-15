@@ -1,6 +1,11 @@
 // get city name from URL
 var switch_to_city = getQueryVariable("city");
 
+// set the transition var
+var transitionTimeNormal = ' 700ms ease 0s';
+var transitionTimeFaster = ' 1s ease 0s';
+var transitionTimeSlower = ' 1.5s ease 0s';
+
 //update url in About page
 if(switch_to_city === "Essex"){
   document.getElementById("btn_more").disabled = true;
@@ -149,19 +154,19 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     .attr('class', 'wheel-img')
     .attr('id', 'wheel-img')
     .attr('xlink:href', "./img/wheel-dark.png")
-    .style('transition', 'transform 1s ease 0.2s')
+    .style('transition', 'transform'+ transitionTimeNormal)
     //safari
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
-    .style('transform', `translate(-${wheel_radius}px, 50px)`)
+    .style('transform', `translate3d(-${wheel_radius}px, 50px,0)`)
 
   // add dots and labels
   var timeline = svg.append('g')
     .attr('id', 'timeline')
-    .style('transition', 'all 1s ease 0.2s')
+    .style('transition', 'all' + transitionTimeFaster)
 
     //set start position
     .style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
-    .style('transform', `translate(0,0) rotate(-90deg)`)
+    .style('transform', `translate3d(0,0,0) rotate(-90deg)`)
   
   // add dots
   var dots = timeline.selectAll('.dot')
@@ -224,7 +229,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       }
     })
     .attr('r', dot_radius)
-    .style('transition', 'all 1s ease 0.2s')
+    .style('transition', 'all' + transitionTimeNormal)
     .style('transition-delay', '0.7s')
     .style('fill', 'rgb(255,255,255)');
 
@@ -259,7 +264,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
     })
     .style('text-anchor', 'end')
-    .style('transition', 'all 1s ease 0.2s')
+    .style('transition', 'all' + transitionTimeNormal)
     .style('transition-delay', '0.7s')
     .text((d) => {
       return d.year;
@@ -277,7 +282,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     })
     .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
     .style('transform-origin', '0px 0px')
-    .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
+    .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(90deg)`)
     .style('opacity', 0)
 
   var text_item2 = svg
@@ -291,7 +296,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     })
     .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
     .style('transform-origin', '0px 0px')
-    .style('transform', `translate(20px, ${text_item_height}px) rotate(90deg)`)
+    .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(90deg)`)
     .style('opacity', 0)
  
   var text_top = text_item
@@ -451,12 +456,12 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   //onboard animation
   //wheel
   wheel.style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
-    .style('transform', `translate(-${wheel_radius}px, 50px) rotate(90deg)`);
+    .style('transform', `translate3d(-${wheel_radius}px, 50px,0) rotate(90deg)`);
   //dots and labels
   timeline
     //.attr('transform', `translate(0 0) rotate(0 0 462)`);
     .style('transform-origin', `0 ${start_dot_originalY}px`)
-    .style('transform', `translate(0,0)`);
+    .style('transform', `translate3d(0,0,0)`);
   //first dot
   let first_dot = d3.select('#d-0');
   first_dot
@@ -475,14 +480,14 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   fisrt_content_top
     .attr('class','first_content1')
     .style('transform-origin', '0 0')
-    .style('transform', `translate(20px,${text_item_height}px) rotate(0deg)`)
+    .style('transform', `translate3d(20px,${text_item_height}px,0) rotate(0deg)`)
     .style('opacity', 1)
 
   let fisrt_content_bottom = d3.select('#text-item-g2-0');
   fisrt_content_bottom
     .attr('class','first_content2')
     .style('transform-origin', '0 0')
-    .style('transform', `translate(20px,${text_item_height}px) rotate(0deg)`)
+    .style('transform', `translate3d(20px,${text_item_height}px,0) rotate(0deg)`)
     .style('opacity', 1)
 
   //rotation
@@ -520,20 +525,20 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       //rotate out
       last_word_text_top 
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(-180deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(-180deg)`)
         .style('opacity', 0)
       last_word_text_bottom
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(-180deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(-180deg)`)
         .style('opacity', 0)
       //rotate in
       current_word_text_top 
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(0deg)`)
         .style('opacity', 1)
       current_word_text_bottom
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(0deg)`)
         .style('opacity', 1)
 
       // two consecutive dots have the same year
@@ -599,20 +604,20 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       //rotate out
       last_word_text_top 
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(180deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(180deg)`)
         .style('opacity', 0)
       last_word_text_bottom
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(180deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(180deg)`)
         .style('opacity', 0)
       //rotate in
       current_word_text_top 
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(0deg)`)
         .style('opacity', 1)
       current_word_text_bottom
         .style('transform-origin', '0px 0px')
-        .style('transform', `translate(20px, ${text_item_height}px) rotate(0deg)`)
+        .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(0deg)`)
         .style('opacity', 1)
 
       // two consecutive dots have the same year
@@ -660,10 +665,10 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     sumAngle += rotationAngle;
 
     timeline.style('transform-origin', `0px ${start_dot_originalY}px`)
-      .style('transform', `translate(0,0) rotate(${sumAngle}deg)`);
+      .style('transform', `translate3d(0,0,0) rotate(${sumAngle}deg)`);
     currentWheel
       .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
-      .style('transform', `translate(-${wheel_radius}px, 50px) rotate(${wheel_sumAngle}deg)`);
+      .style('transform', `translate3d(-${wheel_radius}px, 50px,0) rotate(${wheel_sumAngle}deg)`);
 
     ////NEED UPDATE!
     var new_title = data[index].event
@@ -784,9 +789,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 525), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 200), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 525);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 200);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function() {

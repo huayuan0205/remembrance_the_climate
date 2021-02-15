@@ -1,5 +1,6 @@
 .mobile .canvas {
   width: 820px;
+  touch-action: none;
 }
 
 .mobile .container {
