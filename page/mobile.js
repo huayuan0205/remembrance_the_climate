@@ -1,10 +1,9 @@
 function bindTouch(el, callBack) {
 
-  window.addEventListener("touchstart", func, {passive: true} );
-
   var slider = $(el);
 
   $('body').on('touchstart', el, function(e) {
+    e.preventDefault();
     var touch = e.originalEvent,
     startX = touch.changedTouches[0].pageX;
     startY = touch.changedTouches[0].pageY;
@@ -34,6 +33,7 @@ function bindTouch(el, callBack) {
     return false;
 
   }).on('touchend', function() {
+    e.preventDefault();
     slider.off('touchmove');
   });
 }
