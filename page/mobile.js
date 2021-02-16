@@ -1,5 +1,7 @@
 function bindTouch(el, callBack) {
 
+  window.addEventListener("touchstart", func, {passive: true} );
+
   var slider = $(el);
 
   $('body').on('touchstart', el, function(e) {
