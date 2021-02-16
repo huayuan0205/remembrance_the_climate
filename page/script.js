@@ -824,9 +824,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 0), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 200), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 0);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 200);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function () {
