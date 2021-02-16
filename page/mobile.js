@@ -4,7 +4,7 @@ function bindTouch(el, callBack) {
 
   $('body').on('touchstart', el, function(e) {
     var touch = e.originalEvent,
-      startX = touch.changedTouches[0].pageX;
+    startX = touch.changedTouches[0].pageX;
     startY = touch.changedTouches[0].pageY;
 
     slider.on('touchmove', function(e) {
@@ -23,7 +23,7 @@ function bindTouch(el, callBack) {
       // };
       if (touch.pageY - startY > 1) {
         console.log("scroll down");
-        return callBack('dowm')
+        return callBack('down')
       } else if (touch.pageY - startY < -1) {
         console.log("scroll up");
         return callBack('up')
