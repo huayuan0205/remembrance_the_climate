@@ -6,14 +6,6 @@ var transitionTimeNormal = ' 700ms ease 0s';
 var transitionTimeFaster = ' 1s ease 0s';
 var transitionTimeSlower = ' 1.5s ease 0s';
 
-//update url in About page
-if (switch_to_city === "Essex") {
-  document.getElementById("btn_more").disabled = true;
-  document.getElementById("btn_more").style.visibility = 'hidden';
-  $('#about_link')
-    .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
-}
-
 // use the two lines below when selecting a new place
 // if the user is clicking one place ID - switch_to_city
 var switch_to_url = "https://web.northeastern.edu/climatefutures/page/" + "?city=" + switch_to_city;
@@ -85,6 +77,16 @@ function toRadians(angle) {
 d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}/data.json`).then(function (json) {
   // testing - use file url 'data/Essex/data.json'
 
+  console.log(switch_to_city);
+
+  //update url in About page
+  if (switch_to_city === "Essex") {
+    document.getElementById("btn_more").disabled = true;
+    document.getElementById("btn_more").style.visibility = 'hidden';
+    $('#about_link')
+      .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
+  }
+
   var dataArray = []; // This will be the resulting array
   for (var key in json) {
     var entry = json[key]
@@ -113,11 +115,11 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   if (screen.width <= 375) {
     text_item_height = 444.5;
-    text_wrap_width_title = 350;
+    text_wrap_width_title = 255;
     text_wrap_width_desc = 340;
   } else if (screen.width <= 505) {
     text_item_height = 438.5;
-    text_wrap_width_title = 350;
+    text_wrap_width_title = 255;
     text_wrap_width_desc = 340;
   }
 
@@ -680,37 +682,56 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
       .style('transform', `translate3d(-${wheel_radius}px, 50px,0) rotate(${wheel_sumAngle}deg)`);
 
-    ////NEED UPDATE!
-    var new_title = data[index].event
-    $(document).ready(function () {
-      $('#btn_more').on('click', function () {
-        // $('#exampleModal1').modal({show:true});
-        $.ajax({
-          type: "GET",
-          url: "data/Durham/data.json",
-          //url: `data/${switch_to_city}/data.json`
-          dataType: 'json',
-          success: function (response) {
-            $.each(response, function (i, e) {
-              if (e.event == new_title) {
-                console.log(new_title);
-                // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
-                $("#exampleModal1").find('#more-main').text(e.more_text);
-                $("#exampleModal1").find('#notes').html(e.note);
-                $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
-                if (e.note == "") {
-                  $("hr").css("visibility", "hidden")
-                } else {
-                  $("hr").css("visibility", "visible")
-                }
+    var new_title = dataArray[index].event;
+    console.log(new_title);
+
+    $('#btn_more').on('click', function () {
+      // $('#exampleModal1').modal({show:true});
+      $.ajax({
+        type: "GET",
+        url: `data/${switch_to_city}/data.json`,
+        dataType: 'json',
+        success: function (response) {
+          $.each(response, function (i, e) {
+            if (e.event == new_title) {
+              console.log(e.event);
+              // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
+              $("#exampleModal1").find('#more-main').text(e.more_text);
+              $("#exampleModal1").find('#notes').html(e.note);
+              $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
+              if (e.note == "") {
+                // $("hr").css("visibility", "hidden")
+              } else {
+                $("hr").css("visibility", "visible")
               }
-            })
-          }
-        })
+            }
+          })
+        }
       })
     })
-
   }
+
+  // get modal data
+  ////NEED UPDATE!
+  $(document).ready(function () {
+    $('#btn_about').on('click', function () {
+      $.ajax({
+        type: "GET",
+        url: `data/${switch_to_city}/about.json`,
+        dataType: 'json',
+        success: function (response) {
+          $.each(response, function (i, e) {
+            console.log(e.head);
+            $("#exampleModal2").find('#about-head').text(e.head);
+            $("#exampleModal2").find('#about-body-1').text(e.body1);
+            $('#about-body-1').append(`<a href="${e.link} target="_blank">plans to mitigate and adapt to the effects of climate change.</a>`);
+            $("#exampleModal2").find('#about-body-2').text(e.body2);
+            $("#exampleModal2").find('#about-body-3').text(e.body3);
+          })
+        }
+      })
+    })
+  })
 
   // enable keydown-scroll
   document.addEventListener("keydown", function (event) {
@@ -772,8 +793,8 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
         console.log("degree:" + degrees);
       }
     });
-    for (var i = 0; i < index; i++ ){
-      rotation_def(i+1, "up", dataArray);
+    for (var i = 0; i < index; i++) {
+      rotation_def(i + 1, "up", dataArray);
     }
     // index--;
   });
