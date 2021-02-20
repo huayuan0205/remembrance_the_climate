@@ -1,3 +1,7 @@
+html {
+  touch-action: manipulation;
+}
+
 .mobile .canvas {
   width: 820px;
   touch-action: none;
