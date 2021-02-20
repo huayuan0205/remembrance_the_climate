@@ -744,7 +744,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     }
   }
 
-  //fire scrolling
+  // fire scrolling
   function move(delta) {
     if (delta > 0) {
       if (index - 1 >= 0) {
@@ -763,26 +763,20 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   // fire scrolling by url hash
   $(document).ready(function () {
-    var hash = location.hash.replace('#', '');
+    var hashTag = location.hash.replace('#', '');
     dataArray.forEach(function (item) {
-      if (item.spot_id == hash) {
-        newIndex = item.id-1;
+      if (item.spot_id == hashTag) {
+        index = item.id - 1;
+        console.log("hashTag:" + hashTag);
+        console.log("index:" + index);
+        console.log("degree:" + degrees);
       }
     });
-    // rotation_def(newIndex, "up", dataArray);
-    console.log(newIndex);
+    for (var i = 0; i < index; i++ ){
+      rotation_def(i+1, "up", dataArray);
+    }
+    // index--;
   });
-
-
-  // $(window).on('load', function () {
-  //   // console.log(newIndex);
-  //   alert("window is loaded");
-  // });
-
-  // window.onload = (event) => {
-  //   console.log(newIndex);
-  //   rotation_def(newIndex, "down", dataArray);
-  // };
 
   var num_m = 0;
 
