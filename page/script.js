@@ -879,6 +879,6 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     } else {
       keyUp();
     }
-  }, 50))
+  }, 5))
 
 })
