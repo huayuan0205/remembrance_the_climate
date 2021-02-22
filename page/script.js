@@ -83,8 +83,8 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   if (switch_to_city === "Essex") {
     document.getElementById("btn_more").disabled = true;
     document.getElementById("btn_more").style.visibility = 'hidden';
-    $('#about_link')
-      .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
+    // $('#about_link')
+    //   .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
   }
 
   var dataArray = []; // This will be the resulting array
@@ -102,7 +102,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   //   //get sorted data by year
   //   var data_by_year = rows.slice().sort((a, b) => d3.ascending(a.year, b.year));//orignal date format: mm/dd/yyyy
 
-  var wheel_radius = 480; //test1:562
+  var wheel_radius = 480; 
   var dot_radius = 2;
   var start_dot_originalX = wheel_radius + 13; //493
   var start_dot_originalY = wheel_radius + 50; //530
@@ -589,7 +589,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       }
 
       //change URL path?
-      let new_url = old_url + `#${data[index].spot_id}`;
+      let new_url = old_url + `#/${data[index].spot_id}`;
       window.history.pushState({}, 0, new_url);
       console.log(new_url);
       //console.log(data[index].spot_id);
@@ -659,7 +659,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       }
 
       //change URL path?
-      let new_url = old_url + `#${data[index].spot_id}`;
+      let new_url = old_url + `#/${data[index].spot_id}`;
       window.history.pushState({}, 0, new_url);
       console.log(new_url);
       //console.log(data[index].spot_id);
@@ -879,6 +879,6 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     } else {
       keyUp();
     }
-  }, 5))
+  }, 100))
 
 })
