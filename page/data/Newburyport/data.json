@@ -1,0 +1,41 @@
+[{
+		"id": 1,
+		"subdomain": "newburyport",
+		"year": 2018,
+		"mon_day": "MAR 2",
+		"event": "UNDER WATER ",
+		"spot": 3,
+		"spot_id": 3,
+		"desc": "Storm surge floods American Yacht Club and erodes shoreline up to Wastewater Treatment Plant. ",
+		"more_text": "Flooding is a threat when astronomical high tides coincide with multi-day storm events. Oceanic storm surge causes sea level to rise above the river which, consequently, prevents the river from discharging. As sea levels continue to rise throughout the 21st century, the risk of inundation will increase. By 2070 a 1% (100-year) storm would likely flood 93% of the facility’s grounds.",
+		"note": "(1) Abdollahian, N. et al., Community exposure to potential climate-driven changes to coastal-inundation hazards for six communities in Essex County, Massachusetts, U.S. Geological Survey open-file report (Reston, VA: USGS, 2016), 17 <br><br> (2) GM coastal adaptation plan, p 45",
+		"note1": "(1) Abdollahian, N. et al., Community exposure to potential climate-driven changes to coastal-inundation hazards for six communities in Essex County, Massachusetts, U.S. Geological Survey open-file report (Reston, VA: USGS, 2016), 17",
+		"note2": "(2) GM coastal adaptation plan, p 45"
+	},{
+		"id": 2,
+		"subdomain": "newburyport",
+		"year": 2021,
+		"mon_day": "JUN",
+		"event": "FACILITY PROTECTED",
+		"spot": 2,
+		"spot_id": 2,
+		"desc": "Built against rising sea levels, this revetment made the Rail Trail possible and protects Wastewater Treatment Plant. ",
+		"more_text": "In response to the storm surge damage to the shore, plans were made to elevate the shoreline to keep seawater from reaching the Wastewater Treatment Plant. With sea levels continuing to rise, however, this revetment only delays when the city will have to relocate the plant to higher ground for a permanent solution. A significant benefit to the community is that the revetment enabled repair of the longstanding riverfront gap in the Rail Trail.",
+		"note":"",
+		"note1":"",
+		"note2":""
+	},{
+		"id": 3,
+		"subdomain": "newburyport",
+		"year": 2094,
+		"mon_day": "MAR ",
+		"event": "NUISANCE EMERGES",
+		"spot": 1,
+		"spot_id": 1,
+		"desc": "Climate change brings first winter in Newburyport with no days below freezing, and mosquitoes year-round.",
+		"more_text": "As the planet warms, climate zones are moving farther from the equator. Across much of the country, advances in spring thaw will exceed delay in fall freeze and by mid-century, it is estimated that the portion of North America that now experiences temperatures below freezing will further decrease by 6%. In the Northeast, where winters are warming three times faster than summers, this extends the season of activity for insects. Mosquitoes, ticks and other pests are less active in cooler weather but without a hard frost their populations will not decline over winter.",
+		"note": "(1) Rawlins, M., Bradley, R., Diaz, H., Kimball, J., Robinson, D. (2016) Future Decreases in Freezing Days across North America. https://journals.ametsoc.org/view/journals/clim/29/19/jcli-d-15-0802.1.xml",
+		"note1": "(1) Rawlins, M., Bradley, R., Diaz, H., Kimball, J., Robinson, D. (2016) Future Decreases in Freezing Days across North America. https://journals.ametsoc.org/view/journals/clim/29/19/jcli-d-15-0802.1.xml",
+		"note2":""
+	}
+]

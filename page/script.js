@@ -1,11 +1,6 @@
 // get city name from URL
 var switch_to_city = getQueryVariable("city");
 
-// set the transition var
-var transitionTimeNormal = ' 700ms ease 0s';
-var transitionTimeFaster = ' 1s ease 0s';
-var transitionTimeSlower = ' 1.5s ease 0s';
-
 // use the two lines below when selecting a new place
 // if the user is clicking one place ID - switch_to_city
 var switch_to_url = "https://web.northeastern.edu/climatefutures/page/" + "?city=" + switch_to_city;
@@ -81,8 +76,8 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   //update url in About page
   if (switch_to_city === "Essex") {
-    document.getElementById("btn_more").disabled = true;
-    document.getElementById("btn_more").style.visibility = 'hidden';
+    //document.getElementById("btn_more").disabled = true;
+    document.getElementById("btn_more").remove();
     // $('#about_link')
     //   .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
   }
@@ -102,7 +97,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   //   //get sorted data by year
   //   var data_by_year = rows.slice().sort((a, b) => d3.ascending(a.year, b.year));//orignal date format: mm/dd/yyyy
 
-  var wheel_radius = 480; 
+  var wheel_radius = 480;
   var dot_radius = 2;
   var start_dot_originalX = wheel_radius + 13; //493
   var start_dot_originalY = wheel_radius + 50; //530
@@ -129,7 +124,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   //console.log(count_year);
 
-  var avg_degree = 250 / count_year;
+  var avg_degree = 200 / count_year;
   var rotating_degrees = [];
   var degrees = [0];
   var year_sub = [0]
@@ -142,6 +137,11 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     year_sub.push(dataArray[i].year - dataArray[i - 1].year);
   }
   //console.log('each rotatiion degree=' + degrees)
+
+  // set the transition var
+  var transitionTimeNormal = ' 700ms ease 0s';
+  var transitionTimeFaster = ' 500ms ease 0s';
+  var transitionTimeSlower = ' 1.5s ease 0s';
 
   //add svg
   var svg = d3.select('.canvas')
@@ -157,7 +157,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     .attr('class', 'wheel-img')
     .attr('id', 'wheel-img')
     .attr('xlink:href', "./img/wheel-dark.png")
-    .style('transition', 'transform' + transitionTimeNormal)
+    //.style('transition', 'transform' + transitionTimeNormal)
+    .style('transition', 'transform 1s ease 0s')
+
     //safari
     .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
     .style('transform', `translate3d(-${wheel_radius}px, 50px,0)`)
@@ -232,8 +234,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       }
     })
     .attr('r', dot_radius)
-    .style('transition', 'all' + transitionTimeNormal)
-    .style('transition-delay', '0.7s')
+    //.style('transition', 'all' + transitionTimeNormal)
+    .style('transition', 'all 800ms ease 0s, opacity 1s ease 0s')
+    .style('transition-delay', '0.6s')
     .style('fill', 'rgb(255,255,255)');
 
   //add labels
@@ -267,8 +270,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       return `translate(${trans_x},${trans_y}) rotate(${rotate_degree})`
     })
     .style('text-anchor', 'end')
-    .style('transition', 'all' + transitionTimeNormal)
-    .style('transition-delay', '0.7s')
+    //.style('transition', 'all' + transitionTimeNormal)
+    .style('transition', 'all 800ms ease 0s, opacity 1s ease 0s')
+    .style('transition-delay', '0.6s')
     .text((d) => {
       return d.year;
     })
@@ -283,7 +287,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     .attr('id', (d, i) => {
       return `text-item-g-${i}`
     })
-    .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
+    .style('transition', 'transform 1s ease 0s, opacity .5s ease 0s')
     .style('transform-origin', '0px 0px')
     .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(90deg)`)
     .style('opacity', 0)
@@ -297,7 +301,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     .attr('id', (d, i) => {
       return `text-item-g2-${i}`
     })
-    .style('transition', 'transform 1s ease 0.1s, opacity .8s ease 0s')
+    .style('transition', 'transform 1s ease 0s, opacity .5s ease 0s')
     .style('transform-origin', '0px 0px')
     .style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(90deg)`)
     .style('opacity', 0)
@@ -337,9 +341,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     .text(d => d.spot)
     .attr('class', 'tspan-top')
     .attr('id', 'text-id')
-    .attr('name', (d, i) => {
-      return `${d.spot_id}`
-    })
+    // .attr('name', (d, i) => {
+    //   return `${d.spot_id}`
+    // })
     .attr('x', 0)
     .attr('dy', '-1.55em')
     .call(reposition)
@@ -348,7 +352,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   var monday = text_bottom.append("tspan")
     .attr('class', 'tspan-bottom')
-    .text(d => d.mon_day) //monday = month + day
+    .text(d => d.mon_day.toUpperCase()) //monday = month + day
     .attr('id', 'text-date')
     .attr('x', 0)
     .attr('y', '4em')
@@ -474,13 +478,13 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   let first_dot = d3.select('#d-0');
   first_dot
     .attr('r', 4)
-    .style('transition-delay', '1s')
+    .style('transition-delay', '0.7s')
     .style('fill', 'rgb(0,0,0)');
   //first label 2018
   let first_label = d3.select('#label-0');
   first_label
     .attr('r', 4)
-    .style('transition-delay', '1s')
+    .style('transition-delay', '0.7s')
     .style('opacity', .7)
     .style('font-family', 'Trade Bold');
   //first text item
@@ -518,8 +522,8 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     // rotate to next dot
     if (up_down == 'up') {
       //clear onboarding delay
-      first_label.style('transition-delay', '0s');
-      first_dot.style('transition-delay', '0s');
+      //first_label.style('transition-delay', '0s');
+      //first_dot.style('transition-delay', '0s');
 
       rotationAngle = 0 - degrees[index]; //counter-clockwise
       wheelAngle = 0 - 18; //counter-clockwise
@@ -559,7 +563,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
           for (i = 0; i < degrees.length && i !== index; i++) {
             d3.select('#d-' + i)
               .attr('r', dot_radius)
-              .style('transition-delay', '1s')
+              .style('transition-delay', '0.7s')
               .style('fill', 'rgb(255,255,255)');
           }
           // current dot is black
@@ -598,8 +602,8 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     // rotate to previous dot
     if (up_down == 'down') {
       //clear onboarding delay
-      first_label.style('transition-delay', '0s');
-      first_dot.style('transition-delay', '0s');
+      // first_label.style('transition-delay', '0s');
+      // first_dot.style('transition-delay', '0s');
 
       rotationAngle = degrees[index + 1];
       wheelAngle = 18;
@@ -682,37 +686,49 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
       .style('transform-origin', `${wheel_radius}px ${wheel_radius}px`)
       .style('transform', `translate3d(-${wheel_radius}px, 50px,0) rotate(${wheel_sumAngle}deg)`);
 
-    var new_title = dataArray[index].event;
-    console.log(new_title);
-
-    $('#btn_more').on('click', function () {
-      // $('#exampleModal1').modal({show:true});
-      $.ajax({
-        type: "GET",
-        url: `data/${switch_to_city}/data.json`,
-        dataType: 'json',
-        success: function (response) {
-          $.each(response, function (i, e) {
-            if (e.event == new_title) {
-              console.log(e.event);
-              // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
-              $("#exampleModal1").find('#more-main').text(e.more_text);
-              $("#exampleModal1").find('#notes').html(e.note);
-              $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
-              if (e.note == "") {
-                // $("hr").css("visibility", "hidden")
-              } else {
-                $("hr").css("visibility", "visible")
-              }
-            }
-          })
-        }
-      })
-    })
+    cityID = dataArray[index].id;
+    // console.log("dataArray[index]:", dataArray[index]);
   }
 
+  var cityID = 1;
+  console.log("cityid:", cityID);
+
   // get modal data
-  ////NEED UPDATE!
+  // More button
+  $('#btn_more').on('click', function () {
+    // $('#exampleModal1').modal({show:true});
+    $.ajax({
+      type: "GET",
+      url: `data/${switch_to_city}/data.json`,
+      dataType: 'json',
+      success: function (response) {
+        // $("#exampleModal1").find('#more-main').text(response.find(x => x.id === 1).more_text);
+        $.each(response, function (i, e) {
+          if (e.id == cityID) {
+            console.log(e.event);
+            // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
+            $("#exampleModal1").find('#more-main').html(e.more_text);
+            $("#exampleModal1").find('#notes').html(e.note);
+            if (!e.note) {
+              $("hr").css("visibility", "hidden");
+            } else {
+              $("hr").css("visibility", "visible");
+            }
+            // display URL in notes
+            $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
+            if (switch_to_city !== "Durham") {
+              var obj1 = document.getElementById("more_desc_extra");
+              obj1.remove();
+              //obj2.remove();
+            }
+          }
+        })
+      }
+    })
+  })
+
+  // get modal data
+  // About button
   $(document).ready(function () {
     $('#btn_about').on('click', function () {
       $.ajax({
@@ -724,8 +740,15 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
             console.log(e.head);
             $("#exampleModal2").find('#about-head').text(e.head);
             $("#exampleModal2").find('#about-body-1').text(e.body1);
-            $('#about-body-1').append(`<a href="${e.link} target="_blank">plans to mitigate and adapt to the effects of climate change.</a>`);
+            if (switch_to_city === "Durham") {
+              $('#about-body-1').append(`<a href="${e.link}" target="_blank">plans to mitigate and adapt to the effects of climate change.</a>`);
+            }
             $("#exampleModal2").find('#about-body-2').text(e.body2);
+            if (switch_to_city === "Newburyport") {
+              $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
+              
+              //$('#about-body-2').append().text(e.body2a);
+            }
             $("#exampleModal2").find('#about-body-3').text(e.body3);
           })
         }
@@ -784,7 +807,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
 
   // fire scrolling by url hash
   $(document).ready(function () {
-    var hashTag = location.hash.replace('#', '');
+    var hashTag = location.hash.replace('#/', '');
     dataArray.forEach(function (item) {
       if (item.spot_id == hashTag) {
         index = item.id - 1;
@@ -839,9 +862,9 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
   }
 
   if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 200), false);
+    document.addEventListener('DOMMouseScroll', throttle(scrollFunc, 475), false);
   }
-  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 200);
+  window.onmousewheel = document.onmousewheel = throttle(scrollFunc, 475);
 
   //disable scroll after clicking the button
   $('#exampleModal1').on('shown.bs.modal', function () {

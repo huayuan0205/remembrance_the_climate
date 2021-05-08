@@ -39,8 +39,23 @@
 				data-target="#exampleModal1">MORE</button>
 			<button type="button" class="btn" id="btn_about" data-toggle="modal"
 				data-target="#exampleModal2">ABOUT</button>
+			<!-- Dropdown list for button "Switch"-->
+			<button class="btn btn-secondary dropdown-toggle" id="btn_switch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				LOCALITY</button>
+			<div class="dropdown-menu" aria-labelledby="btn_switch">
+				<a href="/climatefutures/page/?city=Durham">
+					<button class="dropdown-item" type="button">Durham</button>
+				</a>
+				<a href="/climatefutures/page/?city=Essex">
+					<button class="dropdown-item" type="button">Essex</button>
+				</a>
+				<a href="/climatefutures/page/?city=Newburyport">
+					<button class="dropdown-item" type="button">Newburyport</button>
+				</a>
+			</div>
 		</div>
 	</div>
+	
 	<!-- Modal1 for button "More"-->
 	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
@@ -56,25 +71,19 @@
 						<div class="col"></div>
 						<div class="col-9">
 							<div class="more_desc">
-								<p class='about-body' id="more-main">
-									As temperatures rise due to climate change, we expect to see
-									increasing numbers of wildlife species that are typically located
-									in more southern regions. Sightings of rare birds, which include
-									the sandhill crane and wood stork, have become more and more common.
-									We are also seeing dwindling numbers of some of our historically
-									common native birds, as well as changes in the timing of migration
-									and breeding patterns in some species. The Mississippi kite,
-									a relative newcomer, was first observed nesting in Durham in 2018.
-								</p>
+								<p class='about-body' id="more-main"></p>
 							</div>
 							<br>
-							<a class='about-body'
+							<div id="more_desc_extra">
+								<a class='about-body' id="more_dlink"
 								href="https://www.ci.durham.nh.us/administration/responding-climate-change"
-								target="_blank">Learn more about how
-								Durham is addressing climate change here.</a>
-							<br><br>
-							<p class='about-body'>#seacoastremembranceproject</p>
-							<br>
+								target="_blank">Learn more about how Durham is addressing climate change here.
+								</a>
+								<br><br>
+								<p class='about-body' id="seacoast">#seacoastremembranceproject</p>
+								<br>
+							</div>
+							
 							<hr>
 							<p id="notes">
 								<!-- deliver dynamic content -->
@@ -86,6 +95,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- Modal2 for button "About"-->
 	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
@@ -104,9 +114,11 @@
 							<p id='about-head' class="about-head"></p>
 							<p id='about-body-1' class="about-body"></p>
 							<p id='about-body-2' class="about-body"></p>
-							<br><br>
+							<br>
 							<hr style="visibility:visible">
 							<p id='about-body-3' class="about-body">
+							<!-- colab url -->
+							<p id='about-body-4' class="about-body-right"><a href="https://camd.northeastern.edu/research-scholarship-creative-practice/co-laboratory-for-data-impact/" target="_blank">— Co-Lab for Data Impact</a></p>
 							</p>
 						</div>
 						<div class="col"></div>
