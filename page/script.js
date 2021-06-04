@@ -739,10 +739,12 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
           $.each(response, function (i, e) {
             console.log(e.head);
             $("#exampleModal2").find('#about-head').text(e.head);
+            // 1st paragraph
             $("#exampleModal2").find('#about-body-1').text(e.body1);
-            if (switch_to_city === "Durham") {
+            if ((switch_to_city === "Durham") || (switch_to_city === "Essex")) {
               $('#about-body-1').append(`<a href="${e.link}" target="_blank">plans to mitigate and adapt to the effects of climate change.</a>`);
             }
+            // 2nd paragraph
             $("#exampleModal2").find('#about-body-2').text(e.body2);
             if (switch_to_city === "Newburyport") {
               $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
