@@ -6,7 +6,7 @@
    "year": 2018,
    "mon_day": "JAN 4",
    "event": "ROADWAY UNDER WATER",
-   "spot": "Essex 2",
+   "spot": "ESSEX-2",
    "spot_id": 2,
    "desc": "Storm surge flooding closes Main Street.",
    "link": "",
@@ -14,13 +14,7 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  },
  {
    "id": 2,
@@ -29,7 +23,7 @@
    "year": 2025,
    "mon_day": "JUL 30",
    "event": "FLOOD RISK REDUCED",
-   "spot": "Essex 6",
+   "spot": "ESSEX-6",
    "spot_id": 6,
    "desc": "Apple Street culvert enlarged to prevent chronic climate related overflow.",
    "link": "",
@@ -37,13 +31,7 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  },
  {
    "id": 3,
@@ -52,7 +40,7 @@
    "year": 2034,
    "mon_day": "JUN 30",
    "event": "RELIEVING HIGHER TIDES",
-   "spot": "Essex 4",
+   "spot": "ESSEX-4",
    "spot_id": 4,
    "desc": "Ebben Creek culvert enlarged to accommodate tidal flow from sea-level rise.",
    "link": "",
@@ -60,13 +48,7 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  },
  {
    "id": 4,
@@ -75,7 +57,7 @@
    "year": 2057,
    "mon_day": "SEP 30",
    "event": "ROADWAY RAISED",
-   "spot": "Essex 3",
+   "spot": "ESSEX-3",
    "spot_id": 3,
    "desc": "Causeway elevated 5 feet to keep above continuing sea-level rise.",
    "link": "",
@@ -83,13 +65,7 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  },
  {
    "id": 5,
@@ -98,7 +74,7 @@
    "year": 2061,
    "mon_day": "AUG 29",
    "event": "SPECIES RELOCATES NORTHWARD",
-   "spot": "Essex 1",
+   "spot": "ESSEX-1",
    "spot_id": 1,
    "desc": "Last sighting in Essex of the American Bittern, at this spot.",
    "link": "",
@@ -106,13 +82,7 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  },
  {
    "id": 6,
@@ -121,7 +91,7 @@
    "year": 2074,
    "mon_day": "MAR 1",
    "event": "BRIDGE REPLACES ROAD",
-   "spot": "Essex 5",
+   "spot": "ESSEX-5",
    "spot_id": 5,
    "desc": "Bridge connecting Conomo Point to mainland first opened to traffic.",
    "link": "",
@@ -129,12 +99,6 @@
    "note": "",
    "note1": "",
    "note2": "",
-   "note3": "",
-   "FIELD16": "",
-   "FIELD17": "",
-   "FIELD18": "",
-   "FIELD19": "",
-   "FIELD20": "",
-   "FIELD21": ""
+   "note3": ""
  }
 ]

@@ -381,7 +381,7 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
     text.each(function () {
       if ($(this).prev("tspan").find("#wrap").length != 0) {
         console.log('hello');
-        $(this).attr("dy", "-3em");
+        $(this).attr("dy", "-3.15em");//distance between spot and event
       }
     })
   }
@@ -746,11 +746,14 @@ d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}
             }
             // 2nd paragraph
             $("#exampleModal2").find('#about-body-2').text(e.body2);
+            //Newburyport-clickable text
             if (switch_to_city === "Newburyport") {
               $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
-              
               //$('#about-body-2').append().text(e.body2a);
+            } else if (switch_to_city === "Rockport") {
+              $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
             }
+            //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
           })
         }
