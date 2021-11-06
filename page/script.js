@@ -3,7 +3,7 @@ var switch_to_city = getQueryVariable("city");
 
 // use the two lines below when selecting a new place
 // if the user is clicking one place ID - switch_to_city
-var switch_to_url = "https://web.northeastern.edu/climatefutures/page/" + "?city=" + switch_to_city;
+//var switch_to_url = "https://web.northeastern.edu/climatefutures/page/" + "?city=" + switch_to_city;
 //location.href = switch_to_url;
 
 function getQueryVariable(variable) {
@@ -69,7 +69,8 @@ function toRadians(angle) {
   return angle * (Math.PI / 180);
 }
 
-d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}/data.json`).then(function (json) {
+//d3.json(`https://web.northeastern.edu/climatefutures/page/data/${switch_to_city}/data.json`).then(function (json) {
+d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   // testing - use file url 'data/Essex/data.json'
 
   console.log(switch_to_city);
