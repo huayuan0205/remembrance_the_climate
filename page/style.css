@@ -176,6 +176,11 @@ body {
   min-height: 1em;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
 /* modal */
 .modal {
   overflow-y: auto;
