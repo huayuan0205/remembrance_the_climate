@@ -515,6 +515,15 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   console.log(old_url);
   // console.log(window.location.pathname);
 
+  // QR codes cache
+  const dealWithHashChange = () => {
+    window.location.reload();
+  }
+  window.addEventListener('hashchange', dealWithHashChange, true);
+  window.onbeforeunload = function(){
+    window.removeEventListener('hashchange',dealWithHashChange, true);
+  }
+
   function rotation_def(index, up_down, data) {
 
     let rotationAngle = 0;
