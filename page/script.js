@@ -766,8 +766,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             $("#exampleModal2").find('#about-body-3').text(e.body3);
             //customize for the Trustees 
             if (switch_to_city === "Trustees") {
-              $('#separating-line').css("visibility", "hidden")
-              $('#about-body-4').css("visibility", "hidden")
+              $('#separating-line').attr("style", "visibility: hidden");
+              $('#about-body-4').attr("style", "visibility: hidden");
             }
           })
         }
