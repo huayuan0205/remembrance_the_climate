@@ -739,11 +739,17 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
         success: function (response) {
           $.each(response, function (i, e) {
             console.log(e.head);
+            // page title
             $("#exampleModal2").find('#about-head').text(e.head);
             // 1st paragraph
             $("#exampleModal2").find('#about-body-1').text(e.body1);
+            //Durham-clickable text
             if ((switch_to_city === "Durham") || (switch_to_city === "Essex")) {
               $('#about-body-1').append(`<a href="${e.link}" target="_blank">plans to mitigate and adapt to the effects of climate change.</a>`);
+            }
+            //Trustees-clickable text
+            if (switch_to_city === "Trustees") {
+              $('#about-body-1').append(`<a href="${e.link}" target="_blank">The Trustees has responded</a> <span>${e.body1a}</span>`);
             }
             // 2nd paragraph
             $("#exampleModal2").find('#about-body-2').text(e.body2);
@@ -751,11 +757,18 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             if (switch_to_city === "Newburyport") {
               $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
               //$('#about-body-2').append().text(e.body2a);
-            } else if (switch_to_city === "Rockport") {
+            } 
+            //Rockport-clickable text
+            else if (switch_to_city === "Rockport") {
               $('#about-body-2').append(`<a href="${e.link}" target="_blank">planned projects to deal with them.</a> <span>${e.body2a}</span>`);
             }
             //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
+            //customize for the Trustees 
+            if (switch_to_city === "Trustees") {
+              $('#separating-line').css("visibility", "hidden")
+              $('#about-body-4').css("visibility", "hidden")
+            }
           })
         }
       })
