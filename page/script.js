@@ -513,9 +513,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   var wheel_sumAngle = 90;
   let old_url = window.location.pathname + "?city=" + switch_to_city;
   console.log(old_url);
-  // console.log(window.location.pathname);
 
-  // QR codes cache
+  // QR codes
   const dealWithHashChange = () => {
     window.location.reload();
   }
@@ -523,6 +522,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   window.onbeforeunload = function(){
     window.removeEventListener('hashchange',dealWithHashChange, true);
   }
+  // console.log(window.location.pathname);
 
   function rotation_def(index, up_down, data) {
 
@@ -774,10 +774,10 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
             //customize for the Trustees 
-            if (switch_to_city === "Trustees") {
-              $('#separating-line').attr("style", "visibility: hidden");
-              $('#about-body-4').attr("style", "visibility: hidden");
-            }
+            // if (switch_to_city === "Trustees") {
+            //   $('#separating-line').attr("style", "visibility: hidden");
+            //   $('#about-body-4').attr("style", "visibility: hidden");
+            // }
           })
         }
       })
