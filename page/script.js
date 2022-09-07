@@ -125,7 +125,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
 
   //console.log(count_year);
 
-  var avg_degree = 200 / count_year;
+  var avg_degree = 270 / count_year;
   var rotating_degrees = [];
   var degrees = [0];
   var year_sub = [0]
@@ -672,7 +672,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
           .attr('r', 4)
           .style('fill', 'rgb(0,0,0)');
         d3.select('#d-' + (index + 1))
-          .attr('r', 4)
+          .attr('r', dot_radius)
           .style('fill', 'rgb(255,255,255)');
       } else {
         //other dots keep original color and size
