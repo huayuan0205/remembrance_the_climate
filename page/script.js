@@ -186,12 +186,17 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   dots
     .attr('cx', (d, i) => {
       var prevData = dots.data()[i - 1];
+      var prevData2 = dots.data()[i - 2];
       var rotate_degree = avg_degree * (d.year - startYear);
+      //console.log(`prevData:${prevData[i]}`);
       if (rotate_degree <= 180) {
         if (i > 0) {
-          if (d.year == prevData['year']) { //two dots with the same year
+          if (d.year == prevData['year'] && d.year == prevData2['year']) { //three dots with the same year
+            //console.log(`same year:${prevData['year']}`);
+            return ((start_dot_originalX + 20) * Math.cos(toRadians(rotate_degree)));
+          } else if(d.year == prevData['year']){
             return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
-          } else {
+          }else {
             return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
           }
         } else {
@@ -199,7 +204,9 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
         }
       } else if (rotate_degree <= 270) {
         if (i > 0) {
-          if (d.year == prevData['year']) { //two dots with the same year
+          if (d.year == prevData['year'] && d.year == prevData2['year']) {
+            return (-1) * (start_dot_originalX + 20) * Math.cos(toRadians(rotate_degree - 180));
+          } else if (d.year == prevData['year']) { //two dots with the same year
             return (-1) * (start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree - 180));
           } else {
             return (-1) * start_dot_originalX * Math.cos(toRadians(rotate_degree - 180));
@@ -211,10 +218,13 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
     })
     .attr('cy', (d, i) => {
       var prevData = dots.data()[i - 1];
+      var prevData2 = dots.data()[i - 2];
       var rotate_degree = avg_degree * (d.year - startYear);
       if (rotate_degree <= 180) {
         if (i > 0) {
-          if (d.year == prevData['year']) {
+          if (d.year == prevData['year'] && d.year == prevData2['year']){
+            return (start_dot_originalX + 20) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+          } else if (d.year == prevData['year']) {
             return (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
           } else {
             return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
@@ -224,6 +234,9 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
         }
       } else if (rotate_degree <= 270) {
         if (i > 0) {
+          if (d.year == prevData['year'] && d.year == prevData2['year']){
+            return start_dot_originalY - (start_dot_originalX + 20) * Math.sin(toRadians(rotate_degree - 180));
+          }
           if (d.year == prevData['year']) {
             return start_dot_originalY - (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree - 180));
           } else {
@@ -750,6 +763,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             console.log(e.head);
             // page title
             $("#exampleModal2").find('#about-head').text(e.head);
+
             // 1st paragraph
             $("#exampleModal2").find('#about-body-1').text(e.body1);
             //Durham-clickable text
@@ -760,6 +774,21 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             if (switch_to_city === "Trustees") {
               $('#about-body-1').append(`<a href="${e.link}" target="_blank">The Trustees has responded</a> <span>${e.body1a}</span>`);
             }
+            //Salem-clickable text
+            if (switch_to_city === "Salem") {
+              $('#about-body-1').append(`
+                <a href="${e.link1}" target="_blank">City of Salem,</a> 
+                <a href="${e.link2}" target="_blank">Salem Maritime NHS,</a>
+                <span>${e.body1a}</span>
+                <a href="${e.link3}" target="_blank">Salem State University</a>
+                <span>${e.body1b}</span>
+              `);
+            }
+            //Saugus-clickable text
+            if (switch_to_city === "Saugus") {
+              $('#about-body-1').append(`<a href="${e.link}" target="_blank">Saugus Iron Works NHS</a> <span>${e.body1a}</span>`);
+            }
+
             // 2nd paragraph
             $("#exampleModal2").find('#about-body-2').text(e.body2);
             //Newburyport-clickable text
