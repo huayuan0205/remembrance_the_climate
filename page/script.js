@@ -802,6 +802,9 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             }
             //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
+            if ((switch_to_city === "Salem") || (switch_to_city === "Saugus") ) {
+              $('#about-body-3').append(`<a href="${e.link3a}" target="_blank">Remembrance of Climate Futures,</a> <span>${e.body3a}</span>`);
+            }
             //customize for the Trustees 
             // if (switch_to_city === "Trustees") {
             //   $('#separating-line').attr("style", "visibility: hidden");
