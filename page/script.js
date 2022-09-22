@@ -188,18 +188,24 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       var prevData = dots.data()[i - 1];
       var prevData2 = dots.data()[i - 2];
       var rotate_degree = avg_degree * (d.year - startYear);
-      //console.log(`prevData:${prevData[i]}`);
+      
       if (rotate_degree <= 180) {
-        if (i > 0) {
-          if (d.year == prevData['year'] && d.year == prevData2['year']) { //three dots with the same year
-            //console.log(`same year:${prevData['year']}`);
+        if (i > 1) {
+          if (d.year == prevData['year'] && d.year == prevData2['year']) {//three dots with the same year
+            console.log(`same year2:${prevData2['year']}`);
             return ((start_dot_originalX + 20) * Math.cos(toRadians(rotate_degree)));
-          } else if(d.year == prevData['year']){
+          } else if (d.year == prevData['year']){//two dots with the same year
             return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
-          }else {
+          } else {//others
             return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
           }
-        } else {
+        } else if (i>0) {//the 2nd dot
+          if (d.year == prevData['year']){//two dots with the same year
+            return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
+          } else {
+            return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
+          }
+        } else {//the 1st dot
           return (start_dot_originalX * Math.cos(toRadians(rotate_degree)));
         }
       } else if (rotate_degree <= 270) {
@@ -221,7 +227,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       var prevData2 = dots.data()[i - 2];
       var rotate_degree = avg_degree * (d.year - startYear);
       if (rotate_degree <= 180) {
-        if (i > 0) {
+        if (i > 1) {
           if (d.year == prevData['year'] && d.year == prevData2['year']){
             return (start_dot_originalX + 20) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
           } else if (d.year == prevData['year']) {
@@ -229,6 +235,12 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
           } else {
             return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
           }
+        } else if(i>0){
+            if (d.year == prevData['year']) {
+              return (start_dot_originalX + 10) * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+            } else {
+              return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
+            }
         } else {
           return start_dot_originalX * Math.sin(toRadians(rotate_degree)) + start_dot_originalY;
         }
