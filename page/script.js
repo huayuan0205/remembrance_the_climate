@@ -75,13 +75,12 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
 
   console.log(switch_to_city);
 
-  //update url in About page
-  if (switch_to_city === "Essex") {
-    //document.getElementById("btn_more").disabled = true;
-    document.getElementById("btn_more").remove();
+  //remove MORE button in Essex
+  //if (switch_to_city === "Essex") {
+    //document.getElementById("btn_more").remove();
     // $('#about_link')
     //   .attr('href', 'https://www.essexma.org/board-selectmen/pages/coastal-resilience-resources')
-  }
+  //}
 
   var dataArray = []; // This will be the resulting array
   for (var key in json) {
@@ -743,6 +742,18 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             console.log(e.event);
             // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
             $("#exampleModal1").find('#more-main').html(e.more_text);
+             //Arlington-clickable text
+             if (switch_to_city === "Arlington") {
+              $('#more-main').append(`
+                <a href="${e.more_link1}" target="_blank">Mothers Out Front</a> 
+                <span>${e.more_text1}</span>
+                <a href="${e.more_link2}" target="_blank">ACE Testimonials</a>
+                <span>${e.more_text2}</span>
+              `);
+            }
+
+
+            //notes
             $("#exampleModal1").find('#notes').html(e.note);
             if (!e.note) {
               $("hr").css("visibility", "hidden");
@@ -752,9 +763,12 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             // display URL in notes
             $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
             if (switch_to_city !== "Durham") {
-              var obj1 = document.getElementById("more_desc_extra");
+              var obj1 = document.getElementById("more_desc_extra_durham");
               obj1.remove();
-              //obj2.remove();
+            }
+            if (switch_to_city !== "Arlington") {
+              var obj1 = document.getElementById("more_desc_extra_arlington");
+              obj1.remove();
             }
           }
         })
@@ -775,7 +789,6 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             console.log(e.head);
             // page title
             $("#exampleModal2").find('#about-head').text(e.head);
-
             // 1st paragraph
             $("#exampleModal2").find('#about-body-1').text(e.body1);
             //Durham-clickable text
@@ -814,9 +827,9 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             }
             //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
-            if ((switch_to_city === "Salem") || (switch_to_city === "Saugus") ) {
+            //if ((switch_to_city === "Salem") || (switch_to_city === "Saugus")||(switch_to_city === "Essex") ) {
               $('#about-body-3').append(`<a href="${e.link3a}" target="_blank">Remembrance of Climate Futures,</a> <span>${e.body3a}</span>`);
-            }
+            //}
             //customize for the Trustees 
             // if (switch_to_city === "Trustees") {
             //   $('#separating-line').attr("style", "visibility: hidden");
