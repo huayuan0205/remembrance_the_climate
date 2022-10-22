@@ -60,7 +60,7 @@ html {
 
 @media screen and (max-width: 505px) {
   body {
-    background-color: green;
+    /* background-color: green; */
   }
   .mobile .container {
     overflow-x: hidden !important;
@@ -105,7 +105,7 @@ html {
 
 @media screen and (max-width: 412px) {
   body {
-    background-color: purple;
+    /* background-color: purple; */
   }
 
   .mobile .canvas {
@@ -136,7 +136,7 @@ html {
     width: 200px;
   }
   .mobile #text-desc {
-    width: 330px;
+    width: 300px;
     font-size: 1.4em;
   }   
   .mobile .label-text {
@@ -146,7 +146,7 @@ html {
 
 @media screen and (max-width: 375px) {
   body {
-    background-color:blue;
+    /* background-color:blue; */
   }
 
   .mobile .canvas {
@@ -177,7 +177,7 @@ html {
     width: 200px;
   }
   .mobile #text-desc {
-    width: 330px;
+    width: 300px;
     font-size: 1.3em;
   }   
   .mobile .label-text {
