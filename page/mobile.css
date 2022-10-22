@@ -60,7 +60,7 @@ html {
 
 @media screen and (max-width: 505px) {
   body {
-    /* background-color: green; */
+    background-color: green;
   }
   .mobile .container {
     overflow-x: hidden !important;
@@ -95,7 +95,7 @@ html {
     font-size: 1.6em;
   }
   .mobile #text-desc tspan {
-    width: 300px;
+    width: 330px;
     font-size: 1.3em;
   }   
   .mobile .label-text {
@@ -105,7 +105,7 @@ html {
 
 @media screen and (max-width: 412px) {
   body {
-    /* background-color: purple; */
+    background-color: purple;
   }
 
   .mobile .canvas {
@@ -136,7 +136,8 @@ html {
     width: 200px;
   }
   .mobile #text-desc {
-  font-size: 1.4em;
+    width: 330px;
+    font-size: 1.4em;
   }   
   .mobile .label-text {
     font-size: 1.8em;
@@ -145,7 +146,7 @@ html {
 
 @media screen and (max-width: 375px) {
   body {
-    /* background-color:blue; */
+    background-color:blue;
   }
 
   .mobile .canvas {
@@ -176,6 +177,7 @@ html {
     width: 200px;
   }
   .mobile #text-desc {
+    width: 330px;
     font-size: 1.3em;
   }   
   .mobile .label-text {
