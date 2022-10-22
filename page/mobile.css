@@ -152,7 +152,7 @@ html {
   .mobile .canvas {
     /* width: 150vw; */
     height: 180vh;
-    transform: scale(0.7);
+    transform: scale(0.6);
     transform-origin: left top;
     position: fixed;
   }
