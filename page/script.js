@@ -742,15 +742,20 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             console.log(e.event);
             // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
             $("#exampleModal1").find('#more-main').html(e.more_text);
-             //Arlington-clickable text
-             if (switch_to_city === "Arlington") {
+            //Arlington-clickable text
+            if (switch_to_city === "Arlington") {
               $('#more-main').append(`
-                <a href="${e.more_link1}" target="_blank">Mothers Out Front</a> 
-                <span>${e.more_text1}</span>
-                <a href="${e.more_link2}" target="_blank">ACE Testimonials</a>
-                <span>${e.more_text2}</span>
-              `);
+                <a href="${e.link}" target="_blank">${e.link}</a>
+                <span>${e.more_text2}</span>`);
             }
+            // if (switch_to_city === "Arlington") {
+            //   $('#more-main').append(`
+            //     <a href="${e.more_link1}" target="_blank">Mothers Out Front</a> 
+            //     <span>${e.more_text1}</span>
+            //     <a href="${e.more_link2}" target="_blank">ACE Testimonials</a>
+            //     <span>${e.more_text2}</span>
+            //   `);
+            // }
 
 
             //notes
@@ -766,10 +771,10 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
               var obj1 = document.getElementById("more_desc_extra_durham");
               obj1.remove();
             }
-            if (switch_to_city !== "Arlington") {
-              var obj1 = document.getElementById("more_desc_extra_arlington");
-              obj1.remove();
-            }
+            // if (switch_to_city !== "Arlington") {
+            //   var obj1 = document.getElementById("more_desc_extra_arlington");
+            //   obj1.remove();
+            // }
           }
         })
       }
@@ -812,6 +817,10 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             //Saugus-clickable text
             if (switch_to_city === "Saugus") {
               $('#about-body-1').append(`<a href="${e.link}" target="_blank">Saugus Iron Works NHS</a> <span>${e.body1a}</span>`);
+            }
+            //Arlington-clickable text
+            if (switch_to_city === "Arlington") {
+              $('#about-body-1').append(`<a href="${e.link}" target="_blank">Town of Arlington</a> <span>${e.body1a}</span>`);
             }
 
             // 2nd paragraph
