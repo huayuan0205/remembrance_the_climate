@@ -736,31 +736,27 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       url: `data/${switch_to_city}/data.json`,
       dataType: 'json',
       success: function (response) {
-        // $("#exampleModal1").find('#more-main').text(response.find(x => x.id === 1).more_text);
         $.each(response, function (i, e) {
           if (e.id == cityID) {
             console.log(e.event);
             // var url = "<a target='_blank' href='" + e.url + "' >" + e.url + "</a>";
             $("#exampleModal1").find('#more-main').html(e.more_text);
+            //Durham-clickable text
+            if (switch_to_city === "Durham") {
+              $('#more-main').append(`
+                <br><br>
+                <a href="https://www.ci.durham.nh.us/administration/responding-climate-change"
+									target="_blank">Learn more about how Durham is addressing climate change here.</a>
+								<br><br>
+								<p class='about-body' id="seacoast">#seacoastremembranceproject</p>`);
+            }
             //Arlington-clickable text
             if (switch_to_city === "Arlington") {
-              // dataArray.forEach(d)
-              //   if (d.spot_id === 9){
-              //     console.log("this is arlington-9");
-              //   }
               $('#more-main').append(`
               <a href="${e.link}" target="_blank">${e.link}</a>
               <span>${e.more_text2}</span>`);
             }
           }
-            // if (switch_to_city === "Arlington") {
-            //   $('#more-main').append(`
-            //     <a href="${e.more_link1}" target="_blank">Mothers Out Front</a> 
-            //     <span>${e.more_text1}</span>
-            //     <a href="${e.more_link2}" target="_blank">ACE Testimonials</a>
-            //     <span>${e.more_text2}</span>
-            //   `);
-            // }
 
             //notes
             $("#exampleModal1").find('#notes').html(e.note);
@@ -771,12 +767,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             }
             // display URL in notes
             $('#notes').html($('#notes').html().replace(/((http:|https:)[^\s]+[\w])/g, '<a href="$1" target="_blank">$1</a>'));
-            if (switch_to_city !== "Durham") {
-              var obj1 = document.getElementById("more_desc_extra_durham");
-              obj1.remove();
-            }
-            // if (switch_to_city !== "Arlington") {
-            //   var obj1 = document.getElementById("more_desc_extra_arlington");
+            var obj1 = document.getElementById("more_desc_extra_durham");
+            // if (switch_to_city !== "Durham") {
             //   obj1.remove();
             // }
           
