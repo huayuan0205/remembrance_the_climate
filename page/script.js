@@ -744,10 +744,15 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             $("#exampleModal1").find('#more-main').html(e.more_text);
             //Arlington-clickable text
             if (switch_to_city === "Arlington") {
+              // dataArray.forEach(d)
+              //   if (d.spot_id === 9){
+              //     console.log("this is arlington-9");
+              //   }
               $('#more-main').append(`
-                <a href="${e.link}" target="_blank">${e.link}</a>
-                <span>${e.more_text2}</span>`);
+              <a href="${e.link}" target="_blank">${e.link}</a>
+              <span>${e.more_text2}</span>`);
             }
+          }
             // if (switch_to_city === "Arlington") {
             //   $('#more-main').append(`
             //     <a href="${e.more_link1}" target="_blank">Mothers Out Front</a> 
@@ -756,7 +761,6 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             //     <span>${e.more_text2}</span>
             //   `);
             // }
-
 
             //notes
             $("#exampleModal1").find('#notes').html(e.note);
@@ -775,7 +779,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             //   var obj1 = document.getElementById("more_desc_extra_arlington");
             //   obj1.remove();
             // }
-          }
+          
         })
       }
     })
@@ -820,7 +824,12 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             }
             //Arlington-clickable text
             if (switch_to_city === "Arlington") {
-              $('#about-body-1').append(`<a href="${e.link}" target="_blank">Town of Arlington</a> <span>${e.body1a}</span>`);
+              $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">Town of Arlington</a> 
+                <span>${e.body1a}</span>
+                <a href="${e.link1a}" target="_blank">Arlington Commission for Arts & Culture</a> 
+                <span>${e.body1b}</span>
+                `);
             }
 
             // 2nd paragraph
@@ -836,9 +845,18 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
             }
             //text below the separated line
             $("#exampleModal2").find('#about-body-3').text(e.body3);
-            //if ((switch_to_city === "Salem") || (switch_to_city === "Saugus")||(switch_to_city === "Essex") ) {
+            if (switch_to_city === "Arlington" ) {
+              $('#about-body-3').append(`
+                <a href="${e.link3a}" target="_blank">twelve Arlington High School interns</a> 
+                <span>${e.body3a}</span>
+                <a href="${e.link3b}" target="_blank">Remembrance of Climate Futures</a> 
+                <span>${e.body3b}</span>
+                `);
+            }else{
               $('#about-body-3').append(`<a href="${e.link3a}" target="_blank">Remembrance of Climate Futures,</a> <span>${e.body3a}</span>`);
-            //}
+            }
+            
+            
             //customize for the Trustees 
             // if (switch_to_city === "Trustees") {
             //   $('#separating-line').attr("style", "visibility: hidden");
