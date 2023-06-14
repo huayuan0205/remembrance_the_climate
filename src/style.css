@@ -1,0 +1,422 @@
+html, body, .container, h1, h2, h3, div, a, p {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  transition: color .2s ease;
+}
+
+h1 {
+  font-size: 34px;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: white;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #fff;
+  line-height: 1.4285em;
+  overscroll-behavior: contain;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.text-item-g {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.text-item-g2 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+.first_content1 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.first_content2 {
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+
+.text-item-top {
+  justify-content: flex-start;
+}
+
+.tspan-top {
+  display: inline-block
+}
+
+#text-id {
+  font-family: "Caslon Regular";
+  text-transform: lowercase;
+  font-size: 20px;
+  margin-bottom: 0;
+  fill: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+#text-title {
+  font-family: "Caslon Regular";
+  text-transform: lowercase;
+  font-size: 34px;
+  fill: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-top: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+#text-date {
+  font-family: "Trade";
+  font-size: 20px;
+  fill: black;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+}
+
+#text-desc {
+  font-family: "Trade";
+  fill: #fff;
+  font-size: 20px;
+  font-weight: 100;
+  /* line-height: 1.2rem; */
+  -webkit-font-smoothing: antialiased;
+}
+
+.backgear-img {
+  position: fixed;
+  opacity: .85;
+  filter: blur(4px);
+  z-index: -5999;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: visible;
+  overflow-x: none;
+  margin: 0;
+  padding: 0;
+  /* overflow: scroll; */
+  /* transition: tranform 1s ease 0s; */
+  /* position: fixed; */
+  /* overflow:auto; */
+  /* transform-origin: center,center; */
+}
+
+/* button */
+#icon-div {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+#icon-div button {
+  font-family: "Trade";
+  /* font-weight: 700; */
+  vertical-align: middle;
+  border-radius: 2px;
+  /* margin: 0 0 0 0; */
+  border: none;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, .1);
+  transition-duration: 0.4s;
+}
+
+#icon-div :hover {
+  background-color: rgba(255, 255, 255, .5);
+  color: black;
+}
+
+.ui-mini-button {
+  background: transparent none;
+  font-size: 8pt;
+  color: #fff;
+  text-shadow: none !important;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  min-height: 1em;
+}
+
+.btn {
+  background: transparent none;
+  padding-top: .4em;
+  padding-bottom: .4em;
+  padding-left: .4em;
+  padding-right: .4em;
+  font-size: 8pt;
+  color: #fff;
+  text-shadow: none !important;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  min-height: 1em;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+/* modal */
+.modal {
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  position: fixed;
+  margin: 2% 1.75rem 2% 1.75rem;
+  max-width: 100%;
+  min-height: 90%;
+  height: 100%;
+  vertical-align: middle;
+  overscroll-behavior: scroll;
+  background-color: rgba(116, 116, 116, .1);
+}
+
+#dialog1 {
+  position: fixed;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#dialog2 {
+  position: fixed;
+  top: 1%;
+  bottom: 0.5%;
+  margin: 1%;
+}
+
+.modal-img {
+  position: fixed;
+  filter: blur(4px);
+  width: 650px;
+  height: 650px;
+  opacity: .85;
+  top: .18vh;
+  left: -50vw;
+  z-index: 0;
+  -webkit-filter: blur(4px) brightness(60%);
+  filter: blur(4px) brightness(60%);
+}
+
+.modal-header {
+  border-bottom: none;
+  height: 10%;
+}
+
+.close {
+  /* width: 10px;
+	height:10px; */
+  color: white;
+  right: 10px;
+  z-index: 2;
+}
+
+.close:focus, .close:hover {
+  color: rgb(255, 255, 255);
+}
+
+.modal-content {
+  height: 100%;
+  /* margin: 1% 1% 1% 1%; */
+  background-color: rgba(0, 0, 0);
+  color: white;
+}
+
+#content1 {
+  margin: 0;
+  margin-bottom: 1%;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+#content2 {
+  background-color: rgba(0, 0, 0);
+  z-index: 1;
+}
+
+.more_desc {
+  column-count: 3;
+}
+
+.modal-content p {
+  margin-bottom: 25px;
+  line-height: 1.5rem;
+}
+
+.modal-content .about-head {
+  font-family: "Caslon Regular";
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.modal-content .about-body {
+  font-family: "Trade";
+  font-size: 16px;
+  color: white !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+#about-body-3 {
+  margin-bottom: 0;
+  padding-bottom: 5;
+}
+
+.modal-content .about-body-right {
+  margin-top: 0;
+  padding-top: 0;
+  font-family: "Trade";
+  font-size: 16px;
+  text-align: right;
+  color: white !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.modal-content #notes {
+  font-family: "Trade";
+  font-size: 12px;
+  line-height: 1.5em;
+  color: white !important;
+  -webkit-font-smoothing: antialiased;
+  /* Careful, this breaks the word wherever it is without a hyphen */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  /* Adds a hyphen where the word breaks */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+a {
+  color: white;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: rgba(255, 255, 255, .5);
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+  text-decoration: underline;
+}
+
+/* #more_dlink {
+  visibility: hidden;
+}
+
+#seacoast {
+  visibility: hidden;
+} */
+
+
+hr {
+  visibility: hidden;
+  border-top: 2px solid white;
+  margin-top: 10;
+  padding: 5px;
+}
+
+.canvas svg {
+  width: 100%;
+  height: 100%;
+  /* filter: brightness(0.75); */
+}
+
+svg .g-wheel {
+  -webkit-filter: brightness(10%);
+  filter: brightness(100%);
+  opacity: 0.8;
+}
+
+.label-text {
+  /* text-anchor: end; */
+  font-size: 20px;
+  font-family: "Trade";
+  color: #000000;
+  opacity: 0.3;
+}
+
+.item-head {
+  margin-top: 33px;
+  height: 416px;
+}
+
+#wheel-img {
+  /* position:fixed; */
+  width: 960px;
+  height: 960px;
+  transition: all 1s ease 0s;
+  /* transform-origin:0,0; */
+  opacity: .8;
+  z-index: -1999;
+  /* filter: brightness(0.75); */
+}
+
+#timeline {
+  transform-origin: 0px 0px;
+  filter: brightness(1);
+  opacity: 1;
+}
+
+.textbox {
+  transform-origin: 0ch 60vh;
+  position: absolute;
+}
+
+.wheel {
+  stroke: black;
+  stroke-width: 2pt;
+  fill: beige;
+}
+
+#info-box {
+  padding: 50px;
+  position: fixed;
+  background: #fafafa;
+  box-shadow: 3px 3px 3px silver;
+  top: 20px;
+  right: 20px;
+}
+
+/*
+@media (max-width: 414px) {
+	#wheel-img{
+
+		width: 400px;
+		height: 400px;
+		transition: all 1s ease 0s;
+
+		opacity: .8;
+		z-index: -1999;
+
+	}
+}  */

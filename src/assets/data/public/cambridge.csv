@@ -1,0 +1,13 @@
+id,date,event,spot,spot_id,description,link,linkText,coord_lat,coord_lng
+1,7/10/2028,Relief from Heat Wave,Rindge Avenue Climate Resilience Trail,RIN-2,The DCR McCrehan Pool was kept open 24 hours a day during a 10 day heat wave.,,,42.12,-71.02
+2,5/1/2030,Flooding,Rindge Avenue Climate Resilience Trail,RIN-3,Two feet of flooding came to Clifton Street.,,,42.12,-71.02
+3,5/21/2033,Homes Elevated,Rindge Avenue Climate Resilience Trail,RIN-5,Homes on Clifton Street were raised to protect them from growing flood risk.,,,42.12,-71.02
+4,4/12/2033,Reliable Electricity,Rindge Avenue Climate Resilience Trail,RIN-4,Fresh Pond Apartments and Rindge Tower were connected to a microgrid to provide reliable electricity.,,,42.12,-71.02
+5,5/8/2023,Renewable Energy,Rindge Avenue Climate Resilience Trail,RIN-1,Solar power canopies were installed in the parking lots at Fresh Pond Apartments and Rindge Tower to reduce the urban heat island and charge electric vehicles.,,,42.12,-71.02
+6,10/1/2035,Subway Flood Risks,Rindge Avenue Climate Resilience Trail,RIN-6,The MBTA floodproofed Alewife Station anticipating the growing threat of sea level rise and storm surge flooding.,,,42.12,-71.02
+7,8/23/2024,School Elevated,Vassal Lane Climate Resilience Trail,VAS-2,The reconstructed Tobin School was elevated 3 feet anticipating higher flood water.,,,42.12,-71.02
+8,6/2/2070,Flooding Reaches Vassal,Vassal Lane Climate Resilience Trail,VAS-6,Salt water flooding from a coastal storm first reached Vassal Lane.,,,42.12,-71.02
+9,9/10/2024,Flood Water Storage,Vassal Lane Climate Resilience Trail,VAS-3,A massive underground stormwater storage tank was installed when the Tobin School was reconstructed.,,,42.12,-71.02
+10,8/5/2030,Heat Wave,Vassal Lane Climate Resilience Trail,VAS-4,A 12-day heat wave hung over the city with humidity levels making the heat feel like 102 degrees Fahrenheit.,,,42.12,-71.02
+11,5/7/2020,Trees Provide Relief,Vassal Lane Climate Resilience Trail,VAS-1,Vassal Lane was turned into a cool corridor when trees planted grew to shade the street.,,,42.12,-71.02
+12,10/9/2040,Road Reduction,Vassal Lane Climate Resilience Trail,VAS-5,Car ownership decreased enough to allow the residential streets to be slimmed down to reduce pavement and create more green space.,,,42.12,-71.02
