@@ -346,7 +346,6 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
     //.style('transform-origin', '20px 0px')
     //.style('transform',`translate(100,${start_dot_originalY})`)
     .attr('class', 'text-item-bottom')
-
     .attr('id', (d, i) => {
       return `text-item-bottom-${i}`
     })
@@ -372,8 +371,6 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
     .attr('x', 0)
     .attr('dy', '-1.55em')
     .call(reposition)
-
-  // var spot_id = spot.append("")
 
   var monday = text_bottom.append("tspan")
     .attr('class', 'tspan-bottom')
@@ -821,6 +818,21 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
                 <span>${e.body1b}</span>
                 `);
             }
+            //Lynn-clickable text
+            if (switch_to_city === "Lynn") {
+              $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">City of Lynn</a> 
+                <span>${e.body1a}</span>
+                `);
+            }
+            //Ipswich-clickable text
+            if (switch_to_city === "Ipswich") {
+              $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">Town of Ipswich</a> 
+                <span>${e.body1a}</span>
+                `);
+            }
+            
 
             // 2nd paragraph
             $("#exampleModal2").find('#about-body-2').text(e.body2);
