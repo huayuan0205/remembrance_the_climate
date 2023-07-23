@@ -1,0 +1,7 @@
+id,date,year,mon_day,spot,spot_id,event,desc,link,more_text,note,note1,note2,note3
+1,,2018,NOV 16,BEVERLY-4,4,[EVENT],[DESC],,,,,,
+2,,2021,SEP 17,BEVERLY-5,5,[EVENT],[DESC],,,,,,
+3,,2021,November,BEVERLY-3,3,[EVENT],[DESC],,,,,,
+4,,2022,DEC 23,BEVERLY-6,6,[EVENT],[DESC],,,,,,
+5,,2063,[DATE],BEVERLY-2,2,[EVENT],[DESC],,,,,,
+6,,2070,APR 13,BEVERLY-1,1,[EVENT],[DESC],,,,,,
