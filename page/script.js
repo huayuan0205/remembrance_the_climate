@@ -832,6 +832,14 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
                 <span>${e.body1a}</span>
                 `);
             }
+
+            //Sailsbury-clickable text
+            if (switch_to_city === "Salisbury") {
+              $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">Town of Salisbury</a> 
+                <span>${e.body1a}</span>
+                `);
+            }
             
 
             // 2nd paragraph
