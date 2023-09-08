@@ -840,6 +840,14 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
                 <span>${e.body1a}</span>
                 `);
             }
+
+            //Sailsbury-clickable text
+            if (switch_to_city === "Beverly") {
+              $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">City of Beverly</a>
+                <span>${e.body1a}</span>
+            `);
+            }
             
 
             // 2nd paragraph
