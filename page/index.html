@@ -1,0 +1,222 @@
+<!doctype html>
+<html style="height: 100%;">
+
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-196921545-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-196921545-1');
+	</script> -->
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RE432N9TQ9"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-RE432N9TQ9');
+	</script>
+
+	<!-- Google Tag Manager -->
+	<script>
+		(function (w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({
+				'gtm.start': new Date().getTime(),
+				event: 'gtm.js'
+			});
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != 'dataLayer' ? '&l=' + l : '';
+			j.async = true;
+			j.src =
+				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-WKQGZX8');
+	</script>
+	<!-- End Google Tag Manager -->
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width">
+
+	<script src="src/d3.v5.min.js"></script>
+	<!-- <script type="text/javascript" src="data.json"></script> -->
+	<link href="src/bootstrap.min.css" rel='stylesheet'>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	<script src="src/jquery.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+	<script src="src/popper.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
+	<script src="src/bootstrap.min.js"></script>
+
+	<link href='style.css' rel='stylesheet'>
+	<link href='mobile.css' rel='stylesheet'>
+	<link href="font.css" rel="stylesheet" />
+	<title>Remembrance of a Climate Futures US</title>
+</head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKQGZX8" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<!-- background and button -->
+	<div class='container' style="overflow: auto;">
+		<div class='canvas' id='scroll' onchange="">
+			<!-- all the visual elements of wheel are put in here -->
+		</div>
+		<div>
+			<img src="./img/alluminium_bg.png" alt="" id="backgear" class="backgear-img"
+				style="height: 3318.18px; width: 3318.18px; left: -1659.0px; top: -1247.09px;">
+		</div>
+		<div id='icon-div'>
+			<button type="button" class="btn" id="btn_more" data-toggle="modal"
+				data-target="#exampleModal1">MORE</button>
+			<button type="button" class="btn" id="btn_about" data-toggle="modal"
+				data-target="#exampleModal2">ABOUT</button>
+			<!-- Dropdown list for button "LOCALITY"-->
+			<button class="btn btn-secondary dropdown-toggle" id="btn_switch" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
+				LOCALITY</button>
+			<div class="dropdown-menu" aria-labelledby="btn_switch">
+				<a href="/page/?city=Durham">
+					<button class="dropdown-item" type="button">Durham</button>
+				</a>
+				<a href="/page/?city=Essex">
+					<!-- <a href="/climatefutures/page/?city=Essex"></a> -->
+					<button class="dropdown-item" type="button">Essex</button>
+				</a>
+				<a href="/page/?city=Newburyport">
+					<button class="dropdown-item" type="button">Newburyport</button>
+				</a>
+				<a href="/page/?city=Rockport">
+					<button class="dropdown-item" type="button">Rockport</button>
+				</a>
+				<a href="/page/?city=Arlington">
+					<!-- <a href="#"> -->
+					<button class="dropdown-item" type="button">Arlington</button>
+					<!-- <button class="dropdown-item" type="button" disabled>Arlington</button> -->
+				</a>
+				<a href="/page/?city=Trustees">
+					<!-- <a href="#"> -->
+					<button class="dropdown-item" type="button">Trustees</button>
+				</a>
+				<a href="/page/?city=Salem">
+					<button class="dropdown-item" type="button">Salem</button>
+				</a>
+				<a href="/page/?city=Saugus">
+					<button class="dropdown-item" type="button">Saugus</button>
+				</a>
+				<a href="/page/?city=Ipswich">
+					<button class="dropdown-item" type="button">Ipswich</button>
+				</a>
+				<a href="/page/?city=Salisbury">
+					<button class="dropdown-item" type="button">Salisbury</button>
+				</a>
+				<a href="/page/?city=Lynn">
+					<button class="dropdown-item" type="button">Lynn</button>
+				</a>
+				<a href="/page/?city=Beverly">
+					<button class="dropdown-item" type="button">Beverly</button>
+				</a>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal1 for button "More"-->
+	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" id="dialog1">
+			<div class="modal-content" id="content1">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col"></div>
+						<div class="col-9">
+							<div class="more_desc">
+								<p class='about-body' id="more-main"></p>
+							</div>
+							<br>
+							<div id="more_desc_extra_durham">
+								<a class='about-body'
+									href="https://www.ci.durham.nh.us/administration/responding-climate-change"
+									target="_blank">Learn more about how Durham is addressing climate change here.</a>
+								<br><br>
+								<p class='about-body' id="seacoast">#seacoastremembranceproject</p>
+								<br>
+							</div>
+							<hr>
+							<p id="notes">
+								<!-- deliver dynamic content -->
+							</p>
+						</div>
+						<div class="col"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal2 for button "About"-->
+	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" id="dialog2">
+			<div class="modal-content" id="content2">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<img src="img/wheel-blur.png" class="modal-img" alt="" id="backgear">
+						<div class="col"></div>
+						<div class="col-8">
+							<p id='about-head' class="about-head"></p>
+							<p id='about-body-1' class="about-body"></p>
+							<p id='about-body-2' class="about-body"></p>
+							<br>
+							<!-- separating line -->
+							<hr id="separating-line" style="visibility:visible">
+							<p id='about-body-3' class="about-body">
+								<!-- colab url -->
+								<p id='about-body-4' class="about-body-right"><a
+										href="https://camd.northeastern.edu/research-scholarship-creative-practice/co-laboratory-for-data-impact/"
+										target="_blank">— Co-Lab for Data Impact</a></p>
+							</p>
+						</div>
+						<div class="col"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+	<!-- <script src='./lib/d3/d3.min.js'></script> -->
+	<!-- <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script> -->
+	<script src="lodash.min.js"></script>
+	<script src='mobile.js?n=1' type='text/javascript'></script>
+	<script src='script.js?n=1' type='text/javascript'></script>
+	<!-- <script src='../data/data-sample.json'></script> -->
+</body>
+
+</html>
