@@ -1,40 +1,23 @@
-html, body, section, h1, h2, h3, div, a, p {
-    margin: 0;
-    padding: 0;
+@import "variables";
+
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.wheel-img {
-    transition: transform 1s ease 0s;
-    transform-origin: $wheel_radius $wheel_radius;
-    transform: translate3d(-$wheel_radius, 50px,0);
+#root {
+  background: left / cover no-repeat url("/img/alluminium_bg.png"),
+  white;
+}
+
+#wheel-img {
+  transition: transform 1s ease 0s;
+  transform-origin: $wheel-radius $wheel-radius;
+  transform: -($wheel-radius) 50px, 0;
 }
 
 #timeline {
-//    .style('transition', 'all' + transitionTimeFaster)
-
-//  START POSITION
-//.style('transform-origin', `0 ${start_dot_originalY}px`) //(0,530)
-//.style('transform', `translate3d(0,0,0) rotate(-90deg)`)
-//.style('transform-origin', `0 ${start_dot_originalY}px`)
-//.style('transform', `translate3d(0,0,0)`);
-}
-
-.dot {
-//    .style('transition', 'all 800ms ease 0s, opacity 1s ease 0s')
-//.style('transition-delay', '0.6s')
-//.style('fill', 'rgb(255,255,255)');
-}
-
-.label-text {
-  //.style('text-anchor', 'end')
-  //.style('transition', 'all' + transitionTimeNormal)
-  //.style('transition', 'all 800ms ease 0s, opacity 1s ease 0s')
-  //.style('transition-delay', '0.6s')
-}
-
-.text-item-g {
-//  .style('transition', 'transform 1s ease 0s, opacity .5s ease 0s')
-//.style('transform-origin', '0px 0px')
-//.style('transform', `translate3d(20px, ${text_item_height}px,0) rotate(90deg)`)
-//.style('opacity', 0)
+  transition: all 500ms ease 0s;
+  transform-origin: 0 $start-dot-initial-y;
+  transform: translate3d(0,0,0) rotate(-90deg);
 }

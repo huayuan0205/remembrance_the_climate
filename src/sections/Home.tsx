@@ -1,12 +1,9 @@
-import citiesDirectory from '../data/citiesDirectory.ts'
-import ModalNav from "../components/ModalNav.tsx";
-import "./home.scss";
+import Timeline from "./Timeline.tsx";
 function Home() {
     return (
         <>
             <section className="rtc-home">
-                <p>something</p>
-                <ModalNav cities={citiesDirectory} />
+                <Timeline city='Durham' />
             </section>
         </>
     )

@@ -1,28 +1,58 @@
-function ModalNav({ cities }: { cities: string[] }) {
+import {useState} from 'react';
+import {Button, Dropdown, Nav, Navbar} from 'react-bootstrap';
+import MoreModal from "./MoreModal.tsx";
+import AboutModal from "./AboutModal.tsx";
+
+function ModalNav({cities}: { cities: string[] }) {
+    const [showMore, setShowMore] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
+    const handleMoreModal = () => setShowMore(true);
+    const closeMoreModal = () => setShowMore(false);
+    const handleAboutModal = () => setShowAbout(true);
+    const closeAboutModal = () => setShowAbout(false);
+
     return (
-        <div>
-            <button>MORE</button>
+        <>
+            <Navbar fixed="top">
+                <Navbar.Toggle />
+                <Nav>
+                    <Nav.Item>
+                        <Button variant="light" onClick={handleMoreModal}>
+                            MORE
+                        </Button>
+                    </Nav.Item>
 
-            <button>ABOUT</button>
+                    <Nav.Item>
+                        <Button variant="light" onClick={handleAboutModal}>
+                            ABOUT
+                        </Button>
+                    </Nav.Item>
 
-            <button className="btn btn-secondary dropdown-toggle" id="btn_switch" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                LOCALITY
-            </button>
+                    <Nav.Item>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="light">
+                                LOCALITY
+                            </Dropdown.Toggle>
 
-            <div className="dropdown-menu" aria-labelledby="btn_switch">
-                {
-                    <ul>
-                        {
-                            cities.map((c) => (
-                                <li>
-                                    <a href={`/${c}`}>{ c }</a>
-                                </li>
-                            ))}
-                    </ul>
-                }
-            </div>
-        </div>
+                            <Dropdown.Menu>
+                                {
+                                    cities.map((c, i) => (
+                                        <Dropdown.Item href={`/${c}`} key={i}>
+                                            {c}
+                                        </Dropdown.Item>
+                                    ))
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                    </Nav.Item>
+                </Nav>
+            </Navbar>
+
+            <MoreModal showModal={showMore} closeModal={closeMoreModal}/>
+            <AboutModal showModal={showAbout} closeModal={closeAboutModal}/>
+
+        </>
     )
 }
 
