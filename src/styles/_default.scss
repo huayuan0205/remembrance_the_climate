@@ -1,0 +1,23 @@
+@import "variables";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background: left / cover no-repeat url("/img/alluminium_bg.png"),
+  white;
+}
+
+#wheel-img {
+  transition: transform 1s ease 0s;
+  transform-origin: $wheel-radius $wheel-radius;
+  transform: -($wheel-radius) 50px, 0;
+}
+
+#timeline {
+  transition: all 500ms ease 0s;
+  transform-origin: 0 $start-dot-initial-y;
+  transform: translate3d(0,0,0) rotate(-90deg);
+}
