@@ -1,5 +1,19 @@
 import * as d3 from "d3";
 import {useEffect, useState} from "react";
+
+type dataEntry = {
+    id: number,
+    date: String,
+    subdomain: String,
+    spotId: number,
+    event: String,
+    link: String,
+    desc: String,
+    moreText: String,
+}
+
+// SPOT key ? how is this ordered
+
 function Timeline({ city }: { city: String }) {
     const [data, setData] = useState([]);
     const [ degrees, setDegrees ] = useState([])
