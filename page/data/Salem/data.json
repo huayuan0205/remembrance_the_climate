@@ -323,6 +323,24 @@
    "note3": "",
    "note4": ""
  },
+  {
+    "id": 21,
+    "subdomain": "salem",
+    "date": "",
+    "year": 2068,
+    "mon_day": "MAY 3",
+    "event": "MOVING BACK",
+    "spot": "SALEM-11",
+    "spot_id": "11",
+    "desc": "Rising sea level forced The House of the Seven Gables to move from this spot after 400 years.",
+    "link": "",
+    "more_text": "",
+    "note": "",
+    "note1": "",
+    "note2": "",
+    "note3": "",
+    "note4": ""
+  },
  {
    "id": 18,
    "subdomain": "salem",
