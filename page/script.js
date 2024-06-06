@@ -543,7 +543,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   window.onbeforeunload = function(){
     window.removeEventListener('hashchange',dealWithHashChange, true);
   }
-  // console.log(window.location.pathname);
+  console.log(window.location.pathname);
 
   function rotation_def(index, up_down, data) {
 
@@ -626,8 +626,6 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       //change URL path?
       let new_url = old_url + `#/${data[index].spot_id}`;
       window.history.pushState({}, 0, new_url);
-      // console.log(new_url);
-      // console.log(data[index].spot_id);
     }
 
     // rotate to previous dot
