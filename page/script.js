@@ -50,7 +50,7 @@ const m = {
 };
 const w = W - m.r - m.l;
 const h = H - m.t - m.b;
-console.log(`.canvas-W,H:${W},${H}`);
+// console.log(`.canvas-W,H:${W},${H}`);
 
 // disable scrolling after clicking the button
 // $('#exampleModal1').on('shown.bs.modal', function (e) {
@@ -73,7 +73,7 @@ function toRadians(angle) {
 d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   // testing - use file url 'data/Essex/data.json'
 
-  console.log(switch_to_city);
+  // console.log(switch_to_city);
 
   //remove MORE button in Essex
   //if (switch_to_city === "Essex") {
@@ -87,7 +87,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
     var entry = json[key]
     dataArray.push(entry)
   }
-  console.log(dataArray);
+  // console.log(dataArray);
   // })
 
   // dataPromise.then(function(rows) {
@@ -191,7 +191,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       if (rotate_degree <= 180) {
         if (i > 1) {
           if (d.year == prevData['year'] && d.year == prevData2['year']) {//three dots with the same year
-            console.log(`same year2:${prevData2['year']}`);
+            // console.log(`same year2:${prevData2['year']}`);
             return ((start_dot_originalX + 20) * Math.cos(toRadians(rotate_degree)));
           } else if (d.year == prevData['year']){//two dots with the same year
             return ((start_dot_originalX + 10) * Math.cos(toRadians(rotate_degree)));
@@ -402,7 +402,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   function reposition(text) {
     text.each(function () {
       if ($(this).prev("tspan").find("#wrap").length != 0) {
-        console.log('hello');
+        // console.log('hello');
         $(this).attr("dy", "-3.15em");//distance between spot and event
       }
     })
@@ -533,7 +533,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   var sumAngle = 0
   var wheel_sumAngle = 90;
   let old_url = window.location.pathname + "?city=" + switch_to_city;
-  console.log(old_url);
+  // console.log(old_url);
 
   // QR codes
   const dealWithHashChange = () => {
@@ -564,8 +564,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       let last_word_text_bottom = d3.select('#text-item-g2-' + (index - 1));
       let current_word_text_top = d3.select('#text-item-g-' + index);
       let current_word_text_bottom = d3.select('#text-item-g2-' + index);
-      console.log('now', (index - 1))
-      console.log('down', index);
+      // console.log('now', (index - 1))
+      // console.log('down', index);
 
       //rotate out
       last_word_text_top
@@ -626,8 +626,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       //change URL path?
       let new_url = old_url + `#/${data[index].spot_id}`;
       window.history.pushState({}, 0, new_url);
-      console.log(new_url);
-      console.log(data[index].spot_id);
+      // console.log(new_url);
+      // console.log(data[index].spot_id);
     }
 
     // rotate to previous dot
@@ -644,8 +644,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       let last_word_text_bottom = d3.select('#text-item-g2-' + (index + 1))
       let current_word_text_top = d3.select('#text-item-g-' + (index))
       let current_word_text_bottom = d3.select('#text-item-g2-' + (index))
-      console.log('now', (index + 1))
-      console.log('up', (index));
+      // console.log('now', (index + 1))
+      // console.log('up', (index));
 
       //rotate out
       last_word_text_top
@@ -696,7 +696,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       //change URL path?
       let new_url = old_url + `#/${data[index].spot_id}`;
       window.history.pushState({}, 0, new_url);
-      console.log(new_url);
+      // console.log(new_url);
       // console.log(data[index].spot_id);
     }
 
@@ -722,7 +722,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   }
 
   var cityID = 1;
-  console.log("cityid:", cityID);
+  // console.log("cityid:", cityID);
 
   // get modal data
   // More button
@@ -735,7 +735,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       success: function (response) {
         $.each(response, function (i, e) {
           if (e.id == cityID) {
-            console.log(e.event);
+            // console.log(e.event);
             // console.log('cityID='+ cityID);
             // console.log(e.id+"+"+e.note);
 
@@ -782,7 +782,7 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
         dataType: 'json',
         success: function (response) {
           $.each(response, function (i, e) {
-            console.log(e.head);
+            // console.log(e.head);
             // page title
             $("#exampleModal2").find('#about-head').text(e.head);
             // 1st paragraph
@@ -941,9 +941,9 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
     dataArray.forEach(function (item) {
       if (item.spot_id == hashTag) {
         index = item.id - 1;
-        console.log("hashTag:" + hashTag);
-        console.log("index:" + index);
-        console.log("degree:" + degrees);
+        // console.log("hashTag:" + hashTag);
+        // console.log("index:" + index);
+        // console.log("degree:" + degrees);
       }
     });
     for (var i = 0; i < index; i++) {

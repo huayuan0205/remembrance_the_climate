@@ -23,10 +23,10 @@ function bindTouch(el, callBack) {
       //   return callBack('left')
       // };
       if (touch.pageY - startY > 1) {
-        console.log("scroll down");
+        // console.log("scroll down");
         return callBack('down')
       } else if (touch.pageY - startY < -1) {
-        console.log("scroll up");
+        // console.log("scroll up");
         return callBack('up')
       };
     });
