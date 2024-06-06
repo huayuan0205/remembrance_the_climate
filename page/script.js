@@ -627,8 +627,8 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
   var index = 0;
   var sumAngle = 0;
   var wheel_sumAngle = 90;
-  // let old_url = window.location.pathname + "?city=" + switch_to_city;
-  // console.log(old_url);
+  let old_url = window.location.pathname + "?city=" + switch_to_city;
+  console.log(old_url);
 
   // QR codes
   const dealWithHashChange = () => {
@@ -732,10 +732,10 @@ d3.json(`./data/${switch_to_city}/data.json`).then(function (json) {
       }
 
       //change URL path?
-      // let new_url = old_url + `#/${data[index].spot_id}`;
-      // window.history.pushState({}, 0, new_url);
-      // console.log(new_url);
-      // console.log(data[index].spot_id);
+      let new_url = old_url + `#/${data[index].spot_id}`;
+      window.history.pushState({}, 0, new_url);
+      console.log(new_url);
+      console.log(data[index].spot_id);
     }
 
     // rotate to previous dot
