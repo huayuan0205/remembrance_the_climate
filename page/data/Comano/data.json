@@ -1,0 +1,30 @@
+[
+ {
+   "id": 1,
+   "subdomain": "Comano",
+   "year": 2025,
+   "mon_day": "Apr 3",
+   "event": "BIO PROTECTION",
+   "spot": "COMANO-2",
+   "spot_id": 2,
+   "desc": "Qui, il Municipio ha creato un’oasi per la biodiversità.",
+   "link": "",
+   "more_text": "",
+   "more_text2":"",
+   "note": ""
+ },
+ {
+   "id": 1,
+   "subdomain": "Comano",
+   "year": 2075,
+   "mon_day": "Apr 3",
+   "event": "BIO PROTECTION",
+   "spot": "COMANO-2",
+   "spot_id": 2,
+   "desc": "Qui, il Municipio ha creato un’oasi per la biodiversità.",
+   "link": "",
+   "more_text": "",
+   "more_text2":"",
+   "note": ""
+ }
+]

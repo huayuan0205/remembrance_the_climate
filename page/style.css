@@ -329,15 +329,6 @@ a:visited {
   text-decoration: underline;
 }
 
-/* #more_dlink {
-  visibility: hidden;
-}
-
-#seacoast {
-  visibility: hidden;
-} */
-
-
 hr {
   visibility: hidden;
   border-top: 2px solid white;
@@ -407,16 +398,112 @@ svg .g-wheel {
   right: 20px;
 }
 
-/*
-@media (max-width: 414px) {
-	#wheel-img{
+#locality-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000 !important; /* Solid black background, !important overrides other styles */
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  visibility: hidden;
+  opacity: 0;
+}
 
-		width: 400px;
-		height: 400px;
-		transition: all 1s ease 0s;
+/* This class is added by JavaScript to show the menu. */
+#locality-overlay.is-visible {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+}
 
-		opacity: .8;
-		z-index: -1999;
+/* Menu Content & Typography
+-------------------------------------------------- */
+#locality-content {
+  text-align: center;
+  color: white;
+}
 
-	}
-}  */
+/* FIXED: This rule prevents the list container background from changing on hover. */
+#country-view, 
+#city-view {
+  background-color: transparent !important;
+}
+
+#locality-content h2 {
+  font-family: "Caslon Regular";
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation Buttons (Close & Back)
+-------------------------------------------------- */
+#close-locality-btn,
+#back-to-countries-btn {
+  position: absolute;
+  top: 15px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  text-shadow: none;
+  z-index: 2001;
+  transition: opacity 0.2s ease;
+}
+
+#close-locality-btn:hover,
+#back-to-countries-btn:hover {
+  opacity: 1;
+}
+
+#close-locality-btn {
+  right: 25px;
+  font-size: 2rem;
+}
+
+#back-to-countries-btn {
+  left: 25px;
+  font-size: 1rem;
+  font-family: "Trade";
+  display: none; /* Hidden by default, shown via JS */
+}
+
+/* Country/City List Items
+-------------------------------------------------- */
+/* Shared styles for all buttons in the locality menu. */
+#country-list-container .country-btn,
+#city-view .city-link {
+  display: block;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  padding: 15px 40px;
+  margin: 10px auto;
+  text-decoration: none;
+  width: 300px;
+  max-width: 90vw;
+  transition: all 0.2s ease;
+  font-family: "Trade";
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hover effect for all buttons in the menu. */
+#country-list-container .country-btn:hover,
+#city-view .city-link:hover {
+  background-color: #d3d3d3; /* Light grey background */
+  color: #000; /* Black text */
+  border-color: #d3d3d3; /* Match border to the background */
+}
