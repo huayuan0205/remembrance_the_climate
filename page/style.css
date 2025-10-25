@@ -430,9 +430,25 @@ svg .g-wheel {
 }
 
 /* FIXED: This rule prevents the list container background from changing on hover. */
-#country-view, 
+#country-view,
 #city-view {
   background-color: transparent !important;
+}
+
+/* Make city list scrollable with padding at top */
+#city-view {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#city-view::-webkit-scrollbar {
+  display: none;
 }
 
 #locality-content h2 {
