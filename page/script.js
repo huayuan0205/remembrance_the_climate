@@ -804,13 +804,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         $("#exampleModal2").find('#about-body-3').text(e.body3);
                         if (switch_to_city === "Arlington") {
                             $('#about-body-3').append(`
-                <a href="${e.link3a}" target="_blank">twelve Arlington High School interns</a> 
+                <a href="${e.link3a}" target="_blank">twelve Arlington High School interns</a>
                 <span>${e.body3a}</span>
-                <a href="${e.link3b}" target="_blank">Remembrance of Climate Futures</a> 
+                <a href="${e.link3b}" target="_blank">Remembrance of Climate Futures</a>
                 <span>${e.body3b}</span>
                 `);
+                            $('#separating-line').show();
+                            $('#about-body-4').show();
+                        } else if (switch_to_city === "Comano") {
+                            // For Comano, don't append Remembrance link and hide Co-Lab link
+                            $('#separating-line').show();
+                            $('#about-body-4').hide();
                         } else {
                             $('#about-body-3').append(`<a href="${e.link3a}" target="_blank">Remembrance of Climate Futures,</a> <span>${e.body3a}</span>`);
+                            $('#separating-line').show();
+                            $('#about-body-4').show();
                         }
                     })
                 }
