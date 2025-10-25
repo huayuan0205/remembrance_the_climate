@@ -85,6 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Password protection for Comano - intercept clicks on city links
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('city-link')) {
+            const cityName = e.target.textContent;
+            if (cityName === "Comano") {
+                e.preventDefault(); // Stop the link from navigating
+                const password = prompt("Enter password:");
+                if (password !== "comano2025") {
+                    alert("Access denied");
+                    return;
+                }
+                // If password is correct, navigate to Comano
+                window.location.href = e.target.href;
+            }
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         const backBtn = document.getElementById('back-to-countries-btn');
         const countryView = document.getElementById('country-view');
