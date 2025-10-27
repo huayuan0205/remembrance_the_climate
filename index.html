@@ -8,8 +8,24 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-WKQGZX8');
         </script> -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Password protection for Comano links
+                document.querySelectorAll('a[href*="city=Comano"]').forEach(function(link) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var password = prompt("Enter password:");
+                        if (password === "comano2025") {
+                            window.location.href = this.href;
+                        } else {
+                            alert("Access denied");
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
-    
+
     <body>
         <a href="page/?city=Durham">Durham</a>
         <a href="page/?city=Essex">Essex</a>
