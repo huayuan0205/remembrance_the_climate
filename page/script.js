@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const localities = {
         "United States": [
-            "Durham", "Essex", "Newburyport", "Rockport", "Arlington",
-            "Trustees", "Salem", "Saugus", "Ipswich", "Salisbury", "Lynn", "Beverly"
+            "Arlington", "Beverly", "Durham", "Essex", "Gloucester", "Ipswich", "Lynn",
+            "Newburyport", "Rockport", "Salem", "Salisbury", "Saugus", "Swampscott", "Trustees"
         ],
         "Switzerland": ["Comano"]
     };
@@ -809,6 +809,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (switch_to_city === "Beverly") {
                             $('#about-body-1').append(`
                 <a href="${e.link}" target="_blank">City of Beverly</a>
+                <span>${e.body1a}</span>
+            `);
+                        }
+                        if (switch_to_city === "Gloucester") {
+                            $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">City of Gloucester</a>
+                <span>${e.body1a}</span>
+            `);
+                        }
+                        if (switch_to_city === "Swampscott") {
+                            $('#about-body-1').append(`
+                <a href="${e.link}" target="_blank">Town of Swampscott</a>
                 <span>${e.body1a}</span>
             `);
                         }
