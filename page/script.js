@@ -8,9 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const localities = {
         "United States": [
             "Arlington", "Beverly", "Durham", "Essex", "Gloucester", "Ipswich", "Lynn",
-            "Newburyport", "Rockport", "Salem", "Salisbury", "Saugus", "Swampscott", "Trustees"
+            "MassAudubon", "Newburyport", "Rockport", "Salem", "Salisbury", "Saugus", "Swampscott", "Trustees"
         ],
-        "Switzerland": ["Comano"]
+        "Switzerland": ["Porza"]
+    };
+
+    // Display labels for city slugs whose menu text differs from the ?city= value.
+    const cityLabels = {
+        "MassAudubon": "Mass Audubon"
     };
 
     // Get references to all the necessary HTML elements for the menu
@@ -32,39 +37,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to open the overlay with a sliding animation
+    // Function to open the overlay — show all localities, grouped by country
     function openOverlay() {
         if (overlay) overlay.classList.add('is-visible');
+        showLocalities();
     }
 
     // Function to close the overlay
     function closeOverlay() {
-        if (overlay) {
-            overlay.classList.remove('is-visible');
-            // Reset to the country selection screen after the closing animation finishes
-            setTimeout(() => {
-                if (cityView) cityView.style.display = 'none';
-                if (countryView) countryView.style.display = 'block';
-            }, 500); // This delay should match the CSS transition duration
-        }
+        if (overlay) overlay.classList.remove('is-visible');
     }
 
-    // Function to display the cities for a selected country
-    function showCities(countryName) {
-        const cities = localities[countryName];
-        let cityHTML = `<h2>${countryName}</h2><div class="city-list-container">`;
-
-        cities.forEach(city => {
-            // This creates a link that reloads the page with a query parameter.
-            // Example: index.html?city=Durham
-            cityHTML += `<a href="?city=${encodeURIComponent(city)}" class="city-link">${city}</a>`;
+    // Render every country as its own section: a country heading followed by its
+    // community buttons, so all countries share the same visual hierarchy.
+    function showLocalities() {
+        let html = '';
+        Object.keys(localities).forEach(country => {
+            html += `<h2>${country}</h2><div class="city-list-container">`;
+            localities[country].forEach(city => {
+                // Each link reloads the page with a ?city= query param, e.g. ?city=Durham
+                const label = cityLabels[city] || city;
+                html += `<a href="?city=${encodeURIComponent(city)}" class="city-link">${label}</a>`;
+            });
+            html += `</div>`;
         });
 
-        cityHTML += `</div>`;
+        if (cityView) cityView.innerHTML = html;
 
-        if (cityView) cityView.innerHTML = cityHTML;
-
-        // Switch from the country view to the city view
+        // Always use the city view; the separate country selection screen is unused.
         if (countryView) countryView.style.display = 'none';
         if (cityView) cityView.style.display = 'block';
     }
@@ -75,64 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attach the event listener to the close button inside the menu
     if (closeButton) closeButton.addEventListener('click', closeOverlay);
 
-    // Use event delegation to handle clicks on any of the country buttons
-    if (countryContainer) {
-        countryContainer.addEventListener('click', function(e) {
-            // Check if a country button was clicked
-            if (e.target && e.target.classList.contains('country-btn')) {
-                showCities(e.target.dataset.country);
-            }
-        });
-    }
-
-    // Password protection for Comano - intercept clicks on city links
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('city-link')) {
-            const cityName = e.target.textContent;
-            if (cityName === "Comano") {
-                e.preventDefault(); // Stop the link from navigating
-                const password = prompt("Enter password:");
-                if (password !== "comano2025") {
-                    alert("Access denied");
-                    return;
-                }
-                // If password is correct, navigate to Comano
-                window.location.href = e.target.href;
-            }
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const backBtn = document.getElementById('back-to-countries-btn');
-        const countryView = document.getElementById('country-view');
-        const cityView = document.getElementById('city-view');
-        const closeBtn = document.getElementById('close-locality-btn');
-
-        // 1. Handle clicking the "Back" button
-        backBtn.addEventListener('click', () => {
-            cityView.style.display = 'none';
-            countryView.style.display = 'block';
-        });
-
-        // 2. Use a MutationObserver to show/hide the back button automatically
-        // This watches for when the city list becomes visible or hidden.
-        const observer = new MutationObserver((mutationsList) => {
-            for (const mutation of mutationsList) {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                    const cityViewIsVisible = cityView.style.display !== 'none';
-                    backBtn.style.display = cityViewIsVisible ? 'block' : 'none';
-                }
-            }
-        });
-
-        // Start observing the city-view div for changes to its style attribute
-        observer.observe(cityView, { attributes: true });
-
-        // 3. Also ensure the back button is hidden when the whole menu is closed
-        closeBtn.addEventListener('click', () => {
-            backBtn.style.display = 'none';
-        });
-    });
 
     // --- ADDED SECTION END ---
 
@@ -840,8 +782,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 `);
                             $('#separating-line').show();
                             $('#about-body-4').show();
-                        } else if (switch_to_city === "Comano") {
-                            // For Comano, don't append Remembrance link and hide Co-Lab link
+                        } else if (switch_to_city === "Porza") {
+                            // For Porza, don't append Remembrance link and hide Co-Lab link
                             $('#separating-line').show();
                             $('#about-body-4').hide();
                         } else {

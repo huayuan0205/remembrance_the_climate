@@ -461,6 +461,14 @@ svg .g-wheel {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Separate stacked country sections (e.g. Switzerland below the US list):
+   add space before the heading and a 15px-gapped divider line. */
+#city-view .city-list-container + h2 {
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 /* Navigation Buttons (Close & Back)
 -------------------------------------------------- */
 #close-locality-btn,
