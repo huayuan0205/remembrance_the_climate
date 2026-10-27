@@ -1,11 +1,13 @@
-[{
-    "city": "Porza",
-    "head": "Percorso della ‘Memoria di un Clima Futuro’",
-    "link": "",
-    "link1a":"",
-    "link3a":"",
-    "link3b":"",
-    "body1": "Mentre accordi internazionali come l’Accordo di Parigi del 2015 hanno rappresentato passi fondamentali per affrontare la crisi climatica, la loro attuazione non può che partire da da un solido impegno locale. In piccoli comuni come Porza, le urgenze della mitigazione e dell’adattamento climatico sono state affrontate con risposte concrete come aree per la conservazione della biodiversità, spazi verdi a favore degli impollinatori, piantumazioni di alberi, incentivi per abbonamenti ai trasporti pubblici, installazione di colonnine di ricarica per veicoli elettrici, strutture per il riciclo e supporto alle associazioni locali. Queste iniziative rappresentano un contributo significativo alla mitigazione e all’adattamento climatico. Tuttavia, molto resta ancora da fare.",
-    "body2": "È in questo spirito che nasce l’iniziativa di progettare e proporre il Percorso della Memoria di un Clima Futuro, un progetto sostenuto dal Comune di Porza. Questa serie di installazioni collega luoghi quotidiani a temi climatici globali, rendendo tangibili gli effetti del cambiamento climatico globale sul territorio vissuto dalla popolazione locale, ricordando ai residenti e visitatori che la crisi climatica non è un fenomeno astratto e distante, ma una realtà che interessa tutti e tutte le dimensioni della vita collettiva. Le installazioni disseminate per Porza invitano alla riflessione sulle sfide presenti e future in ambiti come la gestione delle acque, l’uso dell’energia, il turismo, la gestione forestale, l’agricoltura, la salute pubblica e la biodiversità. Concepite con uno stile narrativo basato su un futuro alternativo, il Percorso della Memoria di un Clima Futuro ha l’obiettivo di ispirare un impegno civico di mitigazione e adattamento alla crisi climatica e promuovere azioni locali.",
-    "body3": "Il Future Percorso della Memoria di un Clima Futuro è un progetto ideato e sviluppato da IAMCLIMATE in collaborazione con il Co-Lab for Data Impact della Northeastern University (Boston, USA)."
-}]
+[
+    {
+        "city": "Porza",
+        "head": "Introduzione al Percorso della ‘Memoria di un Clima Futuro’",
+        "link": "",
+        "link1a": "",
+        "link3a": "",
+        "link3b": "",
+        "body1": "Sebbene accordi internazionali come l’Accordo di Parigi sul clima del 2015 abbiano rappresentato passi fondamentali per affrontare la crisi climatica, la loro attuazione deve partire da un forte impegno a livello locale. In piccoli comuni come Porza, le urgenze legate alla mitigazione e all’adattamento climatico hanno iniziato a essere affrontate attraverso azioni concrete, come incentivi per misure di risparmio energetico (in particolare per gli edifici), l’installazione di impianti per le energie rinnovabili, così come il sostegno all’uso del trasporto pubblico. Queste iniziative rappresentano un contributo significativo alla mitigazione e all’adattamento climatico, ma resta ancora molto da fare.",
+        "body2": "È in questo spirito che è nata l’iniziativa Memoria di un clima futuro, ospitata per la prima volta in Svizzera dal Comune di Porza: una serie di installazioni che mettono in relazione i luoghi della vita quotidiana con temi climatici globali, rendendo tangibili gli effetti del cambiamento climatico globale sul territorio locale e ricordando a residenti e visitatori che la crisi climatica non è un fenomeno astratto o lontano, ma una realtà che incide su tutti gli aspetti della vita collettiva. Le installazioni diffuse sul territorio di Porza invitano a riflettere sulle sfide presenti e future in ambiti quali la gestione delle risorse idriche, l’uso dell’energia, il turismo, la gestione forestale, l’agricoltura, la salute pubblica e la biodiversità. Progettato con un approccio narrativo basato su un futuro verosimile basato su dati scientifici e scenari climatici, Memoria di un clima futuro mira a stimolare l’impegno civico nella mitigazione e nell’adattamento climatico, promuovendo l’azione a livello locale.",
+        "body3": "Memoria di un clima futuro è un progetto ideato e sviluppato da IAMCLIMATE in collaborazione con il Co-Lab for Data Impact della Northeastern University (Boston, USA) e sotto la supervisione del prof. Thomas Starr."
+    }
+]
