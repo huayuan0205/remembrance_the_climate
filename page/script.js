@@ -790,6 +790,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             $('#about-body-4').show();
                         } else if (switch_to_city === "Porza") {
                             // For Porza, don't append Remembrance link and hide Co-Lab link
+                            $('#about-body-3').append(`<br><br>
+                <span>Comune di Porza:</span> <a href="${e.link}" target="_blank">www.porza.ch</a><br>
+                <span>IAMCLIMATE:</span> <a href="${e.link3a}" target="_blank">www.iamclimate.org</a>`);
                             $('#separating-line').show();
                             $('#about-body-4').hide();
                         } else {

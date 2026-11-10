@@ -531,3 +531,30 @@ svg .g-wheel {
   color: #000; /* Black text */
   border-color: #d3d3d3; /* Match border to the background */
 }
+.modal-content #notes .sources-title {
+  display: block;
+  margin-bottom: 0.6em;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.modal-content #notes .source {
+  display: block;
+  position: relative;
+  padding-left: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+.modal-content #notes .source::before {
+  content: "";
+  position: absolute;
+  left: 0.3em;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
